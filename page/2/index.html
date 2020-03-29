@@ -135,6 +135,195 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-13T10:44:57.000Z">2020-03-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 381 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/13/python%E5%AD%A6%E4%B9%A0-2/">python学习-2</a>
+            
+        </h1>
+        <div class="content">
+            <p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017261630425888">函数的各种参数类型，廖雪峰的博客</a></p>
+<p>今天主要学习了函数，函数参量的种类和一些注意事项</p>
+<ul>
+<li><p><code>From xx import xxx</code> 可以从xx.py文件中引用函数xxx(…)</p>
+</li>
+<li><p><code>isinstance(object, classinfo)</code> object-实例对象、classinfo-可以是直接或间接类名、基本类型或者由它们组成的元组；相比于<kbd>type()</kbd>，建议使用<kbd>isinstance()</kbd></p>
+</li>
+<li><p><code>x**n</code> 变量的高次幂的表示形式</p>
+</li>
+<li><p><code>def f2(a, b, c=0, *, d, **kw):</code> 函数的参数组合，注意顺序；此外，对于任意函数，都可以通过类似<kbd>func(<em>args, *</em>kw)</kbd>的形式调用它，无论它的参数是如何定义</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>递归函数，思路很重要，自己的理解能力还是太弱了，加强锻炼吧！</li>
+</ul>
+<blockquote>
+<p>递归函数的经典问题：汉诺塔；例程函数如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def hanoi(n,a,b,c):</span><br><span class="line">    # 当n为1时 (递归基础)</span><br><span class="line">    if n &#x3D;&#x3D; 1:</span><br><span class="line">        print(a, &#39;--&gt;&#39;, c) # 将A柱最底层的圆盘移动到C柱</span><br><span class="line">    # 当n大于1时</span><br><span class="line">    else:</span><br><span class="line">        hanoi(n-1, a, c, b) # 借助C柱，将n-1个圆盘从A柱移动到B柱</span><br><span class="line">        print(a, &#39;--&gt;&#39;, c) # 将A柱最底层的圆盘移动到C柱</span><br><span class="line">        hanoi(n-1, b, a, c) # 借助A柱，将n-1个圆盘从B柱移动到C柱</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li><a href="https://www.runoob.com/python/python-func-range.html">range()函数用法</a> <code>range(start, stop[, step])</code> 基本用于for循环,生成列表或元组的一般表达形式<kbd><strong>list(range(x,x,x))</strong></kbd>或<kbd><strong>tuple(range(x,x,x))</strong></kbd></li>
+<li></li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-12T12:00:22.000Z">2020-03-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 412 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/12/Python/">Python!</a>
+            
+        </h1>
+        <div class="content">
+            <p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017092876846880">python学习目前进度，廖雪峰的教程</a></p>
+<ul>
+<li>本来创建博客的想法是想记录学习python的过程，结果一个hexo博客花了我四五天的时间，不过还好搞出来了，有点小成就感，好了现在继续学习Python！！gogogo</li>
+</ul>
+<blockquote>
+<p>以下是最新写的一个非常简单的成绩查询小程序，<font color=red>注意，有失败的地方已经标出</font></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#2020.3.9</span><br><span class="line">#学习python第二个小程序</span><br><span class="line">#计算今年成绩较去年的变化</span><br><span class="line">n&#x3D;1</span><br><span class="line">m&#x3D;1</span><br><span class="line"></span><br><span class="line">while n&#x3D;&#x3D;1:</span><br><span class="line">    #输入若干信息</span><br><span class="line">    name&#x3D;input(&#39;请输入学生姓名：&#39;);print(&#39;\n&#39;)</span><br><span class="line">    s1&#x3D;input(&#39;请输入%s去年的成绩：&#39;%name)</span><br><span class="line"></span><br><span class="line">    while m&#x3D;&#x3D;1:#这样的方法失败了，目前无法解决成绩输入不是数字的重复正确输入问题</span><br><span class="line">        if type(s1)&#x3D;&#x3D;float or type(s1)&#x3D;&#x3D;int:</span><br><span class="line">            if s1&gt;&#x3D;0:</span><br><span class="line">                m&#x3D;0</span><br><span class="line">                s2&#x3D;float(input(&#39;请输入%s今年的成绩：&#39;%name));print(&#39;\n&#39;)</span><br><span class="line">            else:</span><br><span class="line">                s1&#x3D;input(&#39;输入失败，请正确输入%s去年的成绩：&#39;%name)</span><br><span class="line">        else:</span><br><span class="line">            s1&#x3D;input(&#39;输入失败，请正确输入%s去年的成绩：&#39;%name)</span><br><span class="line"></span><br><span class="line">    else:</span><br><span class="line">    </span><br><span class="line">        #判断成绩走向并计算变化率</span><br><span class="line">        if s2&gt;s1:</span><br><span class="line">            rate&#x3D;(s2-s1)&#x2F;s2*100</span><br><span class="line">            print(&#39;%s同学你好，祝贺你进步了,成绩增长率为 %.2f%%\n&#39;%(name,rate))</span><br><span class="line">    </span><br><span class="line">        elif s1&#x3D;&#x3D;s2:</span><br><span class="line">            print(&#39;%s同学你好，不错，成绩保持住了\n&#39;%name)</span><br><span class="line">            rate&#x3D;0.00</span><br><span class="line"></span><br><span class="line">        else:</span><br><span class="line">            rate&#x3D;(s1-s2)&#x2F;s2*100</span><br><span class="line">            print(&#39;%s同学你好，很遗憾你退步了，成绩下降率为 %.2f%%\n&#39;%(name,rate))</span><br><span class="line"></span><br><span class="line">        n&#x3D;int(input(&#39;如果希望继续查询，请输入1，否则输入其他任意键退出&#39;))</span><br><span class="line"></span><br><span class="line">else:</span><br><span class="line">    #结尾</span><br><span class="line">    print(&#39;欢迎再次使用,再见&#39;)</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-12T10:53:23.000Z">2020-03-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 minutes read (About 553 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/12/DT35%E7%9B%B8%E5%85%B3%E7%9A%84%E5%A4%87%E5%BF%98%E8%AF%B4%E6%98%8E/">DT35相关的备忘说明</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="零点标定的初步方法"><a href="#零点标定的初步方法" class="headerlink" title="零点标定的初步方法"></a>零点标定的初步方法</h3><ul>
+<li>现在认为电压与距离的关系即<font color=blue>D(mm)=0.000995*V(uV,直接的读取值)+50</font>；那么在这个基础上，50mm内的测量肯定不可靠，DT35零位标定方法就初定为</li>
+</ul>
+<blockquote>
+<p>均匀选取10个左右的距离值，D=0.000995*V+50+R，这些值与实际距离真值做差产生10个残差，求当残差的平方和有最小值时的R（求导数为零的情况）</p>
+</blockquote>
+<blockquote>
+<p>matlab实现如下，其中actual_data为距离真值，roughdeal_data为通过上述一元公式求得的，最后运行后打印出Xs0就是R的值，R即为尺子零点到DT35零点的距离（即DT35零点为尺子上刻度为R的地方）（小心方向）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">syms x %零点补偿量</span><br><span class="line">y&#x3D;0;</span><br><span class="line">for i&#x3D;1:length(actual_data)</span><br><span class="line">   y&#x3D;y+(actual_data(i)-roughdeal_data(i)-x)^2;</span><br><span class="line">end</span><br><span class="line">dy&#x3D;diff(y,x);</span><br><span class="line">Xs0&#x3D;solve(dy,x);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="判断激光光线是否垂直车边的初步方法"><a href="#判断激光光线是否垂直车边的初步方法" class="headerlink" title="判断激光光线是否垂直车边的初步方法"></a>判断激光光线是否垂直车边的初步方法</h3><blockquote>
+<p>利用约6m长的标定架，车固定在其中一端，测量激光发射中点到侧边标定架的距离；理论上激光应平行于标定架射向另一端，在另一端再次测量激光中点到侧边标定架的距离，两次测量应相等，目前规定差值不能大于1mm，至少测量三次，可能还需要换边测量</p>
+</blockquote>
+<ul>
+<li><font color=red>这样的方法只能让光线与由两个侧向导轮确定的直线平行,所以导轮的安装必须尽量规范，全场定位技术也需要这一点！！</font></li>
+</ul>
+<hr>
+<h3 id="采集卡相关问题"><a href="#采集卡相关问题" class="headerlink" title="采集卡相关问题"></a>采集卡相关问题</h3><ul>
+<li>在主控ucos操作系统上的速率和准确率测试需要完善</li>
+<li>电压输入探针：现在通道1因为电阻焊盘焊掉失效了；已知通道1分压电阻阻值为M级，温漂百分级，可能需要换成千分级，已测，最大误差5mm以内；3、4通道也要分压电阻不过阻值过小，可能要重新焊M级电阻；其余通道都只是一个保护电阻</li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-11T15:33:41.000Z">2020-03-11</time>
                 
                 <div class="level-item">
@@ -446,7 +635,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            14
+                            17
                         </p>
                     </a>
                 </div>
@@ -470,7 +659,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            13
+                            14
                         </p>
                     </a>
                 </div>
@@ -587,7 +776,7 @@
                 <span class="level-item">Image Processing</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Magnetic-field-specialty/">
@@ -632,7 +821,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 10px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 15px;">ielts</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 10px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16.67px;">ielts</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 16.67px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a>
     </div>
 </div>
     
@@ -644,6 +833,45 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T18:45:22.000Z">2020-03-30</time></div>
+                    <a href="/2020/03/30/opencv3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-摄像头采集和视频播放</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T18:27:34.000Z">2020-03-30</time></div>
+                    <a href="/2020/03/30/opencv2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-matplotlib显示图片</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T10:08:03.000Z">2020-03-29</time></div>
+                    <a href="/2020/03/29/opencv1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-简单读取操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -671,45 +899,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-25T15:58:18.000Z">2020-03-25</time></div>
-                    <a href="/2020/03/25/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E5%A4%84%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">图像识别与处理</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-20T16:48:15.000Z">2020-03-21</time></div>
-                    <a href="/2020/03/21/adams/" class="title has-link-black-ter is-size-6 has-text-weight-normal">adams仿真自学</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-20T16:28:28.000Z">2020-03-21</time></div>
-                    <a href="/2020/03/21/Ielts-2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts学习-2</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -727,7 +916,7 @@
                     <span class="level-item">March 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">14</span>
+                    <span class="level-item tag">17</span>
                 </span>
             </a>
         </li>
@@ -816,9 +1005,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -862,6 +1058,45 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T18:45:22.000Z">2020-03-30</time></div>
+                    <a href="/2020/03/30/opencv3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-摄像头采集和视频播放</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T18:27:34.000Z">2020-03-30</time></div>
+                    <a href="/2020/03/30/opencv2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-matplotlib显示图片</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T10:08:03.000Z">2020-03-29</time></div>
+                    <a href="/2020/03/29/opencv1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-简单读取操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T12:02:44.000Z">2020-03-28</time></div>
                     <a href="/2020/03/28/Ielts%E5%B0%8F%E7%8F%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0-3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-3</a>
                     <p class="is-size-7 is-uppercase">
@@ -884,45 +1119,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-25T15:58:18.000Z">2020-03-25</time></div>
-                    <a href="/2020/03/25/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E5%A4%84%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">图像识别与处理</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-20T16:48:15.000Z">2020-03-21</time></div>
-                    <a href="/2020/03/21/adams/" class="title has-link-black-ter is-size-6 has-text-weight-normal">adams仿真自学</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-20T16:28:28.000Z">2020-03-21</time></div>
-                    <a href="/2020/03/21/Ielts-2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts学习-2</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -940,7 +1136,7 @@
                     <span class="level-item">March 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">14</span>
+                    <span class="level-item tag">17</span>
                 </span>
             </a>
         </li>
@@ -1029,9 +1225,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 

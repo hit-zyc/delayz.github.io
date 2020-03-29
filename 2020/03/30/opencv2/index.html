@@ -7,22 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>DT35相关的备忘说明 - Wdnmd</title>
+<title>python 之 opencv-matplotlib显示图片 - Wdnmd</title>
 
 
-    <meta name="description" content="零点标定的初步方法 现在认为电压与距离的关系即D(mm)&#x3D;0.000995*V(uV,直接的读取值)+50；那么在这个基础上，50mm内的测量肯定不可靠，DT35零位标定方法就初定为   均匀选取10个左右的距离值，D&#x3D;0.000995*V+50+R，这些值与实际距离真值做差产生10个残差，求当残差的平方和有最小值时的R（求导数为零的情况）   matlab实现如下，其中actual_data为距">
+    <meta name="description" content="Matplotlib Matplotlib是Python的一个很常用的绘图库，有兴趣的可以去官网学习更多内容。 显示灰度图12345678import cv2import matplotlib.pyplot as pltimg &#x3D; cv2.imread(&#39;lena.jpg&#39;, 0)# 灰度图显示，cmap(color map)设置为grayplt.imshow(img, cmap&#x3D;&#39;gray&#39;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DT35相关的备忘说明">
-<meta property="og:url" content="https://hit-zyc.github.io/2020/03/12/DT35%E7%9B%B8%E5%85%B3%E7%9A%84%E5%A4%87%E5%BF%98%E8%AF%B4%E6%98%8E/index.html">
+<meta property="og:title" content="python 之 opencv-matplotlib显示图片">
+<meta property="og:url" content="https://hit-zyc.github.io/2020/03/30/opencv2/index.html">
 <meta property="og:site_name" content="Wdnmd">
-<meta property="og:description" content="零点标定的初步方法 现在认为电压与距离的关系即D(mm)&#x3D;0.000995*V(uV,直接的读取值)+50；那么在这个基础上，50mm内的测量肯定不可靠，DT35零位标定方法就初定为   均匀选取10个左右的距离值，D&#x3D;0.000995*V+50+R，这些值与实际距离真值做差产生10个残差，求当残差的平方和有最小值时的R（求导数为零的情况）   matlab实现如下，其中actual_data为距">
+<meta property="og:description" content="Matplotlib Matplotlib是Python的一个很常用的绘图库，有兴趣的可以去官网学习更多内容。 显示灰度图12345678import cv2import matplotlib.pyplot as pltimg &#x3D; cv2.imread(&#39;lena.jpg&#39;, 0)# 灰度图显示，cmap(color map)设置为grayplt.imshow(img, cmap&#x3D;&#39;gray&#39;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hit-zyc.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-03-12T10:53:23.000Z">
-<meta property="article:modified_time" content="2020-03-12T11:59:27.077Z">
+<meta property="article:published_time" content="2020-03-29T18:27:34.000Z">
+<meta property="article:modified_time" content="2020-03-29T18:44:43.448Z">
 <meta property="article:author" content="张砚驰">
-<meta property="article:tag" content="ROBOCON2020">
-<meta property="article:tag" content="DT35">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="opencv">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hit-zyc.github.io/images/og_image.png">
 
@@ -82,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="DT35相关的备忘说明" height="28">
+                <img src="/images/logo.svg" alt="python 之 opencv-matplotlib显示图片" height="28">
             
             </a>
         </div>
@@ -138,17 +138,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T10:53:23.000Z">2020-03-12</time>
+                <time class="level-item has-text-grey" datetime="2020-03-29T18:27:34.000Z">2020-03-30</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 553 words)
+                    3 minutes read (About 452 words)
                 </span>
                 
                 
@@ -162,40 +162,45 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                DT35相关的备忘说明
+                python 之 opencv-matplotlib显示图片
             
         </h1>
         <div class="content">
-            <h3 id="零点标定的初步方法"><a href="#零点标定的初步方法" class="headerlink" title="零点标定的初步方法"></a>零点标定的初步方法</h3><ul>
-<li>现在认为电压与距离的关系即<font color=blue>D(mm)=0.000995*V(uV,直接的读取值)+50</font>；那么在这个基础上，50mm内的测量肯定不可靠，DT35零位标定方法就初定为</li>
-</ul>
-<blockquote>
-<p>均匀选取10个左右的距离值，D=0.000995*V+50+R，这些值与实际距离真值做差产生10个残差，求当残差的平方和有最小值时的R（求导数为零的情况）</p>
-</blockquote>
-<blockquote>
-<p>matlab实现如下，其中actual_data为距离真值，roughdeal_data为通过上述一元公式求得的，最后运行后打印出Xs0就是R的值，R即为尺子零点到DT35零点的距离（即DT35零点为尺子上刻度为R的地方）（小心方向）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">syms x %零点补偿量</span><br><span class="line">y&#x3D;0;</span><br><span class="line">for i&#x3D;1:length(actual_data)</span><br><span class="line">   y&#x3D;y+(actual_data(i)-roughdeal_data(i)-x)^2;</span><br><span class="line">end</span><br><span class="line">dy&#x3D;diff(y,x);</span><br><span class="line">Xs0&#x3D;solve(dy,x);</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="判断激光光线是否垂直车边的初步方法"><a href="#判断激光光线是否垂直车边的初步方法" class="headerlink" title="判断激光光线是否垂直车边的初步方法"></a>判断激光光线是否垂直车边的初步方法</h3><blockquote>
-<p>利用约6m长的标定架，车固定在其中一端，测量激光发射中点到侧边标定架的距离；理论上激光应平行于标定架射向另一端，在另一端再次测量激光中点到侧边标定架的距离，两次测量应相等，目前规定差值不能大于1mm，至少测量三次，可能还需要换边测量</p>
-</blockquote>
-<ul>
-<li><font color=red>这样的方法只能让光线与由两个侧向导轮确定的直线平行,所以导轮的安装必须尽量规范，全场定位技术也需要这一点！！</font></li>
-</ul>
-<hr>
-<h3 id="采集卡相关问题"><a href="#采集卡相关问题" class="headerlink" title="采集卡相关问题"></a>采集卡相关问题</h3><ul>
-<li>在主控ucos操作系统上的速率和准确率测试需要完善</li>
-<li>电压输入探针：现在通道1因为电阻焊盘焊掉失效了；已知通道1分压电阻阻值为M级，温漂百分级，可能需要换成千分级，已测，最大误差5mm以内；3、4通道也要分压电阻不过阻值过小，可能要重新焊M级电阻；其余通道都只是一个保护电阻</li>
-</ul>
+            <font face='Times New Roman'>
 
+<h2 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h2><hr>
+<p>Matplotlib是Python的一个很常用的绘图库，有兴趣的可以去<a href="www.matplotlib.org/">官网</a>学习更多内容。</p>
+<h3 id="显示灰度图"><a href="#显示灰度图" class="headerlink" title="显示灰度图"></a>显示灰度图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度图显示，cmap(color map)设置为gray</span></span><br><span class="line">plt.imshow(img, cmap=<span class="string">'gray'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="http://blog.codec.wang/cv2_matplotlib_show_gray_image.jpg" alt=""></p>
+<p><a href="https://blog.csdn.net/ab_1_2_3_4_5_6_7_8_9/article/details/89306797">plt.show()和plt.imshow()的区别</a></p>
+<p><a href="https://blog.csdn.net/qq_30934313/article/details/85249831"><code>plt.imshow</code> 的<code>cmap</code>颜色参数选择</a></p>
+<hr>
+<h3 id="显示彩色图"><a href="#显示彩色图" class="headerlink" title="显示彩色图"></a>显示彩色图</h3><p><strong>OpenCV中的图像是以BGR的通道顺序存储的</strong>，但Matplotlib是以RGB模式显示的，所以直接在Matplotlib中显示OpenCV图像会出现问题，因此需要转换一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">img2 = img[:, :, ::<span class="number">-1</span>]</span><br><span class="line"><span class="comment"># 或使用</span></span><br><span class="line"><span class="comment"># img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示不正确的图</span></span><br><span class="line">plt.subplot(<span class="number">121</span>),plt.imshow(img) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示正确的图</span></span><br><span class="line">plt.subplot(<span class="number">122</span>)</span><br><span class="line">plt.xticks([]), plt.yticks([]) <span class="comment"># 隐藏x和y轴</span></span><br><span class="line">plt.imshow(img2)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>img[:,:,0]</code>表示图片的蓝色通道，<code>img[:,:,::-1]</code>就表示BGR翻转，变成RGB，说明一下：</p>
+</blockquote>
+<p>熟悉Python的童鞋应该知道，对一个字符串s翻转可以这样写：<code>s[::-1]</code>，’abc’变成’cba’，-1表示逆序。图片是二维的，所以完整地复制一副图像就是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img2 = img[:,:] <span class="comment"># 写全就是：img2 = img[0:height,0:width]</span></span><br></pre></td></tr></table></figure>
+
+<p>而图片是有三个通道，相当于一个长度为3的字符串，所以通道翻转与图片复制组合起来便是<code>img[:,:,::-1]</code>。</p>
+<p>结果如下：</p>
+<p><img src="http://blog.codec.wang/cv2_matplotlib_show_color_image.jpg" alt=""></p>
+<h3 id="加载和保存图片"><a href="#加载和保存图片" class="headerlink" title="加载和保存图片"></a>加载和保存图片</h3><p>不使用OpenCV，Matplotlib也可以加载和保存图片：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> pli</span><br><span class="line"></span><br><span class="line">img = pli.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">plt.imshow(img)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存图片，需放在show()函数之前</span></span><br><span class="line">plt.savefig(<span class="string">'lena2.jpg'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+</font>
         </div>
         
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/DT35/" rel="tag">DT35</a>, <a class="has-link-grey -link" href="/tags/ROBOCON2020/" rel="tag">ROBOCON2020</a>
+                    <a class="has-link-grey -link" href="/tags/opencv/" rel="tag">opencv</a>, <a class="has-link-grey -link" href="/tags/python/" rel="tag">python</a>
                 </div>
             </div>
         </div>
@@ -236,16 +241,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/12/Python/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/30/opencv3/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Python!</span>
+                <span class="level-item">python 之 opencv-摄像头采集和视频播放</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/11/maxwell%E7%A3%81%E5%9C%BA%E4%BB%BF%E7%9C%9F/">
-                <span class="level-item">maxwell磁场仿真记录</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/29/opencv1/">
+                <span class="level-item">python 之 opencv-简单读取操作</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -954,7 +959,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="DT35相关的备忘说明" height="28">
+                    <img src="/images/logo.svg" alt="python 之 opencv-matplotlib显示图片" height="28">
                 
                 </a>
                 <p class="is-size-7">
