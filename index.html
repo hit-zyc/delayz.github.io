@@ -135,6 +135,189 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-03T06:19:15.000Z">2020-04-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 2 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/03/pytorch%E5%88%9D%E8%AF%86/">pytorch初识</a>
+            
+        </h1>
+        <div class="content">
+            <font face='Times New Roman'>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1></font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-03T05:06:41.000Z">2020-04-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes read (About 1425 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/03/opencv-4/">python 之 opencv 阶段总结篇</a>
+            
+        </h1>
+        <div class="content">
+            <font face='Times New Roman'>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li>没想到吧，这就总结了。没错我学习的三分钟热度真的太强了，这几天作业都没好好做，全在看这一套opencv的教程。那么就在大概第四天的时候把这一套教程给全部实验了一遍。</li>
+<li>不管怎么说，这一套教程呢，我作为小白学者觉得非常不错，讲的不深也有一些小挑战（略微简单，不过需要细品）。其实可以通过这些知识和技巧来做自己的延申，我还没有多尝试，唯一一次尝试使用对比字母轮廓形状的方法找到正确的字母，用他给的‘A’成功了，自己在网上找了个‘C’，预处理还做了闭运算轮廓只有一条，结果算法结果是像A我真的吐了。</li>
+<li>那么鉴于我一下子就学完了，而且每一章都像之前那样复制性的总结其实没多大意义，教程我电脑里也有，想复习了再去看看就可，所以这次来一个总结，目的就是略微的提到写我觉得的重点。</li>
+</ul>
+<h1 id="知识点回忆"><a href="#知识点回忆" class="headerlink" title="知识点回忆"></a>知识点回忆</h1><hr>
+<p><a href="#1">1. 摄像头 or 视频</a><br><a href="#2">2. matplotlib的使用</a><br><a href="#3">3. 图像基本操作</a><br><a href="#4">4. 颜色空间转换</a><br><a href="#5">5. 阈值分割</a><br><a href="#6">6. 图形几何变换</a></p>
+<hr>
+<h3 id="1">1. 摄像头 or 视频</h3>
+
+
+<ul>
+<li>我看了下，之前讲完了前三个部分，调用电脑摄像头，可以用来截取一帧图像、可以将摄像头的连续若干帧图像保存成视频的形式</li>
+</ul>
+<ul>
+<li>可以打开一个视频，如果你利用cv2来<strong>创建一个滑动条</strong><code>cv2.createTrackbar()</code>（滑动就会对应有回调函数）还能<strong>实现拖动视频播放进度</strong>，借助<code>cv2.setTrackbarPos()</code>、<code>cv2.getTrackbarPos()</code>其实看函数名也知道是干什么的，这里不多讲了  </li>
+</ul>
+<ul>
+<li><code>cv2.VideoCapture()</code>可以<strong>打开摄像头或者视频文件</strong>，<code>cap.get(propId)</code>、<code>cap.set(propId,value)</code>来<strong>得到和修改摄像头的很多属性</strong></li>
+</ul>
+<ul>
+<li><p><code>cv2.imwrite()</code>来<strong>保存图片或者视频</strong>，保存视频的时候要注意提前设置好视频编码方式，我看有挺多的可能根据需要到时候就会了解吧、当然<strong>读取图片</strong>还是得<code>cv2.imread()</code></p>
+</li>
+<li><p>捕获视频中的一帧<code>ret, frame = capture.read()</code></p>
+</li>
+</ul>
+<hr>
+<h3 id="2">2. matplotlib的使用</h3>  
+
+
+<ul>
+<li>其实这整套教程也没咋用到，他和matlab里的plot用法有点像，都是subplot。不过要注意，他来显示图像时，<code>plt.imshow()</code>中后一个参数cmap的参数选择，灰度图就是<code>cmap = &#39;gray&#39;</code>，而且imshow之后必须要加<code>plt.show()</code>，要不然图片就不显示，可以看一下老师怎么写的</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">titles &#x3D; [&#39;Original&#39;, &#39;BINARY&#39;, &#39;BINARY_INV&#39;, &#39;TRUNC&#39;, &#39;TOZERO&#39;, &#39;TOZERO_INV&#39;]</span><br><span class="line">images &#x3D; [img, th1, th2, th3, th4, th5]</span><br><span class="line"></span><br><span class="line"># 使用Matplotlib显示</span><br><span class="line">for i in range(6):</span><br><span class="line">    plt.subplot(2, 3, i + 1)</span><br><span class="line">    plt.imshow(images[i], &#39;gray&#39;)</span><br><span class="line">    plt.title(titles[i], fontsize&#x3D;8)</span><br><span class="line">    plt.xticks([]), plt.yticks([])  # 隐藏坐标轴</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>matplotlib中图像显示RGB顺序，opencv是BGR，显示时需要通道<strong>倒置</strong>一下</li>
+</ul>
+<hr>
+<h3 id="3">3. 图像基本操作</h3>
+
+<ul>
+<li>读取像素点的值直接<code>img[100, 90]</code>，修改也是这样。</li>
+</ul>
+<ul>
+<li><code>img.shape</code>形状中包括行数、列数和通道数</li>
+</ul>
+<ul>
+<li><strong>截取ROI</strong>，非常简单一看就懂，<code>face = img[100:200, 115:188]</code>，这也只能是个矩形，不过得到轮廓或者利用掩码方式得到一块想要的区域也行</li>
+</ul>
+<ul>
+<li>彩色图的BGR三个通道是可以<strong>分开</strong>单独访问的，<code>b, g, r = cv2.split(img)</code>；也可以<strong>合并</strong>组成图像<code>img = cv2.merge((b, g, r))</code></li>
+</ul>
+<hr>
+<h3 id="4">4. 颜色空间转换</h3>
+
+<ul>
+<li><code>img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</code>图像形式转换，教程中用他来转换成HSV颜色模型，改成<code>cv2.COLOR_BGR2HSV</code>就行了</li>
+</ul>
+<ul>
+<li><code>mask = cv2.inRange(hsv, lower_blue, upper_blue)</code>，其实inRange这个函数我感觉不太重要，因为后面有阈值分割，但可能这个是<strong>针对真彩图像</strong>，与阈值分割多是用于灰度图</li>
+</ul>
+<ul>
+<li>然后很重要的一个<code>res = cv2.bitwise_and(frame, frame, mask=mask)</code>，这个位操作是图像只存在0和255也就是二值图像的关键操作，可以在以后的二值图像处理里起到作用，特别是<strong>应用在掩码图的得到</strong></li>
+</ul>
+<hr>
+<h3 id="5">5. 阈值分割</h3>
+
+<ul>
+<li>这一段是之后的基础，全都讲起来有点麻烦了，我就不多说。额，先说一句，这个应该是用在<strong>处理灰度图上的</strong></li>
+</ul>
+<ul>
+<li><strong>固定阈值</strong>：<code>ret, th = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)</code>，第二个参数是设定的阈值，第三个是最大值，最后一个阈值的方式，<a href="https://docs.opencv.org/4.0.0/d7/d1b/group__imgproc__misc.html#gaa9e58d2860d4afa658ef70a9b1115576">种类主要5种</a></li>
+</ul>
+<ul>
+<li><strong>自适应阈值</strong>：<code>th2 = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 4)</code>，不同之处就在第三个参数，小区域阈值的计算方式；最后一个参数：最终阈值等于小区域计算出的阈值再减去此值（光看看不懂，想试试就自己试试）</li>
+</ul>
+<ul>
+<li><p><strong>Otsu阈值</strong>：看代码就知道怎么用了，原理自便</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 固定阈值法</span><br><span class="line">ret1, th1 &#x3D; cv2.threshold(img, 100, 255, cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line"># Otsu阈值法</span><br><span class="line">ret2, th2 &#x3D; cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)</span><br><span class="line"></span><br><span class="line"># 先进行高斯滤波，再使用Otsu阈值法</span><br><span class="line">blur &#x3D; cv2.GaussianBlur(img, (5, 5), 0)</span><br><span class="line">ret3, th3 &#x3D; cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>光线不均匀的图片就用自适应阈值就完事了</p>
+</li>
+</ul>
+<hr>
+<h3 id="6">6. 图形几何变换</h3>
+
+<p>👴乏了，找时间再写吧</p>
+</font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-30T03:33:54.000Z">2020-03-30</time>
                 
                 <div class="level-item">
@@ -318,7 +501,7 @@
 <p>结果如下：</p>
 <p><img src="http://blog.codec.wang/cv2_matplotlib_show_color_image.jpg" alt=""></p>
 <h3 id="加载和保存图片"><a href="#加载和保存图片" class="headerlink" title="加载和保存图片"></a>加载和保存图片</h3><p>不使用OpenCV，Matplotlib也可以加载和保存图片：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> pli</span><br><span class="line"></span><br><span class="line">img = pli.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">plt.imshow(img)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存图片，需放在show()函数之前</span></span><br><span class="line">plt.savefig(<span class="string">'lena2.jpg'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = plt.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">plt.imshow(img)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存图片，需放在show()函数之前</span></span><br><span class="line">plt.savefig(<span class="string">'lena2.jpg'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
 
 </font>
@@ -1067,367 +1250,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-20T16:28:28.000Z">2020-03-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 440 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/21/Ielts-2/">Ielts学习-2</a>
-            
-        </h1>
-        <div class="content">
-            <font face="Times New Roman">
-
-<h2 id="雅思听力"><a href="#雅思听力" class="headerlink" title="雅思听力"></a>雅思听力</h2><ul>
-<li>完成剑雅3个section，正确率正常不过用时较长，进入状态太慢</li>
-<li>以下是学术背景的听力相关词汇积累，<a href="https://www.ieltscat.com/intensive/intensive/364/1/24">雅思喵807听力词汇</a></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>A</th>
-<th align="center">B</th>
-<th align="center">C</th>
-<th align="left">D</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>orientation</td>
-<td align="center">resume</td>
-<td align="center">curriculum</td>
-<td align="left">curriculum vitae</td>
-</tr>
-<tr>
-<td>extra-curriculum</td>
-<td align="center">assessment</td>
-<td align="center">virtual</td>
-<td align="left">compulsory</td>
-</tr>
-<tr>
-<td>trimester</td>
-<td align="center">semester</td>
-<td align="center">term</td>
-<td align="left">session</td>
-</tr>
-<tr>
-<td>obligatory</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="雅思作文"><a href="#雅思作文" class="headerlink" title="雅思作文"></a>雅思作文</h2><ul>
-<li>思维发散小技巧</li>
-</ul>
-<blockquote>
-<p>s-e-c-r-e-t  of cheese <strong>知识的秘密</strong></p>
-<p>skill<br>education<br>carrer,communication,comments,curriculum<br>read,reveal,review,record,refresh<br>elevate,estimate<br>tell,teach,threshold,translate,target,topic,</p>
-</blockquote>
-<ul>
-<li>Ielts作文评分标准</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">任务完成度</th>
-<th align="center">连贯与衔接</th>
-<th align="center">词汇资源</th>
-<th align="center">语法结构</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">TA</td>
-<td align="center">CC</td>
-<td align="center">LR</td>
-<td align="center">GRA</td>
-</tr>
-<tr>
-<td align="center">Task Achievement</td>
-<td align="center">Coherence and Cohesion</td>
-<td align="center">Lexical Resource</td>
-<td align="center">Grammatical Range Accuracy</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">其他扣分点</th>
-<th align="center"></th>
-<th align="center"></th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">underlength</td>
-<td align="center">篇幅不够</td>
-<td align="center">no of words</td>
-<td align="center">字数</td>
-</tr>
-<tr>
-<td align="center">off-topic</td>
-<td align="center">偏题</td>
-<td align="center">memorised</td>
-<td align="center">套用模板</td>
-</tr>
-<tr>
-<td align="center">illegible</td>
-<td align="center">字迹潦草</td>
-<td align="center">penalty</td>
-<td align="center">作弊</td>
-</tr>
-</tbody></table>
-<hr>
-<h4 id="小作文"><a href="#小作文" class="headerlink" title="小作文"></a>小作文</h4><ul>
-<li>动态图（依据年份）、静态图</li>
-<li>线（string）、柱（bar）、饼（pie）、表（form）、流程（flow）、地图（map）</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">图表</th>
-<th align="center">上升</th>
-<th align="center">下降</th>
-<th align="center">维持不变</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">diagram</td>
-<td align="center">rise</td>
-<td align="center">decrease</td>
-<td align="center">stay steady</td>
-</tr>
-<tr>
-<td align="center">chart</td>
-<td align="center">rocket</td>
-<td align="center">go down</td>
-<td align="center">remain constant</td>
-</tr>
-<tr>
-<td align="center">graph</td>
-<td align="center">soar</td>
-<td align="center">decline</td>
-<td align="center">keep stable</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">surge</td>
-<td align="center">drop</td>
-<td align="center">maintain this level</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">climb</td>
-<td align="center">fall</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">go up</td>
-<td align="center">diminish</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">increase</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">boom</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<p>(a(an) upward/downward trend:一个上升下降趋势)</p>
-<hr>
-<h2 id="雅思阅读"><a href="#雅思阅读" class="headerlink" title="雅思阅读"></a>雅思阅读</h2><ul>
-<li>平行阅读法：读完一遍文章后，全部题目做完，即按顺序阅读文章包括题目</li>
-</ul>
-<blockquote>
-<p>判断题中的NG选项出现形势：1.完全没提及 2.提到一部分，另一部分没提及</p>
-</blockquote>
-<ul>
-<li>作业：<strong>剑雅10</strong> <strong>Test 3</strong> <strong>-Passage 2</strong></li>
-</ul>
-<hr>
-<h2 id="生词记忆"><a href="#生词记忆" class="headerlink" title="生词记忆"></a>生词记忆</h2><table>
-<thead>
-<tr>
-<th>生词</th>
-<th align="center">释义</th>
-<th align="center">生词</th>
-<th align="left">释义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>proofread</td>
-<td align="center">v. 校对</td>
-<td align="center">punctuation</td>
-<td align="left">n. 标点符号</td>
-</tr>
-<tr>
-<td>preposition</td>
-<td align="center">n. 介词</td>
-<td align="center">carnival</td>
-<td align="left">n. 狂欢节，嘉年华</td>
-</tr>
-<tr>
-<td>infinitive</td>
-<td align="center">n. （动词的）不定式</td>
-<td align="center">reinvent</td>
-<td align="left">v. 以新形式出现</td>
-</tr>
-<tr>
-<td>pigment</td>
-<td align="center">n. 色素，颜料</td>
-<td align="center">illegible</td>
-<td align="left">a. 难以辨认的</td>
-</tr>
-<tr>
-<td>penalty</td>
-<td align="center">n. 惩罚</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-</tbody></table>
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-18T15:18:19.000Z">2020-03-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 725 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/18/python-3/">python学习-3</a>
-            
-        </h1>
-        <div class="content">
-            <ul>
-<li><p><a href="https://www.runoob.com/python/python-func-enumerate.html"><kbd><strong>enumerate()</strong></kbd>函数</a>:用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在<kbd>for</kbd>循环当中</p>
-</li>
-<li><p><a href="https://www.runoob.com/python3/python3-func-sorted.html"><kbd><strong>sorted()</strong></kbd>函数</a>:对所有可迭代的对象进行排序操作（链接内含<kbd>sort()</kbd>函数与<kbd>sorted()</kbd>函数区别）</p>
-</li>
-<li><p><a href="https://www.runoob.com/python3/python3-string-lower.html"><kbd><strong>lower()</strong></kbd>函数</a>:将字符串中所有字母进行小写操作，（不能对其他类型数据进行操作，会报错）</p>
-</li>
-<li><p><a href="https://www.runoob.com/python3/python3-att-dictionary-items.html"><kbd><strong>items()</strong></kbd>函数</a>:以列表返回可遍历的(键，值)元组数组，(<kbd>xxx.items()</kbd>)</p>
-</li>
-</ul>
-<hr>
-<font face="Times New Roman">
-
-<blockquote>
-<p><strong>lambda</strong> : 匿名函数</p>
-</blockquote>
-<blockquote>
-<p><strong>装饰器（Decorator）</strong>是通过python的@语法实现的</p>
-</blockquote>
-<blockquote>
-<p><strong>OOP</strong>（Object Oriented Programming）：面向对象的编程，是一种程序设计思想</p>
-</blockquote>
-<ul>
-<li>数据封装、继承和多态只是面向对象程序设计中最基础的3个概念</li>
-</ul>
-<blockquote>
-<p>Python允许使用<strong>多重继承</strong>，因此，<strong>MixIn</strong> 就是一种常见的设计</p>
-</blockquote>
-<blockquote>
-<p>如果想将一个类用作for … in循环，类似list或tuple，那么必须有一个<code>__iter__()</code>方法来返回一个迭代对象，但是要注意他就是一个类，当然经过实验发现你通过类建立实例也可以等价的做for循环，注意<code>__iter__</code>要配合<code>__next__</code>使用</p>
-</blockquote>
-<blockquote>
-<p>我们自己定义的类表现得和Python自带的list、tuple、dict没什么区别，这完全归功于动态语言的“鸭子类型”，不需要强制继承某个接口。</p>
-</blockquote>
-<blockquote>
-<p><code>__call__()</code>还可以定义参数。对实例进行直接调用就好比对一个函数进行调用一样，所以你完全可以把对象看成函数，把函数看成对象，因为这两者之间本来就没啥根本的区别</p>
-<p>通过<code>callable()</code>函数，我们就可以判断一个对象是否是“可调用”对象。</p>
-</blockquote>
-<blockquote>
-<p>Python的class允许定义许多定制方法，可以让我们非常方便地生成特定的类。</p>
-<p>本节介绍的是最常用的几个定制方法，还有很多可定制的方法，请参考<a href="http://docs.python.org/3/reference/datamodel.html#special-method-names">Python的官方文档</a>。</p>
-</blockquote>
-<hr>
-<p>借用一个例子深刻理解<code>__str__</code>、<code>__repr__</code>、<code>__getattr__</code>、<code>__call__</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">输出个性化URL:</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chain</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path=<span class="string">''</span>)</span>:</span></span><br><span class="line">       self.__path = path</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">       <span class="keyword">return</span> Chain(<span class="string">'%s/%s'</span> % (self.__path, path))</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">       <span class="keyword">return</span> Chain(<span class="string">'%s/%s'</span> % (self.__path, path))</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">       <span class="keyword">return</span> self.__path</span><br><span class="line"></span><br><span class="line">   __repr__ = __str__</span><br><span class="line"></span><br><span class="line">   print(Chain().users(<span class="string">'michael'</span>).repos) <span class="comment"># /users/michael/repos</span></span><br></pre></td></tr></table></figure>
-
-
-
-<hr>
-<p><a href="https://segmentfault.com/a/1190000017327003">python的枚举类型</a></p>
-<blockquote>
-<p>正常情况下，我们都用<code>class Xxx...</code>来定义类，但是，<code>type()</code>函数也允许我们动态创建出类来</p>
-</blockquote>
-</font>
-
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -1492,7 +1314,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            18
+                            20
                         </p>
                     </a>
                 </div>
@@ -1516,7 +1338,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            15
+                            16
                         </p>
                     </a>
                 </div>
@@ -1633,7 +1455,7 @@
                 <span class="level-item">Image Processing</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Magnetic-field-specialty/">
@@ -1686,7 +1508,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 10px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16.67px;">ielts</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 16.67px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/ielts/" style="font-size: 14px;">ielts</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 16px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10px;">pytorch</a> <a href="/tags/record/" style="font-size: 18px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a>
     </div>
 </div>
     
@@ -1698,6 +1520,32 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T06:19:15.000Z">2020-04-03</time></div>
+                    <a href="/2020/04/03/pytorch%E5%88%9D%E8%AF%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch初识</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T05:06:41.000Z">2020-04-03</time></div>
+                    <a href="/2020/04/03/opencv-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv 阶段总结篇</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1738,32 +1586,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T10:08:03.000Z">2020-03-29</time></div>
-                    <a href="/2020/03/29/opencv1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-简单读取操作</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T12:02:44.000Z">2020-03-28</time></div>
-                    <a href="/2020/03/28/Ielts%E5%B0%8F%E7%8F%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0-3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-3</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1774,6 +1596,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -1816,7 +1649,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/NNS/">
                         <span class="tag">NNS</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1872,14 +1705,21 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/opencv/">
                         <span class="tag">opencv</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pytorch/">
+                        <span class="tag">pytorch</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1930,6 +1770,32 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T06:19:15.000Z">2020-04-03</time></div>
+                    <a href="/2020/04/03/pytorch%E5%88%9D%E8%AF%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch初识</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T05:06:41.000Z">2020-04-03</time></div>
+                    <a href="/2020/04/03/opencv-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv 阶段总结篇</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-30T03:33:54.000Z">2020-03-30</time></div>
                     <a href="/2020/03/30/a/" class="title has-link-black-ter is-size-6 has-text-weight-normal">a</a>
                     <p class="is-size-7 is-uppercase">
@@ -1965,32 +1831,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T10:08:03.000Z">2020-03-29</time></div>
-                    <a href="/2020/03/29/opencv1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-简单读取操作</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T12:02:44.000Z">2020-03-28</time></div>
-                    <a href="/2020/03/28/Ielts%E5%B0%8F%E7%8F%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0-3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-3</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -2001,6 +1841,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -2043,7 +1894,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/NNS/">
                         <span class="tag">NNS</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2099,14 +1950,21 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/opencv/">
                         <span class="tag">opencv</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pytorch/">
+                        <span class="tag">pytorch</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
