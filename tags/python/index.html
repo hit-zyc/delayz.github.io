@@ -202,7 +202,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 minutes read (About 1425 words)
+                    17 minutes read (About 2488 words)
                 </span>
                 
                 
@@ -223,7 +223,7 @@
 <li>那么鉴于我一下子就学完了，而且每一章都像之前那样复制性的总结其实没多大意义，教程我电脑里也有，想复习了再去看看就可，所以这次来一个总结，目的就是略微的提到写我觉得的重点。</li>
 </ul>
 <h1 id="知识点回忆"><a href="#知识点回忆" class="headerlink" title="知识点回忆"></a>知识点回忆</h1><hr>
-<p><a href="#1">1. 摄像头 or 视频</a><br><a href="#2">2. matplotlib的使用</a><br><a href="#3">3. 图像基本操作</a><br><a href="#4">4. 颜色空间转换</a><br><a href="#5">5. 阈值分割</a><br><a href="#6">6. 图形几何变换</a></p>
+<p><a href="#1">1. 摄像头 or 视频</a><br><a href="#2">2. matplotlib的使用</a><br><a href="#3">3. 图像基本操作</a><br><a href="#4">4. 颜色空间转换</a><br><a href="#5">5. 阈值分割</a><br><a href="#6">6. 图形几何变换</a><br><a href="#7">7. 绘图功能</a><br><a href="#8">8. 图像混合</a></p>
 <hr>
 <h3 id="1">1. 摄像头 or 视频</h3>
 
@@ -304,6 +304,123 @@
 </ul>
 <hr>
 <h3 id="6">6. 图形几何变换</h3>
+
+<ul>
+<li>其实我觉得这一章是很重要的，因为图像处理应该会有很多时候待处理的目标是需要几何变换特别是立体上的仿射变换</li>
+</ul>
+<ul>
+<li><code>cv2.resize()</code><strong>可以自己定义大小，也可以按比例缩放</strong>，用处会很多，我不知道和下面这个有什么关系，用处大不大，或者说在哪里使用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lower &#x3D; cv2.pyrDown(img)  # 向下采样一级</span><br><span class="line">higher &#x3D; cv2.pyrUp(img)  # 向上采样一级</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><code>cv2.flip(img, 1)</code>第二个参数决定是<strong>镜像、垂直、镜像垂直翻转</strong></li>
+</ul>
+<ul>
+<li><strong>平移图片</strong>，需要用到矩阵，用<strong>仿射变换函数</strong><code>cv2.warpAffine()</code>实现；<strong>旋转</strong>也是，而且用这个函数前，还要加个得到旋转对应的矩阵的函数<code>cv2.getRotationMatrix2D()</code>，你看这还只是2D的</li>
+</ul>
+<p>$$<br>M = \left[<br> \begin{matrix}<br>   1 &amp; 0 &amp; t_x \newline<br>   0 &amp; 1 &amp; t_y<br>  \end{matrix}<br>  \right]<br>$$</p>
+<h4 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a><strong>仿射变换</strong></h4><ul>
+<li><strong>二维的</strong>，懂了吗，基本的图像变换就是二维坐标的变换：从一种二维坐标(x,y)到另一种二维坐标(u,v)的线性变换，你得先得到一个矩阵，那么就可以转换了，矩阵<strong>T(2×3)</strong>就称为仿射变换的变换矩阵</li>
+</ul>
+<p>$$<br>\begin{matrix}<br>   u=a_1x+b_1y+c_1 \newline<br>   v=a_2x+b_2y+c_2<br>  \end{matrix}<br>$$</p>
+<hr>
+<p>$$<br>\left[<br> \begin{matrix}<br>   u \newline<br>   v<br>  \end{matrix}<br>  \right]  = \left[<br> \begin{matrix}<br>   a_1 &amp; b_1  \newline<br>   a_2 &amp; b_2<br>  \end{matrix}<br>  \right] \left[<br> \begin{matrix}<br>   x \newline<br>   y<br>  \end{matrix}<br>  \right]+\left[<br> \begin{matrix}<br>   c_1 \newline<br>   c_2<br>  \end{matrix}<br>  \right]<br>$$</p>
+<hr>
+<p>$$<br>R=\left[<br> \begin{matrix}<br>   a_1 &amp; b_1  \newline<br>   a_2 &amp; b_2<br>  \end{matrix}<br>  \right], t=\left[<br> \begin{matrix}<br>   c_1 \newline<br>   c_2<br>  \end{matrix}<br>  \right],T=\left[<br> \begin{matrix}<br>   R &amp; t<br>  \end{matrix}<br>  \right]<br>$$</p>
+<hr>
+<ul>
+<li>然后几行代码看懂，现根据三个点和对应的三个点得到变换矩阵，然后直接转整个图像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 变换前的三个点</span><br><span class="line">pts1 &#x3D; np.float32([[50, 65], [150, 65], [210, 210]])</span><br><span class="line"># 变换后的三个点</span><br><span class="line">pts2 &#x3D; np.float32([[50, 100], [150, 65], [100, 250]])</span><br><span class="line"></span><br><span class="line"># 生成变换矩阵</span><br><span class="line">M &#x3D; cv2.getAffineTransform(pts1, pts2)</span><br><span class="line">dst &#x3D; cv2.warpAffine(img, M, (cols, rows))</span><br></pre></td></tr></table></figure>
+
+<h4 id="透视变换"><a href="#透视变换" class="headerlink" title="透视变换"></a><strong>透视变换</strong></h4><ul>
+<li><strong>三维的</strong>，就是<strong>立体上</strong>如何把一个目标看得顺眼一点，一个身份证你斜着拍的，那我想让他能像平着拍的一样舒服，那就用这个方法</li>
+</ul>
+<p>$$<br>\begin{matrix}<br>   X=a_1 x + b_1 y + c_1 \newline<br>   Y=a_2 x + b_2 y + c_2  \newline<br>   Z=a_3 x + b_3 y + c_3<br>  \end{matrix}<br>$$</p>
+<hr>
+<p>$$<br>\left[<br> \begin{matrix}<br>   X \newline<br>   Y \newline<br>   Z<br>  \end{matrix}<br>  \right]  = \left[<br> \begin{matrix}<br>   a_1 &amp; b_1 &amp; c_1  \newline<br>   a_2 &amp; b_2 &amp; c_2  \newline<br>   a_3 &amp; b_3 &amp; c_3<br>  \end{matrix}<br>  \right] \left[<br> \begin{matrix}<br>   x \newline<br>   y \newline<br>   1<br>  \end{matrix}<br>  \right]<br>$$</p>
+<ul>
+<li>OpenCV中首先根据变换前后的四个点用<code>cv2.getPerspectiveTransform()</code>生成3×3的变换矩阵，然后再用<code>cv2.warpPerspective()</code>进行透视变换</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 原图中卡片的四个角点</span><br><span class="line">pts1 &#x3D; np.float32([[148, 80], [437, 114], [94, 247], [423, 288]])</span><br><span class="line"># 变换后分别在左上、右上、左下、右下四个点</span><br><span class="line">pts2 &#x3D; np.float32([[0, 0], [320, 0], [0, 178], [320, 178]])</span><br><span class="line"></span><br><span class="line"># 生成透视变换矩阵</span><br><span class="line">M &#x3D; cv2.getPerspectiveTransform(pts1, pts2)</span><br><span class="line"># 进行透视变换，参数3是目标图像大小</span><br><span class="line">dst &#x3D; cv2.warpPerspective(img, M, (320, 178))</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">变换</th>
+<th align="center">矩阵</th>
+<th align="center">自由度</th>
+<th align="center">保持性质</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">平移</td>
+<td align="center">[I, t]（2×3）</td>
+<td align="center">2</td>
+<td align="center">方向/长度/夹角/平行性/直线性</td>
+</tr>
+<tr>
+<td align="center">刚体</td>
+<td align="center">[R, t]（2×3）</td>
+<td align="center">3</td>
+<td align="center">长度/夹角/平行性/直线性</td>
+</tr>
+<tr>
+<td align="center">相似</td>
+<td align="center">[sR, t]（2×3）</td>
+<td align="center">4</td>
+<td align="center">夹角/平行性/直线性</td>
+</tr>
+<tr>
+<td align="center">仿射</td>
+<td align="center">[T]（2×3）</td>
+<td align="center">6</td>
+<td align="center">平行性/直线性</td>
+</tr>
+<tr>
+<td align="center">透视</td>
+<td align="center">[T]（3×3）</td>
+<td align="center">8</td>
+<td align="center">直线性</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="7">7. 绘图功能</h3>
+
+<ul>
+<li><p>感觉画图功能不太用得到，不过也是用起来很方便，绘制形状的函数有一些共同的参数</p>
+<ul>
+<li>color：绘制的颜色,是彩色图就估计是BGR，就输一个三维元组ok；灰度图就一个255以内的数</li>
+<li>thickness：线宽，默认为1；<strong>对于矩形/圆之类的封闭形状而言，传入-1表示填充形状</strong></li>
+<li>建议画什么线型都加一个<code>lineType=cv2.LINE_AA</code>比较好看</li>
+</ul>
+</li>
+<li><p><code>img = np.zeros((512, 512, 3), np.uint8)</code>可以直接用这样一句话来<strong>创建一个纯色图</strong></p>
+</li>
+</ul>
+<ul>
+<li><code>cv2.line(img, (0, 0), (512, 512), (255, 0, 0), 5)</code>，<strong>起点</strong>、<strong>终点</strong></li>
+</ul>
+<ul>
+<li><code>cv2.rectangle(img, (384, 0), (510, 128), (0, 255, 0), 3)</code>，<strong>左上</strong>、<strong>右下</strong></li>
+</ul>
+<ul>
+<li><code>cv2.circle(img, (447, 63), 63, (0, 0, 255), -1)</code>，<strong>圆心</strong>、<strong>半径</strong></li>
+</ul>
+<ul>
+<li><code>cv2.ellipse(img, (256, 256), (100, 50), 0, 0, 180, (255, 0, 0), -1)</code>，<strong>椭圆中心</strong>、<strong>x/y轴长度</strong>、<strong>旋转角度</strong>、<strong>起始角度</strong>、<strong>结束角度</strong>，具体自己试试</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 使用cv2.polylines()画多条直线</span><br><span class="line">line1 &#x3D; np.array([[100, 20],  [300, 20]], np.int32).reshape((-1, 1, 2))</span><br><span class="line">line2 &#x3D; np.array([[100, 60],  [300, 60]], np.int32).reshape((-1, 1, 2))</span><br><span class="line">line3 &#x3D; np.array([[100, 100],  [300, 100]], np.int32).reshape((-1, 1, 2))</span><br><span class="line">cv2.polylines(img, [line1, line2, line3], True, (0, 255, 255))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>添加文字</strong>：<code>cv2.putText(img, &#39;ex2tron&#39;, (10, 500), font,4, (255, 255, 255), 2, lineType=cv2.LINE_AA)</code></li>
+</ul>
+<hr>
+<h3 id="8">8. 图像混合</h3>
+
+
 
 <p>👴乏了，找时间再写吧</p>
 </font>
@@ -615,11 +732,13 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/27/PYTHON-%E4%B9%8B-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">Python 之 图像处理</a>
+                <a class="has-link-black-ter" href="/2020/03/27/PYTHON-%E4%B9%8B-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">pillow初识、format格式化、绝对相对路径说明</a>
             
         </h1>
         <div class="content">
-            <blockquote>
+            <font face="Times New Roman">
+
+<blockquote>
 <p>python -m -pip install –upgrade pip   #升级python的pip</p>
 </blockquote>
 <blockquote>
@@ -646,7 +765,7 @@
 <li>windows系统中绝对路径用<code>\</code>展开，而在其他系统中会出现用<code>/</code>的展开</li>
 <li>相对路径中则使用<code>/</code>，比如返回上一级文件夹<code>../</code>，当前文件夹前不需要加斜杠，前往下一级文件夹的某文件则类似于<code>/xx/xx.c</code></li>
 </ol>
-<h3 id="python语法：格式化输出之format用法"><a href="#python语法：格式化输出之format用法" class="headerlink" title="python语法：格式化输出之format用法"></a><a href="https://www.cnblogs.com/lovejh/p/9201219.html">python语法：格式化输出之format用法</a></h3>
+<h3 id="python语法：格式化输出之format用法"><a href="#python语法：格式化输出之format用法" class="headerlink" title="python语法：格式化输出之format用法"></a><a href="https://www.cnblogs.com/lovejh/p/9201219.html">python语法：格式化输出之format用法</a></h3></font>
         </div>
         
         
@@ -928,7 +1047,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            20
+                            21
                         </p>
                     </a>
                 </div>
@@ -1061,7 +1180,7 @@
                 <span class="level-item">Ielts</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Image-Processing/">
@@ -1122,7 +1241,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/ielts/" style="font-size: 14px;">ielts</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 16px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10px;">pytorch</a> <a href="/tags/record/" style="font-size: 18px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 15px;">ielts</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10px;">pytorch</a> <a href="/tags/record/" style="font-size: 17.5px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a>
     </div>
 </div>
     
@@ -1134,6 +1253,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T09:20:19.000Z">2020-04-04</time></div>
+                    <a href="/2020/04/04/Ielts-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-4</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1187,19 +1319,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T18:27:34.000Z">2020-03-30</time></div>
-                    <a href="/2020/03/30/opencv2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-matplotlib显示图片</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1217,7 +1336,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1298,7 +1417,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ielts/">
                         <span class="tag">ielts</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1340,7 +1459,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/record/">
                         <span class="tag">record</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
@@ -1384,6 +1503,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T09:20:19.000Z">2020-04-04</time></div>
+                    <a href="/2020/04/04/Ielts-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-4</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T06:19:15.000Z">2020-04-03</time></div>
                     <a href="/2020/04/03/pytorch%E5%88%9D%E8%AF%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch初识</a>
                     <p class="is-size-7 is-uppercase">
@@ -1432,19 +1564,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T18:27:34.000Z">2020-03-30</time></div>
-                    <a href="/2020/03/30/opencv2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-matplotlib显示图片</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1462,7 +1581,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1543,7 +1662,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ielts/">
                         <span class="tag">ielts</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1585,7 +1704,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/record/">
                         <span class="tag">record</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 

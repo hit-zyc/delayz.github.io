@@ -7,13 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Tag: robocon2020 - Wdnmd</title>
+<title>Tag: ROBOCON2020 - Wdnmd</title>
 
 
     <meta name="description" content="哈尔滨工业大学仪器学院本科生">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wdnmd">
-<meta property="og:url" content="https://hit-zyc.github.io/tags/robocon2020/index.html">
+<meta property="og:url" content="https://hit-zyc.github.io/tags/ROBOCON2020/index.html">
 <meta property="og:site_name" content="Wdnmd">
 <meta property="og:description" content="哈尔滨工业大学仪器学院本科生">
 <meta property="og:locale" content="en_US">
@@ -132,7 +132,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">Tags</a></li>
-            <li class="is-active"><a href="#" aria-current="page">robocon2020</a></li>
+            <li class="is-active"><a href="#" aria-current="page">ROBOCON2020</a></li>
         </ul>
         </nav>
     </div>
@@ -145,7 +145,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-20T16:48:15.000Z">2020-03-21</time>
+                <time class="level-item has-text-grey" datetime="2020-03-12T10:53:23.000Z">2020-03-12</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 179 words)
+                    4 minutes read (About 553 words)
                 </span>
                 
                 
@@ -164,21 +164,32 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/21/adams/">adams仿真自学</a>
+                <a class="has-link-black-ter" href="/2020/03/12/DT35%E7%9B%B8%E5%85%B3%E7%9A%84%E5%A4%87%E5%BF%98%E8%AF%B4%E6%98%8E/">DT35相关的备忘说明</a>
             
         </h1>
         <div class="content">
-            <h3 id="HITCRT分享adams仿真教程（目前删除）"><a href="#HITCRT分享adams仿真教程（目前删除）" class="headerlink" title="HITCRT分享adams仿真教程（目前删除）"></a>HITCRT分享adams仿真教程（目前删除）</h3><hr>
-<h3 id="初步仿真步骤"><a href="#初步仿真步骤" class="headerlink" title="初步仿真步骤"></a>初步仿真步骤</h3><hr>
-<ol>
-<li>新建一个模型，设置各种单位规范</li>
-<li>导入solidworks中生成的模型<kbd>.x_t</kbd>类型文件</li>
-<li>建立约束，<strong>注意方向</strong>（包括固定副、旋转副但不限于此）（可依此设置机构初始状态）</li>
-<li>建立驱动（驱动方程可联系至matlab描述，遵循教程）</li>
-<li>建立力的接触（设置两实体的碰撞、摩擦等参数）<a href="/../documents/Adams材料碰撞参数.xls" target="_blank"><strong>Adams材料碰撞参数(excel)</strong></a></li>
-<li>开始仿真，步数（<kbd>steps</kbd>）越大计算时间越久，计算结果越准确</li>
-<li>设置测量量，以图表形式显示</li>
-</ol>
+            <h3 id="零点标定的初步方法"><a href="#零点标定的初步方法" class="headerlink" title="零点标定的初步方法"></a>零点标定的初步方法</h3><ul>
+<li>现在认为电压与距离的关系即<font color=blue>D(mm)=0.000995*V(uV,直接的读取值)+50</font>；那么在这个基础上，50mm内的测量肯定不可靠，DT35零位标定方法就初定为</li>
+</ul>
+<blockquote>
+<p>均匀选取10个左右的距离值，D=0.000995*V+50+R，这些值与实际距离真值做差产生10个残差，求当残差的平方和有最小值时的R（求导数为零的情况）</p>
+</blockquote>
+<blockquote>
+<p>matlab实现如下，其中actual_data为距离真值，roughdeal_data为通过上述一元公式求得的，最后运行后打印出Xs0就是R的值，R即为尺子零点到DT35零点的距离（即DT35零点为尺子上刻度为R的地方）（小心方向）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">syms x %零点补偿量</span><br><span class="line">y&#x3D;0;</span><br><span class="line">for i&#x3D;1:length(actual_data)</span><br><span class="line">   y&#x3D;y+(actual_data(i)-roughdeal_data(i)-x)^2;</span><br><span class="line">end</span><br><span class="line">dy&#x3D;diff(y,x);</span><br><span class="line">Xs0&#x3D;solve(dy,x);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="判断激光光线是否垂直车边的初步方法"><a href="#判断激光光线是否垂直车边的初步方法" class="headerlink" title="判断激光光线是否垂直车边的初步方法"></a>判断激光光线是否垂直车边的初步方法</h3><blockquote>
+<p>利用约6m长的标定架，车固定在其中一端，测量激光发射中点到侧边标定架的距离；理论上激光应平行于标定架射向另一端，在另一端再次测量激光中点到侧边标定架的距离，两次测量应相等，目前规定差值不能大于1mm，至少测量三次，可能还需要换边测量</p>
+</blockquote>
+<ul>
+<li><font color=red>这样的方法只能让光线与由两个侧向导轮确定的直线平行,所以导轮的安装必须尽量规范，全场定位技术也需要这一点！！</font></li>
+</ul>
+<hr>
+<h3 id="采集卡相关问题"><a href="#采集卡相关问题" class="headerlink" title="采集卡相关问题"></a>采集卡相关问题</h3><ul>
+<li>在主控ucos操作系统上的速率和准确率测试需要完善</li>
+<li>电压输入探针：现在通道1因为电阻焊盘焊掉失效了；已知通道1分压电阻阻值为M级，温漂百分级，可能需要换成千分级，已测，最大误差5mm以内；3、4通道也要分压电阻不过阻值过小，可能要重新焊M级电阻；其余通道都只是一个保护电阻</li>
+</ul>
 
         </div>
         
@@ -239,7 +250,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            20
+                            21
                         </p>
                     </a>
                 </div>
@@ -372,7 +383,7 @@
                 <span class="level-item">Ielts</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Image-Processing/">
@@ -433,7 +444,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/ielts/" style="font-size: 14px;">ielts</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 16px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10px;">pytorch</a> <a href="/tags/record/" style="font-size: 18px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 15px;">ielts</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10px;">pytorch</a> <a href="/tags/record/" style="font-size: 17.5px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a>
     </div>
 </div>
     
@@ -445,6 +456,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T09:20:19.000Z">2020-04-04</time></div>
+                    <a href="/2020/04/04/Ielts-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-4</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -498,19 +522,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T18:27:34.000Z">2020-03-30</time></div>
-                    <a href="/2020/03/30/opencv2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-matplotlib显示图片</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -528,7 +539,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -609,7 +620,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ielts/">
                         <span class="tag">ielts</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -651,7 +662,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/record/">
                         <span class="tag">record</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
@@ -695,6 +706,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T09:20:19.000Z">2020-04-04</time></div>
+                    <a href="/2020/04/04/Ielts-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-4</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-03T06:19:15.000Z">2020-04-03</time></div>
                     <a href="/2020/04/03/pytorch%E5%88%9D%E8%AF%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch初识</a>
                     <p class="is-size-7 is-uppercase">
@@ -743,19 +767,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T18:27:34.000Z">2020-03-30</time></div>
-                    <a href="/2020/03/30/opencv2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-matplotlib显示图片</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -773,7 +784,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -854,7 +865,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ielts/">
                         <span class="tag">ielts</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -896,7 +907,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/record/">
                         <span class="tag">record</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
@@ -1027,91 +1038,6 @@ var IcarusThemeSettings = {
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-
-
-<a id="back-to-top" title="Back to Top" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
-</body>
-</html>datedBrowser({
             bgColor: '#f25648',
             color: '#ffffff',
             lowerThan: 'flex'
