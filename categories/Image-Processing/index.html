@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    11 minutes read (About 1700 words)
+                    12 minutes read (About 1805 words)
                 </span>
                 
                 
@@ -213,7 +213,7 @@
 </ul>
 <h4 id="2-1-选择Pytorch"><a href="#2-1-选择Pytorch" class="headerlink" title="2.1 选择Pytorch"></a>2.1 选择<code>Pytorch</code></h4><ul>
 <li>好用、使用广泛、新颖、直观、动态建立框架</li>
-<li><code>**torchvision**</code>里已经有一些它搭建好的网络，比如resnet（可以可以，我知道例程是这样用的了），然后你用这个已有的网络来训练自己的任务</li>
+<li><strong><code>torchvision</code></strong>里已经有一些它搭建好的网络，比如resnet（可以可以，我知道例程是这样用的了），然后你用这个已有的网络来训练自己的任务</li>
 </ul>
 <blockquote>
 <p>将<code>jupyter notebook</code>工作目录更改为自定义，即在属性栏启动目录将<code>userprofile/</code>..双引号内的内容改为自己希望前往的目录地址，重启即可</p>
@@ -223,16 +223,16 @@
 </ul>
 <h4 id="2-2-什么是Variable"><a href="#2-2-什么是Variable" class="headerlink" title="2.2 什么是Variable"></a>2.2 什么是<code>Variable</code></h4><ul>
 <li><p>&emsp;&emsp;它在神经网络的训练中是一个关键，为什么这么说？思考一下，神经网络的反向传播算法常用梯度下降法，那其中如何求梯度呢？<br>&emsp;&emsp;大家都知道就是求偏导数，导数就是梯度，torch里求导数的小帮手就是<code>variable</code>，将tensor张量放进variable中，开启自动求梯度的配置</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`variable = Variable(tensor,requires_grad=<span class="literal">True</span>)` <span class="comment">#requires_grad = True</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable = Variable(tensor,requires_grad=<span class="literal">True</span>) <span class="comment">#requires_grad = True</span></span><br></pre></td></tr></table></figure>
 <p>那么，你以后含variable的运算就都和variable本身建立了某种联系，可以快速得到以后的结果相对variable的梯度</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v_out = torch.mean(variable*variable)</span><br><span class="line">v_out.backward()  <span class="comment">#求梯度</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v_out = torch.mean(variable*variable)  <span class="comment">#例如求个平均数的运算</span></span><br><span class="line">v_out.backward()  <span class="comment">#求梯度</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>variable</code>变量不同于<code>tensor</code>，但是<code>variable.data</code>可以得到tensor，如果想进行tensor和numpy_array的转换，那么就要<code>xx.data</code>先得到tensor</p>
 </li>
 <li><p><code>variable</code>的运算和<code>tensor</code>相似，但不完全相同</p>
 </li>
 </ul>
-<h4 id="2-3-激励函数-AF–active-function-？"><a href="#2-3-激励函数-AF–active-function-？" class="headerlink" title="2.3 激励函数(AF–active function)？"></a>2.3 激励函数(AF–active function)？</h4><ul>
+<h4 id="2-3-激励函数-AF–activation-function-？"><a href="#2-3-激励函数-AF–activation-function-？" class="headerlink" title="2.3 激励函数(AF–activation function)？"></a>2.3 激励函数(AF–activation function)？</h4><ul>
 <li>&emsp;&emsp;激励函数广泛应用在各种层，各种用，可是为什么要激励函数呢？因为复杂问题中，输入输出往往都<strong>不是线性关系</strong>，不是线性，你就不能简单在他们中间乘个系数。<br>&emsp;&emsp;进阶的操作就是，在输入做完简单线性处理（乘k）的结果代入一个非线性函数</li>
 </ul>
 <ul>
@@ -241,7 +241,12 @@
 <ul>
 <li>&emsp;&emsp;当隐藏层不多时，可以尝试任意一个激励函数；不过当隐藏层中含有非常多个<code>layer</code>，就有慎重选择，可能出现<em>梯度爆炸</em>、<em>梯度消失</em>（我也不太懂，再学学）。其次，具体案例中，少量隐藏层可以有多种选择，<strong>卷积神经网络</strong>首选<code>relu</code>，<strong>循环神经网络</strong>首选<code>relu</code>、<code>tanh</code></li>
 </ul>
-<h4 id="2-4-如何应用active-function？"><a href="#2-4-如何应用active-function？" class="headerlink" title="2.4 如何应用active function？"></a>2.4 如何应用active function？</h4></font>
+<h5 id="如何应用activation-function"><a href="#如何应用activation-function" class="headerlink" title="如何应用activation function"></a><strong>如何应用activation function</strong></h5><ul>
+<li>理解代码然后实验即可<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># fake data</span></span><br><span class="line"></span><br><span class="line">x = torch.linspace(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">200</span>)  <span class="comment"># x data (tensor), shape=(100, 1)</span></span><br><span class="line">x = Variable(x)</span><br><span class="line">x_np = x.data.numpy()   <span class="comment"># numpy array for plotting</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># following are popular activation functions</span></span><br><span class="line"></span><br><span class="line">y_relu = torch.relu(x).data.numpy()</span><br><span class="line">y_sigmoid = torch.sigmoid(x).data.numpy()</span><br><span class="line">y_tanh = torch.tanh(x).data.numpy()</span><br><span class="line">y_softplus = F.softplus(x).data.numpy() <span class="comment"># there's no softplus in torch</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="3-1-构建网络：回归"><a href="#3-1-构建网络：回归" class="headerlink" title="3.1 构建网络：回归"></a>3.1 构建网络：回归</h4></font>
         </div>
         
         
