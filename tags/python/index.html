@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 546 words)
+                    11 minutes read (About 1700 words)
                 </span>
                 
                 
@@ -170,7 +170,7 @@
         <div class="content">
             <font face='Times New Roman'>
 
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如何逐渐掌握深度学习呢，是一个难题，网上参差不齐没有一个非常好非常全面的教程，只能一点一点自己累计，寻找例程来模仿主要理解他是怎么一步步完成任务的、思考一个普遍性的解决问题的过程，如何搭建深度学习的神经网络框架，现在暂时选择pytorch。然后，目前推荐搭建框架过程使用jupyter notebook，所以也要学习如何使用它，那么我想在每一阶段都解决和思考一些问题记录下来，来一步步稳扎稳打的学习深度学习</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp;如何逐渐掌握深度学习呢，是一个难题，网上参差不齐没有一个非常好非常全面的教程，只能一点一点自己累计，寻找例程来模仿主要理解他是怎么一步步完成任务的、思考一个普遍性的解决问题的过程，如何搭建深度学习的神经网络框架，现在暂时选择<code>pytorch</code>。<br>&emsp;&emsp;然后，目前推荐搭建框架过程使用<code>jupyter notebook</code>，所以也要学习如何使用它，那么我想在每一阶段都解决和思考一些问题记录下来，来一步步稳扎稳打的学习深度学习</p>
 <h1 id="学习阶段"><a href="#学习阶段" class="headerlink" title="学习阶段"></a>学习阶段</h1><hr>
 <p><a href="#1">1. 初次接触</a></p>
 <hr>
@@ -192,9 +192,55 @@
 </ul>
 <blockquote>
 </blockquote>
+<ul>
+<li>jupyter notebook 中如何正常运行pytorch网络？</li>
+</ul>
+<blockquote>
+</blockquote>
 <hr>
-<p>其实，深度学习说难不难，说简单肯定不简单，你真的可以甚至1天快速入门、上手，只要你懂一些python语法，稍微看看比较通俗的神经网络的介绍文章，学则一种搭建框架的方式就能让你用上你设计的网络结构，大批量的规则化的图像信息甚至也可以从网上获取，然后非常方便的使用、训练、测试。但是你想真正用神经网络来解决问题你自己的实际问题，那么这些将远远不够，至少我是这样认为的，所以我寻找了很多比较有顺序的深度学习教程（pytorch的），都需要一篇篇的仔细阅读，深化概念，让之后的进阶操作能更快理解。</p>
-</font>
+<h3 id="个人思路"><a href="#个人思路" class="headerlink" title="个人思路"></a>个人思路</h3><p>&emsp;&emsp;其实，深度学习说难不难，说简单肯定不简单，你真的可以甚至1天快速入门、上手，只要你懂一些python语法，稍微看看比较通俗的神经网络的介绍文章，学一种搭建框架的方式就能让你用上你设计的网络结构，大批量的规则化的图像信息甚至也可以从网上获取，然后非常方便的使用、训练、测试。<br>&emsp;&emsp;但是你想真正用神经网络来解决问题你自己的实际问题，那么这些将远远不够，至少我是这样认为的，所以我寻找了很多比较有顺序的深度学习教程（pytorch的），都需要一篇篇的仔细阅读，深化概念，让之后的进阶操作能更快理解。</p>
+<hr>
+<h3 id="一、在另一个教程中，再次理解神经网络"><a href="#一、在另一个教程中，再次理解神经网络" class="headerlink" title="一、在另一个教程中，再次理解神经网络"></a>一、在另一个教程中，再次理解神经网络</h3><h4 id="1-1-神经网络是什么"><a href="#1-1-神经网络是什么" class="headerlink" title="1.1 神经网络是什么"></a>1.1 神经网络是什么</h4><ul>
+<li>之前虽然理解了一种说法，好像没提出来，这里讲一讲，但不讲太多，没啥意义</li>
+<li>首先，人们希望模仿人类的大脑，即生物神经网络，人类如何形成条件反射？如何学习？如何记忆？大脑内神经元如何工作？神经元之间有什么样的联系？</li>
+<li>人工神经网络相比，相似，又不相似，所有神经元的连接在同一时间都是固定的，不会凭空产生新联结，它是一种逐次接近正确答案的训练手段，其中“误差反向传递”起到关键作用</li>
+</ul>
+<h4 id="1-2-神经网络的简单结构概念"><a href="#1-2-神经网络的简单结构概念" class="headerlink" title="1.2 神经网络的简单结构概念"></a>1.2 神经网络的简单结构概念</h4><ul>
+<li><code>Gradient Descent</code>：梯度下降&emsp;&emsp;&emsp;&emsp;<code>Cost Function</code>：损失函数</li>
+<li><strong>输入层、隐含层（第1层。。。第n层）、输出层</strong>就对应着<strong>特征–&gt;代表特征1–&gt;…–&gt;代表特征n–&gt;输出</strong>，这些代表特征是越来越抽象的，人越来越无法理解，但计算机就对他比较敏感了</li>
+<li><strong>迁移学习</strong>：即在当你现有的一般神经网络足够处理比如图片内容种类识别、字符识别的任务后。如果我们在输出层前再加入几层神经网络来训练，就能来完成进阶的任务，比如不仅识别数字，还能知道数字的书写字体。。等等</li>
+</ul>
+<h4 id="2-1-选择Pytorch"><a href="#2-1-选择Pytorch" class="headerlink" title="2.1 选择Pytorch"></a>2.1 选择<code>Pytorch</code></h4><ul>
+<li>好用、使用广泛、新颖、直观、动态建立框架</li>
+<li><code>**torchvision**</code>里已经有一些它搭建好的网络，比如resnet（可以可以，我知道例程是这样用的了），然后你用这个已有的网络来训练自己的任务</li>
+</ul>
+<blockquote>
+<p>将<code>jupyter notebook</code>工作目录更改为自定义，即在属性栏启动目录将<code>userprofile/</code>..双引号内的内容改为自己希望前往的目录地址，重启即可</p>
+</blockquote>
+<ul>
+<li><a href="http://pytorch.org/docs/torch.html#math-operations">pytorch常用函数的详解</a>&emsp;&emsp;&emsp;&emsp;<a href="https://www.bilibili.com/video/BV1Vx411j7kT?p=7">numpy矩阵类型与pytorch中tensor（张量）矩阵转换</a></li>
+</ul>
+<h4 id="2-2-什么是Variable"><a href="#2-2-什么是Variable" class="headerlink" title="2.2 什么是Variable"></a>2.2 什么是<code>Variable</code></h4><ul>
+<li><p>&emsp;&emsp;它在神经网络的训练中是一个关键，为什么这么说？思考一下，神经网络的反向传播算法常用梯度下降法，那其中如何求梯度呢？<br>&emsp;&emsp;大家都知道就是求偏导数，导数就是梯度，torch里求导数的小帮手就是<code>variable</code>，将tensor张量放进variable中，开启自动求梯度的配置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`variable = Variable(tensor,requires_grad=<span class="literal">True</span>)` <span class="comment">#requires_grad = True</span></span><br></pre></td></tr></table></figure>
+<p>那么，你以后含variable的运算就都和variable本身建立了某种联系，可以快速得到以后的结果相对variable的梯度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v_out = torch.mean(variable*variable)</span><br><span class="line">v_out.backward()  <span class="comment">#求梯度</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>variable</code>变量不同于<code>tensor</code>，但是<code>variable.data</code>可以得到tensor，如果想进行tensor和numpy_array的转换，那么就要<code>xx.data</code>先得到tensor</p>
+</li>
+<li><p><code>variable</code>的运算和<code>tensor</code>相似，但不完全相同</p>
+</li>
+</ul>
+<h4 id="2-3-激励函数-AF–active-function-？"><a href="#2-3-激励函数-AF–active-function-？" class="headerlink" title="2.3 激励函数(AF–active function)？"></a>2.3 激励函数(AF–active function)？</h4><ul>
+<li>&emsp;&emsp;激励函数广泛应用在各种层，各种用，可是为什么要激励函数呢？因为复杂问题中，输入输出往往都<strong>不是线性关系</strong>，不是线性，你就不能简单在他们中间乘个系数。<br>&emsp;&emsp;进阶的操作就是，在输入做完简单线性处理（乘k）的结果代入一个非线性函数</li>
+</ul>
+<ul>
+<li>&emsp;&emsp;常用的非线性激活函数由<code>relu</code>、<code>sigmoid</code>、<code>tanh</code>方程，甚至可以自己创造激励函数来求解，不过要注意，这些激励函数必须都是<strong>可以微分的</strong>，因为需要求梯度求导</li>
+</ul>
+<ul>
+<li>&emsp;&emsp;当隐藏层不多时，可以尝试任意一个激励函数；不过当隐藏层中含有非常多个<code>layer</code>，就有慎重选择，可能出现<em>梯度爆炸</em>、<em>梯度消失</em>（我也不太懂，再学学）。其次，具体案例中，少量隐藏层可以有多种选择，<strong>卷积神经网络</strong>首选<code>relu</code>，<strong>循环神经网络</strong>首选<code>relu</code>、<code>tanh</code></li>
+</ul>
+<h4 id="2-4-如何应用active-function？"><a href="#2-4-如何应用active-function？" class="headerlink" title="2.4 如何应用active function？"></a>2.4 如何应用active function？</h4></font>
         </div>
         
         
