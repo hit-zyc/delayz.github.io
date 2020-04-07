@@ -146,6 +146,76 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-07T05:46:09.000Z">2020-04-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 325 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/07/pytorch%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">pytorch使用说明</a>
+            
+        </h1>
+        <div class="content">
+            <font face='Times New Roman'>
+
+<h4 id="torch-normal-means-std-out-None"><a href="#torch-normal-means-std-out-None" class="headerlink" title="torch.normal(means, std, out=None)"></a><code>torch.normal(means, std, out=None)</code></h4><ul>
+<li>返回满足正态分布的张量</li>
+<li><code>means</code>和<code>std</code>分别给出均值和标准差</li>
+</ul>
+<hr>
+<h4 id="torch-rand-sizes-out-None-→-Tensor"><a href="#torch-rand-sizes-out-None-→-Tensor" class="headerlink" title="torch.rand(*sizes, out=None) → Tensor"></a><code>torch.rand(*sizes, out=None) → Tensor</code></h4><ul>
+<li><strong>均匀分布</strong>：返回一个张量，包含了从区间[0, 1)的均匀分布中抽取的一组随机数。张量的形状由参数sizes定义</li>
+</ul>
+<hr>
+<h4 id="torch-randn-sizes-out-None-→-Tensor"><a href="#torch-randn-sizes-out-None-→-Tensor" class="headerlink" title="torch.randn(*sizes, out=None) → Tensor"></a><code>torch.randn(*sizes, out=None) → Tensor</code></h4><ul>
+<li><strong>标准正态分布</strong>：返回一个张量，包含了从标准正态分布（均值为0，方差为1，即高斯白噪声）中抽取的一组随机数。张量的形状由参数sizes定义</li>
+</ul>
+<hr>
+<h4 id="torch-squeeze-a-N"><a href="#torch-squeeze-a-N" class="headerlink" title="torch.squeeze(a,N)"></a><code>torch.squeeze(a,N)</code></h4><ul>
+<li>对数据的维度进行压缩，去掉指定个维数为1的维度，注意：如果不加第二个参数’N’，就是去掉<strong>所有</strong>维数为1的维度</li>
+<li>另一种形式，<code>a.squeeze(N)</code> 也是去掉a中指定的维数为一的维度，去掉的维度数为N</li>
+</ul>
+<hr>
+<h4 id="torch-unsqueeze"><a href="#torch-unsqueeze" class="headerlink" title="torch.unsqueeze()"></a><code>torch.unsqueeze()</code></h4><ul>
+<li>对数据维度进行扩充。给指定位置加上维数为1的维度,同样有另外一种形式<code>a.squeeze(N)</code></li>
+<li><strong>注意！</strong>当对神经网络的输入层的特征数据提前处理时，可能需要使用该函数，因为输入数据必须是一个至少二维的张量</li>
+</ul>
+<hr>
+</font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-04-03T06:19:15.000Z">2020-04-03</time>
                 
                 <div class="level-item">
@@ -1094,7 +1164,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            21
+                            22
                         </p>
                     </a>
                 </div>
@@ -1235,7 +1305,7 @@
                 <span class="level-item">Image Processing</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">8</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Magnetic-field-specialty/">
@@ -1288,7 +1358,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 13.33px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16.67px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 16.67px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 10px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 15px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12.5px;">pytorch</a> <a href="/tags/record/" style="font-size: 17.5px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a>
     </div>
 </div>
     
@@ -1300,6 +1370,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T05:46:09.000Z">2020-04-07</time></div>
+                    <a href="/2020/04/07/pytorch%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch使用说明</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1353,19 +1436,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T18:45:22.000Z">2020-03-30</time></div>
-                    <a href="/2020/03/30/opencv3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-摄像头采集和视频播放</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1383,7 +1453,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1499,14 +1569,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/pytorch/">
                         <span class="tag">pytorch</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1557,6 +1627,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T05:46:09.000Z">2020-04-07</time></div>
+                    <a href="/2020/04/07/pytorch%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch使用说明</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T09:20:19.000Z">2020-04-04</time></div>
                     <a href="/2020/04/04/Ielts-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-4</a>
                     <p class="is-size-7 is-uppercase">
@@ -1605,19 +1688,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-29T18:45:22.000Z">2020-03-30</time></div>
-                    <a href="/2020/03/30/opencv3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">python 之 opencv-摄像头采集和视频播放</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1635,7 +1705,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1751,14 +1821,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/pytorch/">
                         <span class="tag">pytorch</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
