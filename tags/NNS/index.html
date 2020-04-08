@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 minutes read (About 2088 words)
+                    15 minutes read (About 2279 words)
                 </span>
                 
                 
@@ -171,12 +171,9 @@
             <font face='Times New Roman'>
 
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp;如何逐渐掌握深度学习呢，是一个难题，网上参差不齐没有一个非常好非常全面的教程，只能一点一点自己累计，寻找例程来模仿主要理解他是怎么一步步完成任务的、思考一个普遍性的解决问题的过程，如何搭建深度学习的神经网络框架，现在暂时选择<code>pytorch</code>。<br>&emsp;&emsp;然后，目前推荐搭建框架过程使用<code>jupyter notebook</code>，所以也要学习如何使用它，那么我想在每一阶段都解决和思考一些问题记录下来，来一步步稳扎稳打的学习深度学习</p>
-<h1 id="学习阶段"><a href="#学习阶段" class="headerlink" title="学习阶段"></a>学习阶段</h1><hr>
-<p><a href="#1">1. 初次接触</a></p>
+<h3 id="个人思路"><a href="#个人思路" class="headerlink" title="个人思路"></a>个人思路</h3><p>&emsp;&emsp;其实，深度学习说难不难，说简单肯定不简单，你真的可以甚至1天快速入门、上手，只要你懂一些python语法，稍微看看比较通俗的神经网络的介绍文章，学一种搭建框架的方式就能让你用上你设计的网络结构，大批量的规则化的图像信息甚至也可以从网上获取，然后非常方便的使用、训练、测试。<br>&emsp;&emsp;但是你想真正用神经网络来解决问题你自己的实际问题，那么这些将远远不够，至少我是这样认为的，所以我寻找了很多比较有顺序的深度学习教程（pytorch的），都需要一篇篇的仔细阅读，深化概念，让之后的进阶操作能更快理解。</p>
 <hr>
-<h3 id="1">1. 初次接触</h3>
-
-<p>思考：</p>
+<h1 id="学习阶段————初次接触"><a href="#学习阶段————初次接触" class="headerlink" title="学习阶段————初次接触"></a>学习阶段————初次接触</h1><p>思考：</p>
 <ul>
 <li>如何将一大批尺寸不一、随机的图像统一标准化的作为深度学习的输入、以及同时集合这些输入的label–对应的解，即真实值（来和输出层的计算值比较损失）？</li>
 </ul>
@@ -198,19 +195,17 @@
 <blockquote>
 </blockquote>
 <hr>
-<h3 id="个人思路"><a href="#个人思路" class="headerlink" title="个人思路"></a>个人思路</h3><p>&emsp;&emsp;其实，深度学习说难不难，说简单肯定不简单，你真的可以甚至1天快速入门、上手，只要你懂一些python语法，稍微看看比较通俗的神经网络的介绍文章，学一种搭建框架的方式就能让你用上你设计的网络结构，大批量的规则化的图像信息甚至也可以从网上获取，然后非常方便的使用、训练、测试。<br>&emsp;&emsp;但是你想真正用神经网络来解决问题你自己的实际问题，那么这些将远远不够，至少我是这样认为的，所以我寻找了很多比较有顺序的深度学习教程（pytorch的），都需要一篇篇的仔细阅读，深化概念，让之后的进阶操作能更快理解。</p>
-<hr>
-<h3 id="一、在另一个教程中，再次理解神经网络"><a href="#一、在另一个教程中，再次理解神经网络" class="headerlink" title="一、在另一个教程中，再次理解神经网络"></a>一、在另一个教程中，再次理解神经网络</h3><h4 id="1-1-神经网络是什么"><a href="#1-1-神经网络是什么" class="headerlink" title="1.1 神经网络是什么"></a>1.1 神经网络是什么</h4><ul>
+<h2 id="一、在Morvan莫烦的pytorch教程中，再次理解神经网络"><a href="#一、在Morvan莫烦的pytorch教程中，再次理解神经网络" class="headerlink" title="一、在Morvan莫烦的pytorch教程中，再次理解神经网络"></a>一、在Morvan莫烦的pytorch教程中，再次理解神经网络</h2><h3 id="1-1-神经网络是什么"><a href="#1-1-神经网络是什么" class="headerlink" title="1.1 神经网络是什么"></a>1.1 神经网络是什么</h3><ul>
 <li>之前虽然理解了一种说法，好像没提出来，这里讲一讲，但不讲太多，没啥意义</li>
 <li>首先，人们希望模仿人类的大脑，即生物神经网络，人类如何形成条件反射？如何学习？如何记忆？大脑内神经元如何工作？神经元之间有什么样的联系？</li>
 <li>人工神经网络相比，相似，又不相似，所有神经元的连接在同一时间都是固定的，不会凭空产生新联结，它是一种逐次接近正确答案的训练手段，其中“误差反向传递”起到关键作用</li>
 </ul>
-<h4 id="1-2-神经网络的简单结构概念"><a href="#1-2-神经网络的简单结构概念" class="headerlink" title="1.2 神经网络的简单结构概念"></a>1.2 神经网络的简单结构概念</h4><ul>
+<h3 id="1-2-神经网络的简单结构概念"><a href="#1-2-神经网络的简单结构概念" class="headerlink" title="1.2 神经网络的简单结构概念"></a>1.2 神经网络的简单结构概念</h3><ul>
 <li><code>Gradient Descent</code>：梯度下降&emsp;&emsp;&emsp;&emsp;<code>Cost Function</code>：损失函数</li>
 <li><strong>输入层、隐含层（第1层。。。第n层）、输出层</strong>就对应着<strong>特征–&gt;代表特征1–&gt;…–&gt;代表特征n–&gt;输出</strong>，这些代表特征是越来越抽象的，人越来越无法理解，但计算机就对他比较敏感了</li>
 <li><strong>迁移学习</strong>：即在当你现有的一般神经网络足够处理比如图片内容种类识别、字符识别的任务后。如果我们在输出层前再加入几层神经网络来训练，就能来完成进阶的任务，比如不仅识别数字，还能知道数字的书写字体。。等等</li>
 </ul>
-<h4 id="2-1-选择Pytorch"><a href="#2-1-选择Pytorch" class="headerlink" title="2.1 选择Pytorch"></a>2.1 选择<code>Pytorch</code></h4><ul>
+<h3 id="2-1-选择Pytorch"><a href="#2-1-选择Pytorch" class="headerlink" title="2.1 选择Pytorch"></a>2.1 选择<code>Pytorch</code></h3><ul>
 <li>好用、使用广泛、新颖、直观、动态建立框架</li>
 <li><strong><code>torchvision</code></strong>里已经有一些它搭建好的网络，比如resnet（可以可以，我知道例程是这样用的了），然后你用这个已有的网络来训练自己的任务</li>
 </ul>
@@ -220,7 +215,7 @@
 <ul>
 <li><a href="http://pytorch.org/docs/torch.html#math-operations">pytorch常用函数的详解</a>&emsp;&emsp;&emsp;&emsp;<a href="https://www.bilibili.com/video/BV1Vx411j7kT?p=7">numpy矩阵类型与pytorch中tensor（张量）矩阵转换</a></li>
 </ul>
-<h4 id="2-2-什么是Variable"><a href="#2-2-什么是Variable" class="headerlink" title="2.2 什么是Variable"></a>2.2 什么是<code>Variable</code></h4><ul>
+<h3 id="2-2-什么是Variable"><a href="#2-2-什么是Variable" class="headerlink" title="2.2 什么是Variable"></a>2.2 什么是<code>Variable</code></h3><ul>
 <li><p>&emsp;&emsp;它在神经网络的训练中是一个关键，为什么这么说？思考一下，神经网络的反向传播算法常用梯度下降法，那其中如何求梯度呢？<br>&emsp;&emsp;大家都知道就是求偏导数，导数就是梯度，torch里求导数的小帮手就是<code>variable</code>，将tensor张量放进variable中，开启自动求梯度的配置</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable = Variable(tensor,requires_grad=<span class="literal">True</span>) <span class="comment">#requires_grad = True</span></span><br></pre></td></tr></table></figure>
 <p>那么，你以后含variable的运算就都和variable本身建立了某种联系，可以快速得到以后的结果相对variable的梯度</p>
@@ -231,7 +226,7 @@
 <li><p><code>variable</code>的运算和<code>tensor</code>相似，但不完全相同</p>
 </li>
 </ul>
-<h4 id="2-3-激励函数-AF–activation-function-？"><a href="#2-3-激励函数-AF–activation-function-？" class="headerlink" title="2.3 激励函数(AF–activation function)？"></a>2.3 激励函数(AF–activation function)？</h4><ul>
+<h3 id="2-3-激励函数-AF–activation-function-？"><a href="#2-3-激励函数-AF–activation-function-？" class="headerlink" title="2.3 激励函数(AF–activation function)？"></a>2.3 激励函数(AF–activation function)？</h3><ul>
 <li>&emsp;&emsp;激励函数广泛应用在各种层，各种用，可是为什么要激励函数呢？因为复杂问题中，输入输出往往都<strong>不是线性关系</strong>，不是线性，你就不能简单在他们中间乘个系数。<br>&emsp;&emsp;进阶的操作就是，在输入做完简单线性处理（乘k）的结果代入一个非线性函数</li>
 </ul>
 <ul>
@@ -240,12 +235,12 @@
 <ul>
 <li>&emsp;&emsp;当隐藏层不多时，可以尝试任意一个激励函数；不过当隐藏层中含有非常多个<code>layer</code>，就有慎重选择，可能出现<em>梯度爆炸</em>、<em>梯度消失</em>（我也不太懂，再学学）。其次，具体案例中，少量隐藏层可以有多种选择，<strong>卷积神经网络</strong>首选<code>relu</code>，<strong>循环神经网络</strong>首选<code>relu</code>、<code>tanh</code></li>
 </ul>
-<h5 id="如何应用activation-function"><a href="#如何应用activation-function" class="headerlink" title="如何应用activation function"></a><strong>如何应用activation function</strong></h5><ul>
+<h4 id="如何应用activation-function"><a href="#如何应用activation-function" class="headerlink" title="如何应用activation function"></a><strong>如何应用activation function</strong></h4><ul>
 <li>理解代码然后实验即可<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># fake data</span></span><br><span class="line"></span><br><span class="line">x = torch.linspace(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">200</span>)  <span class="comment"># x data (tensor), shape=(100, 1)</span></span><br><span class="line">x = Variable(x)</span><br><span class="line">x_np = x.data.numpy()   <span class="comment"># numpy array for plotting</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># following are popular activation functions</span></span><br><span class="line"></span><br><span class="line">y_relu = torch.relu(x).data.numpy()</span><br><span class="line">y_sigmoid = torch.sigmoid(x).data.numpy()</span><br><span class="line">y_tanh = torch.tanh(x).data.numpy()</span><br><span class="line">y_softplus = F.softplus(x).data.numpy() <span class="comment"># there's no softplus in torch</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h4 id="3-1-构建网络：回归"><a href="#3-1-构建网络：回归" class="headerlink" title="3.1 构建网络：回归"></a>3.1 构建网络：回归</h4><ul>
+<h3 id="3-1-构建网络：回归"><a href="#3-1-构建网络：回归" class="headerlink" title="3.1 构建网络：回归"></a>3.1 构建网络：回归</h3><ul>
 <li><p>利用<code>Pytorch</code>建立一个简单的神经网络</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, xxx, xxx, xxx, ...)</span>:</span></span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        <span class="comment"># xxxxxxxx</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="comment"># xxxxxxxx</span></span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure></li>
 <li><p>定义一个实际的神经网络</p>
@@ -266,6 +261,12 @@
 <p>当然本节是对于简单的回归问题，所以定义输出量的变量简单，损失计算也是简单的均方差算法</p>
 </blockquote>
 </li>
+</ul>
+<h3 id="3-2-构建网络：分类"><a href="#3-2-构建网络：分类" class="headerlink" title="3.2 构建网络：分类"></a>3.2 构建网络：分类</h3><ul>
+<li>与简单的回归神经网络不同的是，分类神经网络的输入量和输出量都不只有一个</li>
+<li>输入量可以是一组坐标，甚至可以是一张图片的一个三维张量，而输出则可以是一个输入张量对所有类别的概率判断</li>
+<li>分类的损失函数选择和回归是不一样的，教程中选择了<code>loss_func = torch.nn.CrossEntropyLoss()</code></li>
+<li>当然，对于我要解决的字符识别问题而言，输入就要复杂得多，远不是一对坐标那么简单，输出的类别也会有很多，所以更透彻的学习将在第二阶段进行</li>
 </ul>
 </font>
         </div>
@@ -498,7 +499,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            22
+                            23
                         </p>
                     </a>
                 </div>
@@ -639,7 +640,7 @@
                 <span class="level-item">Image Processing</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">9</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Magnetic-field-specialty/">
@@ -692,7 +693,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 15px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 12.5px;">pytorch</a> <a href="/tags/record/" style="font-size: 17.5px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 10px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 16px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 14px;">pytorch</a> <a href="/tags/record/" style="font-size: 18px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a>
     </div>
 </div>
     
@@ -704,6 +705,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T11:06:49.000Z">2020-04-08</time></div>
+                    <a href="/2020/04/08/pytorch%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入了解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -757,19 +771,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-30T03:33:54.000Z">2020-03-30</time></div>
-                    <a href="/2020/03/30/a/" class="title has-link-black-ter is-size-6 has-text-weight-normal">a</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/ZYC/">ZYC</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -787,7 +788,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -903,14 +904,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/pytorch/">
                         <span class="tag">pytorch</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -961,6 +962,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T11:06:49.000Z">2020-04-08</time></div>
+                    <a href="/2020/04/08/pytorch%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入了解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T05:46:09.000Z">2020-04-07</time></div>
                     <a href="/2020/04/07/pytorch%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch使用说明</a>
                     <p class="is-size-7 is-uppercase">
@@ -1009,19 +1023,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-30T03:33:54.000Z">2020-03-30</time></div>
-                    <a href="/2020/03/30/a/" class="title has-link-black-ter is-size-6 has-text-weight-normal">a</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/ZYC/">ZYC</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1039,7 +1040,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1155,14 +1156,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/python/">
                         <span class="tag">python</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/pytorch/">
                         <span class="tag">pytorch</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 

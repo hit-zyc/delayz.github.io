@@ -7,18 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Category: ZYC - Wdnmd</title>
+<title>pytorch深入了解 - Wdnmd</title>
 
 
-    <meta name="description" content="哈尔滨工业大学仪器学院本科生">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wdnmd">
-<meta property="og:url" content="https://hit-zyc.github.io/categories/ZYC/index.html">
+    <meta name="description" content="前言&amp;emsp;&amp;emsp;经过这几天的零碎学习，我真是觉得神经网络的搭建真的太复杂了，复杂到什么程度呢？就是一个概念不懂，找到解释后，发现解释里又包含着好几个你根本不知道的概念，不过还好我做了一些学习准备，也不算是完全没有头绪。但是目前暴露的缺陷有：  python高级语法知识的欠缺 pytorch搭建神经网络的细节问题不懂 对于神经网络的每一个相关细节概念的理解和了解不足  &amp;emsp;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pytorch深入了解">
+<meta property="og:url" content="https://hit-zyc.github.io/2020/04/08/pytorch%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Wdnmd">
-<meta property="og:description" content="哈尔滨工业大学仪器学院本科生">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;经过这几天的零碎学习，我真是觉得神经网络的搭建真的太复杂了，复杂到什么程度呢？就是一个概念不懂，找到解释后，发现解释里又包含着好几个你根本不知道的概念，不过还好我做了一些学习准备，也不算是完全没有头绪。但是目前暴露的缺陷有：  python高级语法知识的欠缺 pytorch搭建神经网络的细节问题不懂 对于神经网络的每一个相关细节概念的理解和了解不足  &amp;emsp;&amp;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hit-zyc.github.io/images/og_image.png">
+<meta property="article:published_time" content="2020-04-08T11:06:49.000Z">
+<meta property="article:modified_time" content="2020-04-08T14:43:21.563Z">
 <meta property="article:author" content="张砚驰">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="pytorch">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hit-zyc.github.io/images/og_image.png">
 
@@ -78,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Wdnmd" height="28">
+                <img src="/images/logo.svg" alt="pytorch深入了解" height="28">
             
             </a>
         </div>
@@ -127,77 +131,294 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">Categories</a></li>
-            
-            <li class="is-active"><a href="#" aria-current="page">ZYC</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-30T03:33:54.000Z">2020-03-30</time>
+                <time class="level-item has-text-grey" datetime="2020-04-08T11:06:49.000Z">2020-04-08</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ZYC/">ZYC</a>
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 234 words)
+                    23 minutes read (About 3388 words)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/30/a/">a</a>
+                pytorch深入了解
             
         </h1>
         <div class="content">
-            <font face = 'Times New Roman'>
+            <font face='Times New Roman'>
 
-<div align=center><img src="/../images/828.png"  alt="8-28 2009 哈勃拍摄" style="zoom:30%;"  /></div>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp;经过这几天的零碎学习，我真是觉得神经网络的搭建真的太复杂了，复杂到什么程度呢？就是一个概念不懂，找到解释后，发现解释里又包含着好几个你根本不知道的概念，不过还好我做了一些学习准备，也不算是完全没有头绪。但是目前暴露的缺陷有：</p>
+<ul>
+<li>python高级语法知识的欠缺</li>
+<li>pytorch搭建神经网络的细节问题不懂</li>
+<li>对于神经网络的每一个相关细节概念的理解和了解不足</li>
+</ul>
+<p>&emsp;&emsp;那么针对这些，我认为可以在学习一些实例、教程时碎片化的学习来完善自己的知识框架，所以有了以下的“深入了解”学习阶段</p>
+<h1 id="学习阶段————深入了解"><a href="#学习阶段————深入了解" class="headerlink" title="学习阶段————深入了解"></a>学习阶段————深入了解</h1><p>思考：</p>
+<ul>
+<li>神经网络的框架如何根据自己的要求、向适合解决问题的网络结构改进？</li>
+</ul>
+<blockquote>
+</blockquote>
+<ul>
+<li>学习如何使用GPU来训练模型？</li>
+</ul>
+<blockquote>
+</blockquote>
+<ul>
+<li>jupyter notebook 中如何正常运行pytorch网络？</li>
+</ul>
+<blockquote>
+</blockquote>
+<hr>
+<h2 id="二、结合实例理解，弥补缺失的框架体系知识"><a href="#二、结合实例理解，弥补缺失的框架体系知识" class="headerlink" title="二、结合实例理解，弥补缺失的框架体系知识"></a>二、结合实例理解，弥补缺失的框架体系知识</h2><h3 id="1-读取文件必要的Dataset与DataLoader？"><a href="#1-读取文件必要的Dataset与DataLoader？" class="headerlink" title="1. 读取文件必要的Dataset与DataLoader？"></a>1. 读取文件必要的<code>Dataset</code>与<code>DataLoader</code>？</h3><ul>
+<li>&emsp;&emsp;获取数据一直应该都是神经网络的一个要点。有些时候可以通过某些官方渠道的统一数据集来进行训练。但对于实际的项目，往往无法这样做，那么对于这一次我的大作业也就是获取图像信息来说，每一张图像的数据不一样，尺寸也都不一样，如何把这些杂乱的数据统一的放入神经网络中学习呢？在这里<code>Dataset</code>与<code>DataLoader</code>就起到了必要的作用</li>
+</ul>
+<ul>
+<li><code>Dataset</code>与<code>DataLoader</code>分别对应数据的读取和操作，他们是官网提供给我们处理数据的一个范例。</li>
+</ul>
+<hr>
+<h4 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a><strong><code>Dataset</code></strong></h4><ul>
+<li><code>Dataset</code>位于<code>torch.utils.data.Dataset</code>中，往往我们需要创建自己的获取数据集的<code>Mydataset</code>类，他必须继承官方的<code>Dataset</code>类，并且必须要实现其两个成员函数：<code>__len__()</code>、<code>__getitem__()</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">datasets</span><span class="params">(Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,data,transform = None,test = False)</span>:</span></span><br><span class="line">        imgs = []</span><br><span class="line">        labels = []</span><br><span class="line">        self.test = test</span><br><span class="line">        self.len = len(data)</span><br><span class="line">        self.data = data</span><br><span class="line">        self.transform = transform</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.data:</span><br><span class="line">            imgs.append(i[<span class="number">0</span>])</span><br><span class="line">            self.imgs = imgs</span><br><span class="line">            labels.append(int(i[<span class="number">1</span>]) ) <span class="comment">#pytorch中交叉熵需要从0开始</span></span><br><span class="line">            self.labels  = labels</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self,index)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.test:</span><br><span class="line">            filename = self.imgs[index]</span><br><span class="line">            filename = filename</span><br><span class="line">            img_path = self.imgs[index]</span><br><span class="line">            img = cv2.imread(img_path)</span><br><span class="line">            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span><br><span class="line">            img = cv2.resize(img, (config.img_width, config.img_height))</span><br><span class="line">            img = transforms.ToTensor()(img)</span><br><span class="line">            <span class="keyword">return</span> img,filename</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            img_path = self.imgs[index]</span><br><span class="line">            label = self.labels[index]</span><br><span class="line">            <span class="comment">#label = int(label)</span></span><br><span class="line">            img = cv2.imread(img_path)</span><br><span class="line">            img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)</span><br><span class="line">            img = cv2.resize(img,(config.img_width,config.img_height))</span><br><span class="line">            <span class="comment"># img = transforms.ToTensor()(img)</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> self.transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                img = Image.fromarray(img)</span><br><span class="line">                img = self.transform(img)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                img = transforms.ToTensor()(img)</span><br><span class="line">            <span class="keyword">return</span> img,label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.data)<span class="comment">#self.len</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>在这个实例中，在初始化时需要的参数是，需要训练或者测试的数据，<code>transform</code>操作（这个具体在后面说明），至于后面的<code>test</code>参数也和transform有关</li>
+</ul>
+<ul>
+<li><p>重点看类里内置的方法</p>
+<ul>
+<li><p><code>__getitem__(self,index)</code>:该方法支持从 0 到 len(self)的索引<br>&emsp;&emsp;在我们自己的Dataset中必须需要一个这个方法获取数据集中的每一组数据。比如在此例中，由于在建立dataset实例时出入的<code>data</code>数据是所有的<code>.jpg</code>文件，那么当我们需要获取图片进行训练或测试时，需要利用opencv的方法读取图片数据、将图片转换成RGB格式，把每个图片的尺寸统一为设定的模板尺寸，最后将图片信息数据转换为<code>tensor</code>张量形式</p>
+</li>
+<li><p><code>__len__(self)</code><br>&emsp;&emsp;这个方法比较简单，用起来也很方便。目的就是，返回数据集的长度。但这个方法必须有。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>现存问题：在初始化时，类里面的一些赋值操作，是否存在必要性。当然，数据必须保存在数据集中，所以一个循环读取全部数据内容的操作应该要有。所以我猜测是自己如果需要用到就加，如果不会用到就不需要写在初始化方法中。 </li>
+</ul>
+<hr>
+<h4 id="DataLoader"><a href="#DataLoader" class="headerlink" title="DataLoader"></a><strong><code>DataLoader</code></strong></h4><ul>
+<li><code>torch.utils.data</code>已经提供的类：<code>Dataset</code>，但是通过这种方式只能一个个的数据的把数据全部读出来，定义了数据读取的方式，不能实现<strong>批量</strong>的把数据读取出来，为此pytorch有提供了一个方法：<code>DataLoader()</code><br>&emsp;&emsp;简单点说，就是通过<code>DataLoader</code>将<code>Dataset</code>中的数据集以每次<code>Batch_size</code>个大小的组，读取出来，以供训练</li>
+</ul>
+<ul>
+<li><code>Dataloader</code>本质是一个可迭代对象，使用<code>iter()</code>访问，不能使用<code>next()</code>访问，由于它本身就是一个可迭代对象，可以使用<code>for inputs, labels in dataloaders</code>进行可迭代对象的访问</li>
+</ul>
+<ul>
+<li>我们一般不需要再自己去实现<code>DataLoader</code>的方法了，只需要在构造函数中指定相应的参数即可，比如常见的<code>batch_size</code>，<code>shuffle</code>等等参数。所以使用DataLoader十分简洁方便。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#自己定义的函数：获取数据并将数据分为训练集和测试集两类</span></span><br><span class="line">test_list , train_list = get_files(config.data_folder,config.ratio)</span><br><span class="line"></span><br><span class="line"><span class="comment">#训练集 需要数据增强 transform 使用之前定义好的</span></span><br><span class="line">input_traindata = datasets(train_list,transform = transform)  </span><br><span class="line">train_loader = DataLoader(input_traindata,batch_size = config.batch_size,shuffle = <span class="literal">True</span>,collate_fn = collate_fn ,pin_memory = <span class="literal">False</span>,num_workers = <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#测试集 不要数据增强 transform = None</span></span><br><span class="line">input_testdata = datasets(test_list,transform = <span class="literal">None</span>)</span><br><span class="line">test_loader = DataLoader(input_testdata,batch_size = config.batch_size,shuffle = <span class="literal">False</span>,collate_fn = collate_fn,num_workers = <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>今天是在家的第70天，这70天里我还是出去了一次，去拿了个陀螺仪，一个两万多可真他妈贵，收据和发票一定别弄丢了，👴赔不起</p>
-</blockquote>
-<blockquote>
-<p>我觉得以后还是一定要对朋友关心一些，如果我看不起任何人那我也就没有朋友，到生日了一定要送上祝福，最好能买礼物，所以平时也别太野性消费了。奶茶能不买就别喝了，好好在学校吃饭，攒钱在更有意义的地方</p>
-</blockquote>
-<blockquote>
-<p>rc比赛估计是至少延期了，这比赛我其实很没信心的，本来我就不是个自信的人，队长天天说我们菜，越南不知道哪儿的学校的设计就能把我们搞的一愣一愣的，也许是我太没自信了吧</p>
-</blockquote>
+<ul>
+<li>上述例子可以看到，根据自己定义的<code>dataset</code>创建了训练和测试两个实例，训练需要<strong>数据增强</strong>而测试不需要，所以两个实例除数据不同，<code>tranform</code>也不同</li>
+<li><code>DataLoader</code>的参数<ul>
+<li><code>X_dataset</code>：数据集的实例</li>
+<li><code>batch_size</code>：训练的提取数据的单位内所含个数</li>
+<li><code>shuffle</code> ：布尔值True或者是False ，表示每一个epoch之后是否对样本进行随机打乱，默认是False</li>
+<li><code>collate_fn</code>：这个是一个问题，因为通常由自己确定。是一个自己对于数据选取的方法，但是我不知道他有什么意义，或者优势</li>
+<li><code>pin_memory</code>：如果设置为True，那么data loader将会在返回它们之前，将tensors拷贝到CUDA中的固定内存（CUDA pinned memory）中</li>
+<li><code>num_workers</code>：这个参数决定了有几个进程来处理data loading。0意味着所有的数据都会被load进主进程。（默认为0）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="1-2-典型的批训练"><a href="#1-2-典型的批训练" class="headerlink" title="1.2 典型的批训练"></a>1.2 典型的批训练</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.utils.data <span class="keyword">as</span> Data</span><br><span class="line"></span><br><span class="line">torch.manual_seed(<span class="number">1</span>)    <span class="comment"># reproducible</span></span><br><span class="line"></span><br><span class="line">BATCH_SIZE = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">x = torch.linspace(<span class="number">1</span>, <span class="number">10</span>, <span class="number">10</span>)       <span class="comment"># this is x data (torch tensor)</span></span><br><span class="line">y = torch.linspace(<span class="number">10</span>, <span class="number">1</span>, <span class="number">10</span>)       <span class="comment"># this is y data (torch tensor)</span></span><br><span class="line"></span><br><span class="line">torch_dataset = Data.TensorDataset(x, y)</span><br><span class="line">loader = Data.DataLoader(</span><br><span class="line">    dataset=torch_dataset,      <span class="comment"># torch TensorDataset format</span></span><br><span class="line">    batch_size=BATCH_SIZE,      <span class="comment"># mini batch size</span></span><br><span class="line">    shuffle=<span class="literal">True</span>,               <span class="comment"># random shuffle for training</span></span><br><span class="line">    num_workers=<span class="number">2</span>,              <span class="comment"># subprocesses for loading data</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_batch</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">3</span>):   <span class="comment"># train entire dataset 3 times</span></span><br><span class="line">        <span class="keyword">for</span> step, (batch_x, batch_y) <span class="keyword">in</span> enumerate(loader):  <span class="comment"># for each training step</span></span><br><span class="line">            <span class="comment"># train your data...</span></span><br><span class="line"></span><br><span class="line">            print(<span class="string">'Epoch: '</span>, epoch, <span class="string">'| Step: '</span>, step, <span class="string">'| batch x: '</span>,</span><br><span class="line">                  batch_x.numpy(), <span class="string">'| batch y: '</span>, batch_y.numpy())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    show_batch()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不难发现，其实批训练的实现就是对<code>Dataset</code>与<code>DataLoader</code>的使用，这里很简单，只是看一个思路。</li>
+<li>那么其实每一次训练的时候，对于loader实例的索引，他将带出一组<code>Batch_size</code>个数的数据，但是你的神经网络的输入层的结构不会因为<code>batch_size</code>的变化受到影响</li>
+<li>批训练中<code>batch_size</code>对CNN结果的影响，<a href="https://blog.csdn.net/xuaho0907/article/details/88027224">点击这里了解</a></li>
+</ul>
+<hr>
+<h3 id="1-3-collate-fn如何在加载数据时起作用？"><a href="#1-3-collate-fn如何在加载数据时起作用？" class="headerlink" title="1.3 collate_fn如何在加载数据时起作用？"></a>1.3 <code>collate_fn</code>如何在加载数据时起作用？</h3><ul>
+<li>DataLoader能够为我们自动生成一个多线程的迭代器，只要传入几个参数进行就可以了,但是你真的懂得它是如何工作的么？</li>
+</ul>
+<h4 id="问题就在这个collate-fn上"><a href="#问题就在这个collate-fn上" class="headerlink" title="问题就在这个collate_fn上"></a>问题就在这个<code>collate_fn</code>上</h4><ul>
+<li><code>collate_fn</code>默认是等于<code>default_collate</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span>    <span class="comment">#这是DataLoader的关于迭代的方法的源码</span></span><br><span class="line">    <span class="keyword">if</span> self.num_workers == <span class="number">0</span>:  <span class="comment"># same-process loading        </span></span><br><span class="line">        indices = next(self.sample_iter)  <span class="comment"># may raise StopIteration        </span></span><br><span class="line">        batch = self.collate_fn([self.dataset[i] <span class="keyword">for</span> i <span class="keyword">in</span> indices])  <span class="comment"># 在这里调用了collate_fn函数，传递的参数是一个列表        </span></span><br><span class="line">        <span class="keyword">if</span> self.pin_memory:            </span><br><span class="line">            batch = pin_memory_batch(batch)        </span><br><span class="line">        <span class="keyword">return</span> batch</span><br></pre></td></tr></table></figure>
+<ul>
+<li>那么其实<code>collate_fn</code>这个函数的输入就是一个list，list的长度是一个<code>batch size</code>，list中的每个元素都是<code>__getitem__</code>得到的结果，想要知道详解<a href="https://blog.csdn.net/qq_27825451/article/details/96130126">点击这里</a>，那么<code>batch</code>中的每一个元素其实就是<code>Dataset</code>中<code>__getitem__</code>方法得到的比如（图片信息img、标签label）</li>
+</ul>
+<ul>
+<li><p>那么如果理解了以上的意思，再看<code>collate_fn</code>就能较快地上手了</p>
+</li>
+<li><p>那什么时候该使用DataLoader的<code>collate_fn</code>这个参数？<br>  &emsp;&emsp;当定义<code>DataSet</code>类中的<code>__getitem__</code>函数的时候，由于每次返回的是一组类似于<code>（x,y）</code>的样本，但是如果在返回的每一组样本x,y中出现什么错误，或者是还需要进一步对x,y进行一些处理的时候，我们就需要再定义一个collate_fn函数来实现这些功能。当然我也可以自己在实现<code>__getitem__</code>的时候就实现这些后处理也是可以的。</p>
+</li>
+<li><p>collate_fn，中单词<code>collate</code>的含义是：核对，校勘，对照，整理。顾名思义，这就是一个对每一组样本数据进行一遍“核对和重新整理”，现在可能更好理解一些</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-1-torchvision是什么？"><a href="#2-1-torchvision是什么？" class="headerlink" title="2.1 torchvision是什么？"></a>2.1 <code>torchvision</code>是什么？</h3><ul>
+<li><code>torchvision</code>是PyTorch中专门用来处理图像的库，PyTorch官网的安装教程，也会让你安装上这个包。</li>
+<li>这个包中有四个大类<ul>
+<li><code>torchvision.datasets</code></li>
+<li><code>torchvision.models</code></li>
+<li><code>torchvision.transforms</code></li>
+<li><code>torchvision.utils</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="torchvision-datasets"><a href="#torchvision-datasets" class="headerlink" title="torchvision.datasets"></a>torchvision.datasets</h4><ul>
+<li><p><code>torchvision.datasets</code> 是用来进行数据加载的，PyTorch团队在这个包中帮我们提前处理好了很多很多图片数据集。</p>
+<ul>
+<li><code>MNISTCOCO</code></li>
+<li><code>Captions</code></li>
+<li><code>Detection</code></li>
+<li><code>LSUN</code></li>
+<li><code>ImageFolder</code></li>
+<li><code>Imagenet-12</code></li>
+<li><code>CIFAR</code></li>
+<li><code>STL10</code></li>
+<li><code>SVHN</code></li>
+<li><code>PhotoTour</code></li>
+</ul>
+</li>
+<li><p>我们可以直接使用，示例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"></span><br><span class="line">trainset = torchvison.datasets.MNIST(</span><br><span class="line">        root = <span class="string">'./data'</span>, <span class="comment">#表示MNIST数据的加载的相对目录</span></span><br><span class="line">        train = <span class="literal">True</span>, <span class="comment">#表示是否加载数据库的训练集，false的时候加载测试集</span></span><br><span class="line">        download = <span class="literal">True</span>， <span class="comment">#表示是否自动下载MNIST数据集</span></span><br><span class="line">        transform = <span class="literal">None</span> <span class="comment">#表示是否需要对数据进行预处理，None为不进行预处理</span></span><br><span class="line">)</span><br><span class="line"><span class="comment"># 上面代码完成了MNIST数据 训练集的加载环节</span></span><br><span class="line">train_loader2 = Dateloader(</span><br><span class="line">    dataset = trainset,</span><br><span class="line">    batch_size = <span class="number">32</span>,</span><br><span class="line">    shuffle = <span class="literal">True</span></span><br><span class="line">)</span><br><span class="line">print(<span class="string">"训练集总长度为："</span>,len(trainset))</span><br><span class="line">print(<span class="string">"每个mini-batch的size为32，一共有："</span>,len(train_loader2),<span class="string">"个"</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="torchvision-models"><a href="#torchvision-models" class="headerlink" title="torchvision.models"></a><code>torchvision.models</code></h4><ul>
+<li><p><code>torchvision.models</code>中为我们提供了已经训练好的模型，让我们可以加载之后，直接使用</p>
+</li>
+<li><p><code>torchvision.models</code>模块的子模块中包含以下模型结构。</p>
+<ul>
+<li><code>AlexNet</code></li>
+<li><code>VGG</code></li>
+<li><code>ResNet</code></li>
+<li><code>SqueezeNet</code></li>
+<li><code>DenseNet</code></li>
+</ul>
+</li>
+<li><p>我们可以直接使用如下代码来快速创建一个权重随机初始化的模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models</span><br><span class="line"></span><br><span class="line">resnet18 = models.resnet18()</span><br><span class="line">alexnet = models.alexnet()</span><br><span class="line">squeezenet = models.squeezenet1_0()</span><br><span class="line">densenet = models.densenet_161()</span><br></pre></td></tr></table></figure></li>
+<li><p>也可以通过使用<code>pretrained=True</code>来加载一个别人预训练好的模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models</span><br><span class="line"></span><br><span class="line">resnet18 = models.resnet18(pretrained=<span class="literal">True</span>)</span><br><span class="line">alexnet = models.alexnet(pretrained=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="torchvision-transforms"><a href="#torchvision-transforms" class="headerlink" title="torchvision.transforms"></a><code>torchvision.transforms</code></h4><ul>
+<li><p><code>transforms</code>提供了一般的图像转换操作类，这就是我在一开始<code>Dataset</code>中提到了<code>transform</code>，还记得么？哈哈，可以翻一翻上面的例程中在创建<code>Mydataset</code>类的<code>getitem</code>方法中是如何使用transforms的</p>
+</li>
+<li><p>其实我猜测例程中，作者想在获取每一个图像信息时，除了进行<code>opencv</code>的操作外，训练时还要对图像数据信息做更多处理，而测试时当然就不需要这种处理</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们这里还是对MNIST进行处理，初始的MNIST是 28 * 28，我们把它处理成 96 * 96 的torch.Tensor的格式</span></span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图像预处理步骤</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.Resize(<span class="number">96</span>), <span class="comment"># 缩放到 96 * 96 大小</span></span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize((<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>), (<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>)) <span class="comment"># 归一化</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">DOWNLOAD = <span class="literal">True</span></span><br><span class="line">BATCH_SIZE = <span class="number">32</span></span><br><span class="line"></span><br><span class="line">train_dataset = torchvision.datasets.MNIST(root=<span class="string">'./data/'</span>, train=<span class="literal">True</span>, transform=transform, download=DOWNLOAD)</span><br><span class="line">train_loader = DataLoader(dataset=train_dataset,</span><br><span class="line">                          batch_size=BATCH_SIZE,</span><br><span class="line">                          shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">print(len(train_dataset))</span><br><span class="line">print(len(train_loader))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例程中是将从<code>torchvision.datasets</code>中获取的图像数据做transform，这样更简单，那如何在自己定义的Dataset类中加入Transform呢？<ul>
+<li>第一步：定义自己的<code>DataSet</code>，并重写<code>__getitem__</code>，在里面实现关键的<code>transform</code>操作</li>
+<li>第二步：将多个数据增强方式组合起来合成一个<code>transforms</code>，通过<code>Compose</code>类来实现，注意这个类的返回值哦！</li>
+<li>第三步：构造<code>DataSet</code>的对象，将组合起来的<code>transform</code>传递进去，这样就会对每一个<code>batch_size</code>的图像都进行相关的数据增强操作了</li>
+</ul>
+</li>
+<li>细节问题在于，我没太搞懂这种的数据类型的转换，一会是图片类型，一会是<code>numpy</code>矩阵类型，最后又要转换成<code>tensor</code>张量类型，这个要之后细究</li>
+</ul>
+<hr>
+<h3 id="3-1-什么是Resnet？"><a href="#3-1-什么是Resnet？" class="headerlink" title="3.1 什么是Resnet？"></a>3.1 什么是<code>Resnet</code>？</h3><p>👴也不知道，👴正在学</p>
 </font>
         </div>
         
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/python/" rel="tag">python</a>, <a class="has-link-grey -link" href="/tags/pytorch/" rel="tag">pytorch</a>
+                </div>
+            </div>
+        </div>
         
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
         
     </div>
 </div>
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="Alipay"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/04/07/pytorch%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
+                <span class="level-item">pytorch使用说明</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: false,
+        app_id: 'TPQWn5RsCkS2c8OwbgXhJ6CP-gzGzoHsz',
+        app_key: 'f1r3TAkLX0L1DJd7nS2KFVo9',
+        placeholder: 'Say something...'
+    });
+</script>
+
+    </div>
+</div>
 </div>
                 
 
@@ -949,7 +1170,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Wdnmd" height="28">
+                    <img src="/images/logo.svg" alt="pytorch深入了解" height="28">
                 
                 </a>
                 <p class="is-size-7">
