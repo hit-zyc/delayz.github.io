@@ -6,7 +6,7 @@ Lx2=1345;%2887.5160;%2624.2800;%3157;%标定架底盘x轴-方向实际走的长度
 Ly1=1215;%2887.3198;%2622.2100;%3157;%标定架底盘y轴+方向实际走的长度
 Ly2=1247;%2887.6054;%2622.2100;%3157;%标定架底盘y轴-方向实际走的长度
 
-Q=91.23-180.0;%-90;%-90.036;%陀螺仪旋转角度，该数据应经过角度矫正处理
+Q=91.23;%-90;%-90.036;%陀螺仪旋转角度，该数据应经过角度矫正处理
 %注意注意注意！！！：以下计算均以顺时针旋转约90°为依据（理论上顺/逆时针皆可，但未验证）
 
 coderA1 =-10895;%-4664.3032;  %-4189.929;%(-13963-13951-13955)/3;%y+方向数据
@@ -29,22 +29,22 @@ syms theta_A_plus theta_A_minus theta_B_plus theta_B_minus kA_plus kA_minus kB_p
 %x-方向:ΔA>0、ΔB>0                             x-方向:ΔA>0、ΔB>0        \  。/
 %                                                                            。。。
 %A轮正向系数theta_A_plus kA_plus
-    r1=solve('-Ly2*cos(theta_A_plus)=kA_plus*coderA2','Lx2*cos(Q*pi/180+theta_A_plus)=kA_plus*coderA4',theta_A_plus,kA_plus); 
+    r1=solve('-Ly2*cos(theta_A_plus)=kA_plus*coderA2','-Lx2*cos(Q*pi/180+theta_A_plus)=kA_plus*coderA4',theta_A_plus,kA_plus); 
     theta_A_plus=r1.theta_A_plus;
     kA_plus=r1.kA_plus; 
 
 %A轮反向系数theta_A_minus kA_minus
-    r2=solve('Ly1*cos(theta_A_minus)=kA_minus*coderA1','-Lx1*cos(Q*pi/180+theta_A_minus)=kA_minus*coderA3',theta_A_minus,kA_minus);
+    r2=solve('Ly1*cos(theta_A_minus)=kA_minus*coderA1','Lx1*cos(Q*pi/180+theta_A_minus)=kA_minus*coderA3',theta_A_minus,kA_minus);
     theta_A_minus=r2.theta_A_minus;
     kA_minus=r2.kA_minus;
    
 %B轮正向系数theta_B_plus,k2_plus
-    r3=solve('Ly1*cos(theta_B_plus)=kB_plus*coderB1','Lx2*cos(Q*pi/180+theta_B_plus)=kB_plus*coderB4',theta_B_plus,kB_plus);
+    r3=solve('Ly1*cos(theta_B_plus)=kB_plus*coderB1','-Lx2*cos(Q*pi/180+theta_B_plus)=kB_plus*coderB4',theta_B_plus,kB_plus);
     theta_B_plus=r3.theta_B_plus;
     kB_plus=r3.kB_plus;    
       
 %B轮反向系数theta_B_minus kB_minus
-    r4=solve('-Ly2*cos(theta_B_minus)=kB_minus*coderB2','-Lx1*cos(Q*pi/180+theta_B_minus)=kB_minus*coderB3',theta_B_minus,kB_minus);
+    r4=solve('-Ly2*cos(theta_B_minus)=kB_minus*coderB2','Lx1*cos(Q*pi/180+theta_B_minus)=kB_minus*coderB3',theta_B_minus,kB_minus);
     theta_B_minus=r4.theta_B_minus;
     kB_minus=r4.kB_minus;  
 
