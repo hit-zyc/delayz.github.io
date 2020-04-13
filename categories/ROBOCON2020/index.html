@@ -177,7 +177,7 @@
 <li>在标定过程中，以近y轴为基准的话，那么旋转来测量x轴行进数据时，需要特别注意<strong>旋转方向</strong><ul>
 <li>以前测量时，全都是顺时针旋转约90°，所有公式都是以顺时针旋转来推导的，原本以为只要规定了正方向，结果应该都一样</li>
 <li>但是由于昨天测量时是逆时针，在结算代入数据时发现求出的数据不对，重新推算了一遍发现顺逆时针旋转的算法结算有略微差别</li>
-<li>本次差别在于：x轴行进时的A、B轮相对行进方向角度的余弦值，顺逆时针是相反地</li>
+<li>本次差别在于：x轴行进时的A、B轮相对行进方向角度的余弦值，顺逆时针是<em>相反地</em></li>
 </ul>
 </li>
 </ol>
@@ -190,10 +190,10 @@
 <ol start="2">
 <li>旋转方法也进行了测试，之前一直没有一个比较具体的有效的验证<ul>
 <li>首先，采用的验证方法是已知小推车的模型参数，从而得到理论上的几何中心和随动中心的距离L、以及对应夹角</li>
-<li>条件是在测完直行标定，并计算出8个变量带入程序；并且程序中的L、alpha改成0</li>
+<li>条件是在测完直行标定，并计算出8个变量<em>带入程序<em>；</em>并且程序中的L、alpha改成0</em></li>
 <li>其次，操作小推车旋转约180°（顺逆时针皆可）旋转前后都会有一条铝管作为基准边，得到计算出的x、y坐标的变化</li>
-<li>带入matlab旋转算法结算程序，求得L与alpha（注意matlab中的alpha为顺时针为正方向计算，程序中需要取负号）</li>
-<li>将理论和计算出的长度、角度变量比较，发现长度误差1.2mm，角度误差1.2°，考虑到加工精度误差、以及人为操作误差，结果可以接收</li>
+<li>带入matlab旋转算法结算程序，求得L与alpha（<strong>注意matlab中的alpha为顺时针为正方向计算，程序中需要取负号</strong>）</li>
+<li>将理论和计算出的长度、角度变量比较，发现长度误差1.2mm，角度误差1.2°，考虑到加工精度误差、以及人为操作误差，结果可以接受</li>
 </ul>
 </li>
 </ol>
@@ -391,7 +391,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            25
+                            26
                         </p>
                     </a>
                 </div>
@@ -415,7 +415,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            18
+                            17
                         </p>
                     </a>
                 </div>
@@ -524,7 +524,7 @@
                 <span class="level-item">Ielts</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Image-Processing/">
@@ -585,7 +585,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 12.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 15px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 17.5px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 10px;">定位算法</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 11.67px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 13.33px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16.67px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 18.33px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 10px;">定位算法</a>
     </div>
 </div>
     
@@ -597,6 +597,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/ielts-5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-5</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -650,19 +663,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T09:20:19.000Z">2020-04-04</time></div>
-                    <a href="/2020/04/04/Ielts-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-4</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -680,7 +680,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -740,7 +740,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ROBOCON2020/">
                         <span class="tag">ROBOCON2020</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -761,7 +761,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ielts/">
                         <span class="tag">ielts</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -810,14 +810,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/record/">
                         <span class="tag">record</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/robocon2020/">
-                        <span class="tag">robocon2020</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -861,6 +854,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/ielts-5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-5</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T01:08:55.000Z">2020-04-13</time></div>
                     <a href="/2020/04/13/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录</a>
                     <p class="is-size-7 is-uppercase">
@@ -909,19 +915,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T09:20:19.000Z">2020-04-04</time></div>
-                    <a href="/2020/04/04/Ielts-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-4</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -939,7 +932,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -999,7 +992,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ROBOCON2020/">
                         <span class="tag">ROBOCON2020</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1020,7 +1013,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ielts/">
                         <span class="tag">ielts</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -1069,14 +1062,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/record/">
                         <span class="tag">record</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/robocon2020/">
-                        <span class="tag">robocon2020</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 

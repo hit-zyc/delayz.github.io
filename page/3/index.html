@@ -135,6 +135,58 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-12T12:00:22.000Z">2020-03-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 412 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/12/Python/">Python!</a>
+            
+        </h1>
+        <div class="content">
+            <p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017092876846880">python学习目前进度，廖雪峰的教程</a></p>
+<ul>
+<li>本来创建博客的想法是想记录学习python的过程，结果一个hexo博客花了我四五天的时间，不过还好搞出来了，有点小成就感，好了现在继续学习Python！！gogogo</li>
+</ul>
+<blockquote>
+<p>以下是最新写的一个非常简单的成绩查询小程序，<font color=red>注意，有失败的地方已经标出</font></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#2020.3.9</span><br><span class="line">#学习python第二个小程序</span><br><span class="line">#计算今年成绩较去年的变化</span><br><span class="line">n&#x3D;1</span><br><span class="line">m&#x3D;1</span><br><span class="line"></span><br><span class="line">while n&#x3D;&#x3D;1:</span><br><span class="line">    #输入若干信息</span><br><span class="line">    name&#x3D;input(&#39;请输入学生姓名：&#39;);print(&#39;\n&#39;)</span><br><span class="line">    s1&#x3D;input(&#39;请输入%s去年的成绩：&#39;%name)</span><br><span class="line"></span><br><span class="line">    while m&#x3D;&#x3D;1:#这样的方法失败了，目前无法解决成绩输入不是数字的重复正确输入问题</span><br><span class="line">        if type(s1)&#x3D;&#x3D;float or type(s1)&#x3D;&#x3D;int:</span><br><span class="line">            if s1&gt;&#x3D;0:</span><br><span class="line">                m&#x3D;0</span><br><span class="line">                s2&#x3D;float(input(&#39;请输入%s今年的成绩：&#39;%name));print(&#39;\n&#39;)</span><br><span class="line">            else:</span><br><span class="line">                s1&#x3D;input(&#39;输入失败，请正确输入%s去年的成绩：&#39;%name)</span><br><span class="line">        else:</span><br><span class="line">            s1&#x3D;input(&#39;输入失败，请正确输入%s去年的成绩：&#39;%name)</span><br><span class="line"></span><br><span class="line">    else:</span><br><span class="line">    </span><br><span class="line">        #判断成绩走向并计算变化率</span><br><span class="line">        if s2&gt;s1:</span><br><span class="line">            rate&#x3D;(s2-s1)&#x2F;s2*100</span><br><span class="line">            print(&#39;%s同学你好，祝贺你进步了,成绩增长率为 %.2f%%\n&#39;%(name,rate))</span><br><span class="line">    </span><br><span class="line">        elif s1&#x3D;&#x3D;s2:</span><br><span class="line">            print(&#39;%s同学你好，不错，成绩保持住了\n&#39;%name)</span><br><span class="line">            rate&#x3D;0.00</span><br><span class="line"></span><br><span class="line">        else:</span><br><span class="line">            rate&#x3D;(s1-s2)&#x2F;s2*100</span><br><span class="line">            print(&#39;%s同学你好，很遗憾你退步了，成绩下降率为 %.2f%%\n&#39;%(name,rate))</span><br><span class="line"></span><br><span class="line">        n&#x3D;int(input(&#39;如果希望继续查询，请输入1，否则输入其他任意键退出&#39;))</span><br><span class="line"></span><br><span class="line">else:</span><br><span class="line">    #结尾</span><br><span class="line">    print(&#39;欢迎再次使用,再见&#39;)</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-12T10:53:23.000Z">2020-03-12</time>
                 
                 <div class="level-item">
@@ -515,7 +567,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            25
+                            26
                         </p>
                     </a>
                 </div>
@@ -539,7 +591,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            18
+                            17
                         </p>
                     </a>
                 </div>
@@ -648,7 +700,7 @@
                 <span class="level-item">Ielts</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Image-Processing/">
@@ -709,7 +761,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 12.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 15px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 17.5px;">record</a> <a href="/tags/robocon2020/" style="font-size: 10px;">robocon2020</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 10px;">定位算法</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 11.67px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 13.33px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16.67px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 18.33px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 10px;">定位算法</a>
     </div>
 </div>
     
@@ -721,6 +773,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/ielts-5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-5</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -774,19 +839,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T09:20:19.000Z">2020-04-04</time></div>
-                    <a href="/2020/04/04/Ielts-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-4</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -804,7 +856,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -864,7 +916,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ROBOCON2020/">
                         <span class="tag">ROBOCON2020</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -885,7 +937,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ielts/">
                         <span class="tag">ielts</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -934,14 +986,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/record/">
                         <span class="tag">record</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/robocon2020/">
-                        <span class="tag">robocon2020</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -985,6 +1030,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/ielts-5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-5</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T01:08:55.000Z">2020-04-13</time></div>
                     <a href="/2020/04/13/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录</a>
                     <p class="is-size-7 is-uppercase">
@@ -1033,19 +1091,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T09:20:19.000Z">2020-04-04</time></div>
-                    <a href="/2020/04/04/Ielts-4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-4</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1063,7 +1108,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1123,7 +1168,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ROBOCON2020/">
                         <span class="tag">ROBOCON2020</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1144,7 +1189,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ielts/">
                         <span class="tag">ielts</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -1193,14 +1238,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/record/">
                         <span class="tag">record</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/robocon2020/">
-                        <span class="tag">robocon2020</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
