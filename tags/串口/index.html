@@ -7,13 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Category: ROBOCON2020 - Wdnmd</title>
+<title>Tag: 串口 - Wdnmd</title>
 
 
     <meta name="description" content="哈尔滨工业大学仪器学院本科生">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wdnmd">
-<meta property="og:url" content="https://hit-zyc.github.io/categories/ROBOCON2020/index.html">
+<meta property="og:url" content="https://hit-zyc.github.io/tags/%E4%B8%B2%E5%8F%A3/index.html">
 <meta property="og:site_name" content="Wdnmd">
 <meta property="og:description" content="哈尔滨工业大学仪器学院本科生">
 <meta property="og:locale" content="en_US">
@@ -131,9 +131,8 @@
     <div class="card-content">
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-            <li><a href="/categories">Categories</a></li>
-            
-            <li class="is-active"><a href="#" aria-current="page">ROBOCON2020</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li class="is-active"><a href="#" aria-current="page">串口</a></li>
         </ul>
         </nav>
     </div>
@@ -247,213 +246,6 @@
 <li>类似于format格式化输出，打印在命令行区</li>
 </ul>
 </font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-13T01:08:55.000Z">2020-04-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 604 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/13/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95/">标定记录</a>
-            
-        </h1>
-        <div class="content">
-            <font face = 'Times New Roman'>
-
-<h3 id="2020-4-13"><a href="#2020-4-13" class="headerlink" title="2020.4.13"></a>2020.4.13</h3><hr>
-<p>&emsp;&emsp;周末测试的定位算法，算是一个阶段性的理解。发现了一些问题并且改正；<br>其中包括：</p>
-<ol>
-<li>在标定过程中，以近y轴为基准的话，那么旋转来测量x轴行进数据时，需要特别注意<strong>旋转方向</strong><ul>
-<li>以前测量时，全都是顺时针旋转约90°，所有公式都是以顺时针旋转来推导的，原本以为只要规定了正方向，结果应该都一样</li>
-<li>但是由于昨天测量时是逆时针，在结算代入数据时发现求出的数据不对，重新推算了一遍发现顺逆时针旋转的算法结算有略微差别</li>
-<li>本次差别在于：x轴行进时的A、B轮相对行进方向角度的余弦值，顺逆时针是<em>相反地</em></li>
-</ul>
-</li>
-</ol>
-<p>下图为两种旋转方向的图示：</p>
-<div align=center><img src="/../images/ni.png"  alt="逆时针旋转处理" style="zoom:40%;"  /></div>
-<div align=center><img src="/../images/shun.png"  alt="顺时针旋转处理" style="zoom:40%;"  /></div>
-
-<p>这里备份了两种相似算法的matlab程序<br><a href="/../documents/followwheel_moves_20200322.m">逆时针算法</a><br><a href="/../documents/shunshizhen_moves_20200413.m">顺时针算法</a></p>
-<hr>
-<ol start="2">
-<li>旋转方法也进行了测试，之前一直没有一个比较具体的有效的验证<ul>
-<li>首先，采用的验证方法是已知小推车的模型参数，从而得到理论上的几何中心和随动中心的距离L、以及对应夹角</li>
-<li>条件是在测完直行标定，并计算出8个变量<em>带入程序<em>；</em>并且程序中的L、alpha改成0</em></li>
-<li>其次，操作小推车旋转约180°（顺逆时针皆可）旋转前后都会有一条铝管作为基准边，得到计算出的x、y坐标的变化</li>
-<li>带入matlab旋转算法结算程序，求得L与alpha（<strong>注意matlab中的alpha为顺时针为正方向计算，程序中需要取负号</strong>）</li>
-<li>将理论和计算出的长度、角度变量比较，发现长度误差1.2mm，角度误差1.2°，考虑到加工精度误差、以及人为操作误差，结果可以接受</li>
-</ul>
-</li>
-</ol>
-<div align=center><img src="/../images/rr.png"  alt="旋转算法结果" style="zoom:40%;"  /></div>
-
-
-
-<p>这里备份了旋转算法的matlab程序&emsp;&emsp;&emsp;&emsp;<a href="/../documents/followwheel_rotate_20200413.m">旋转算法</a></p>
-<h4 id="—理论数据—"><a href="#—理论数据—" class="headerlink" title="—理论数据—"></a><strong>—理论数据—</strong></h4><p>  横间距：<strong>37.5 mm</strong></p>
-<p>  长间距：<strong>-29.84 mm</strong></p>
-<p>  矢量绝对值：<strong>47.9236 mm</strong></p>
-<p>  夹角：<strong>-2.24293 rad</strong>  ( -128.5104 °)</p>
-<h4 id="—计算数据—"><a href="#—计算数据—" class="headerlink" title="—计算数据—"></a><strong>—计算数据—</strong></h4><p>  矢量绝对值：<strong>46.698439058181290 mm</strong></p>
-<p>  夹角：<strong>-2.222503658302204 rad</strong>  ( -127.33 °)</p>
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-20T16:48:15.000Z">2020-03-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 179 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/21/adams/">adams仿真自学</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="HITCRT分享adams仿真教程（目前删除）"><a href="#HITCRT分享adams仿真教程（目前删除）" class="headerlink" title="HITCRT分享adams仿真教程（目前删除）"></a>HITCRT分享adams仿真教程（目前删除）</h3><hr>
-<h3 id="初步仿真步骤"><a href="#初步仿真步骤" class="headerlink" title="初步仿真步骤"></a>初步仿真步骤</h3><hr>
-<ol>
-<li>新建一个模型，设置各种单位规范</li>
-<li>导入solidworks中生成的模型<kbd>.x_t</kbd>类型文件</li>
-<li>建立约束，<strong>注意方向</strong>（包括固定副、旋转副但不限于此）（可依此设置机构初始状态）</li>
-<li>建立驱动（驱动方程可联系至matlab描述，遵循教程）</li>
-<li>建立力的接触（设置两实体的碰撞、摩擦等参数）<a href="/../documents/Adams材料碰撞参数.xls" target="_blank"><strong>Adams材料碰撞参数(excel)</strong></a></li>
-<li>开始仿真，步数（<kbd>steps</kbd>）越大计算时间越久，计算结果越准确</li>
-<li>设置测量量，以图表形式显示</li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T10:53:23.000Z">2020-03-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 553 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/12/DT35%E7%9B%B8%E5%85%B3%E7%9A%84%E5%A4%87%E5%BF%98%E8%AF%B4%E6%98%8E/">DT35相关的备忘说明</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="零点标定的初步方法"><a href="#零点标定的初步方法" class="headerlink" title="零点标定的初步方法"></a>零点标定的初步方法</h3><ul>
-<li>现在认为电压与距离的关系即<font color=blue>D(mm)=0.000995*V(uV,直接的读取值)+50</font>；那么在这个基础上，50mm内的测量肯定不可靠，DT35零位标定方法就初定为</li>
-</ul>
-<blockquote>
-<p>均匀选取10个左右的距离值，D=0.000995*V+50+R，这些值与实际距离真值做差产生10个残差，求当残差的平方和有最小值时的R（求导数为零的情况）</p>
-</blockquote>
-<blockquote>
-<p>matlab实现如下，其中actual_data为距离真值，roughdeal_data为通过上述一元公式求得的，最后运行后打印出Xs0就是R的值，R即为尺子零点到DT35零点的距离（即DT35零点为尺子上刻度为R的地方）（小心方向）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">syms x %零点补偿量</span><br><span class="line">y&#x3D;0;</span><br><span class="line">for i&#x3D;1:length(actual_data)</span><br><span class="line">   y&#x3D;y+(actual_data(i)-roughdeal_data(i)-x)^2;</span><br><span class="line">end</span><br><span class="line">dy&#x3D;diff(y,x);</span><br><span class="line">Xs0&#x3D;solve(dy,x);</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="判断激光光线是否垂直车边的初步方法"><a href="#判断激光光线是否垂直车边的初步方法" class="headerlink" title="判断激光光线是否垂直车边的初步方法"></a>判断激光光线是否垂直车边的初步方法</h3><blockquote>
-<p>利用约6m长的标定架，车固定在其中一端，测量激光发射中点到侧边标定架的距离；理论上激光应平行于标定架射向另一端，在另一端再次测量激光中点到侧边标定架的距离，两次测量应相等，目前规定差值不能大于1mm，至少测量三次，可能还需要换边测量</p>
-</blockquote>
-<ul>
-<li><font color=red>这样的方法只能让光线与由两个侧向导轮确定的直线平行,所以导轮的安装必须尽量规范，全场定位技术也需要这一点！！</font></li>
-</ul>
-<hr>
-<h3 id="采集卡相关问题"><a href="#采集卡相关问题" class="headerlink" title="采集卡相关问题"></a>采集卡相关问题</h3><ul>
-<li>在主控ucos操作系统上的速率和准确率测试需要完善</li>
-<li>电压输入探针：现在通道1因为电阻焊盘焊掉失效了；已知通道1分压电阻阻值为M级，温漂百分级，可能需要换成千分级，已测，最大误差5mm以内；3、4通道也要分压电阻不过阻值过小，可能要重新焊M级电阻；其余通道都只是一个保护电阻</li>
-</ul>
-
         </div>
         
         

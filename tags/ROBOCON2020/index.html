@@ -145,6 +145,128 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-14T12:52:29.000Z">2020-04-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 minutes read (About 2552 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">基于matlab的蓝牙串口通信</a>
+            
+        </h1>
+        <div class="content">
+            <font face="Times New Roman">
+
+<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>&emsp;&emsp;用蓝牙做主控串口和电脑通信的想法呢，是因为实践标定的时候需要持续的很稳的推动小车，而且要把<code>jlink</code>将电脑和主控连起来<code>debug</code>看数据又得给主控供5V电（当时忘记充电宝可以供5v电了，一时英明被摧毁），所以无线就没多想了。想过做很长的线、把电脑放在电竞椅上跟着小推车推着走，都不太靠谱，所以在标定的时候还是把电脑架在了小推车上</p>
+<p>&emsp;&emsp;标定进度完成了大半，现在得点空，还是想把这个蓝牙无线通信做起来，因为我在想这个方法是不是可以把<code>WLan</code>的网卡看参数替换掉，个人感觉那种<code>Labview</code>结合<code>Matlab</code>🐂是🐂，但是有点太麻烦了，路由器架在车上得自带一个充电宝，主控上的网线插槽老是松，还要先生成调试组文件带入主控更新…我电脑现在也是再也连不上了，所以这个我觉得某种程度上有一些必要</p>
+<hr>
+<h1 id="二、尝试pybluez模块"><a href="#二、尝试pybluez模块" class="headerlink" title="二、尝试pybluez模块"></a>二、尝试<code>pybluez</code>模块</h1><p>&emsp;&emsp;之前竞培营的时候买过蓝牙，所以家里留了一个（也是为什么想蓝牙通信）。主控串口连接蓝牙再和电脑通信，问题不在串口，而在电脑是如何接收到的数据？什么形式的数据？怎么处理这类数据成为我想要看到的数据甚至生成动态曲线？由于觉得<code>python</code>无所不能，第一时间想到的就是它，结果在下载<code>pybluez</code>模块时出现问题，电脑提示我没有<code>Microsoft Visual C++ 2014</code>的组件工具，这个我百度了也是很多py模块下载时出现的问题</p>
+<p>&emsp;&emsp;有一个<strong>解决方法</strong>就是在一个<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">国外大学提供实时更新的模块下载网站</a>上先把需要的模块的类似安装包（whl类型文件）下载到本地，之后<code>pip install 安装包绝对地址</code>最后<code>pip install 模块名称</code>，不过这个方法我在尝试的时候仍然出现错误，个人认为是这个<code>pybluez</code>模块版本较老，有一些bug也比较正常</p>
+<p>&emsp;&emsp;这条路走不通，以后必须用到的时候再试试把。之后在想<code>wifi</code>也能无线传输数据，而且速率更高，<code>pywifi</code>模块的安装没有问题。不过我手上只有蓝牙模块啊，当务之急是选择什么方法在电脑上得到蓝牙传输的数据</p>
+<hr>
+<h1 id="三、Matlab成为选择"><a href="#三、Matlab成为选择" class="headerlink" title="三、Matlab成为选择"></a>三、<code>Matlab</code>成为选择</h1><p>&emsp;&emsp;此时，在寻找与蓝牙通信相关的过程中，看到了<code>Matlab</code>的字眼，对啊，之前怎么没想到它呢。说干就干，百度关键词<em>Matlab蓝牙通信</em>，果然就有，不过不多，好在matlab的使用者多，而且内置的help搜索向导非常方便，即使不太了解有的也有官方示例。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%Examples</span></span><br><span class="line"><span class="comment">%Find available Bluetooth devices.</span></span><br><span class="line"></span><br><span class="line">instrhwinfo(<span class="string">'Bluetooth'</span>);</span><br><span class="line">instrhwinfo(<span class="string">'Bluetooth'</span>, RemoteName); </span><br><span class="line"><span class="comment">%Construct a Bluetooth object called b using channel 3 of a Lego Mindstorm robot with RemoteName of NXT.</span></span><br><span class="line"></span><br><span class="line">b = Bluetooth(<span class="string">'NXT'</span>, <span class="number">3</span>);</span><br><span class="line"><span class="comment">%Connect to the remote device.</span></span><br><span class="line"></span><br><span class="line">fopen(b)</span><br><span class="line"><span class="comment">%Send a message to the remote device using the fwrite function.</span></span><br><span class="line"></span><br><span class="line">fwrite(b, uint8([<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">155</span>]));</span><br><span class="line"><span class="comment">%Read data from the remote device using the fread function.</span></span><br><span class="line"></span><br><span class="line">name = fread(b,<span class="number">35</span>);</span><br><span class="line"><span class="comment">%Disconnect the Bluetooth device.</span></span><br><span class="line"></span><br><span class="line">fclose(b);</span><br><span class="line"><span class="comment">%Clean up by deleting and clearing the object.</span></span><br><span class="line"></span><br><span class="line">fclose(b);</span><br><span class="line">clear(<span class="string">'b'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>结合官方提供的例子，快速入手蓝牙通信，关键在于定义蓝牙的特定变量<code>b = Bluetooth(&#39;NXT&#39;, 3);</code>，以及<code>fopen(b)</code>来开启蓝牙通信。重点就在于数据的规范、格式。手册上介绍的函数如下：</li>
+</ul>
+<div align=center><img src="/../images/bluetoothfx.png"  alt="Matlab蓝牙相关函数" style="zoom:50%;"  /></div>
+
+<blockquote>
+<p>You can read and write both text data (ASCII based) and binary data. For text data, use the fscanf and fprintf functions. For binary data, use the fread and fwrite functions.<br>你可以借助ASCII码或者二进制数据进行读写操作。对于txt数据使用<code>fscanf</code>、<code>fprintf</code>函数，对于二进制数据使用<code>fread</code>、<code>fwrite</code>函数</p>
+</blockquote>
+<ul>
+<li>以下是目前我脚本中的蓝牙初始化操作</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 配置蓝牙操作</span></span><br><span class="line"></span><br><span class="line">instrhwinfo(<span class="string">'Bluetooth'</span>);</span><br><span class="line">instrhwinfo(<span class="string">'Bluetooth'</span>,<span class="string">'col_test'</span>);</span><br><span class="line">col_test = Bluetooth(<span class="string">'col_test'</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">% col_test.TimerPeriod = 0.1;</span></span><br><span class="line"><span class="comment">% col_test.TimerFcn = &#123;@plotcallback,p&#125;;</span></span><br><span class="line">col_test.Timeout = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 开启蓝牙数据监控，同时开启定时器</span></span><br><span class="line"><span class="comment">% fopen(col_test);</span></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">  fopen(col_test);</span><br><span class="line"><span class="keyword">catch</span> err</span><br><span class="line">  <span class="built_in">disp</span>(<span class="string">'col_test蓝牙通道打开失败'</span>);</span><br><span class="line">  flag = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err_flag </span><br><span class="line">    <span class="built_in">disp</span>(<span class="string">'col_test蓝牙通道成功打开'</span>);</span><br><span class="line">    fwrite(col_test,Command_data);  </span><br><span class="line">    start(t);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通信接口的回调函数"><a href="#通信接口的回调函数" class="headerlink" title="通信接口的回调函数"></a>通信接口的回调函数</h3><ul>
+<li>在搜索帮助中有对串口接收数据的中断回调函数，终端的类型我所了解的有<ul>
+<li>设定接受字节数触发</li>
+<li>设定截至字符触发</li>
+<li>定时间间隔触发</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>不过目前没尝试出来，而且我觉得也没有那个必要所以暂时搁置了研究</li>
+</ul>
+<hr>
+<h1 id="四、如何有效的接受主控数据"><a href="#四、如何有效的接受主控数据" class="headerlink" title="四、如何有效的接受主控数据"></a>四、如何有效的接受主控数据</h1><p>&emsp;&emsp;如果需要监控主控数据，那么每一次就要同时接收数十个浮点数类型的数据。</p>
+<ol>
+<li>接受的方式不可能是直接不停循环接收数据，那么对于高速率传输数据的串口，错误必然存在而且经验证发现错误率不低，所以需要加密再解码确保数据准确。</li>
+<li>其次，由于测试发现<code>fread</code>函数接受蓝牙数据是以字节（8bit）为单位，多个字节数据如何正确转换为<code>float</code>类型我之前没接触过。</li>
+<li>最后蓝牙的速率不出众，那么我也需要测试一下他的速度究竟能有多快？</li>
+</ol>
+<h3 id="4-1-报文形式发送与接收"><a href="#4-1-报文形式发送与接收" class="headerlink" title="4.1 报文形式发送与接收"></a>4.1 报文形式发送与接收</h3><ul>
+<li>主控上的串口<code>dma</code>接收发送不必多说，使用串口六，定义两个结构体<code>Bluez_TX</code>、<code>Bluez_RX</code>包含同样的两帧头两帧尾，那么在Matlab脚本中就需要相似的对于报文的解包，这一部分不难，那么我认为matlab接收数据的优点在于<code>in/outputbuf</code>数据一边进另一边出，在读取过程中的操作十分方便。</li>
+<li>还有一点就是我的脚本中做到，matlab向主控发送一帧数据，命令主控开始发送数据给蓝牙从而开始数据监控。也有停止命令，非常方便。操作就是在主控中的<code>dma</code>发送函数判断一个标志位（发送函数写在一个任务中）</li>
+</ul>
+<h3 id="4-2-多个单字节与浮点数的转换"><a href="#4-2-多个单字节与浮点数的转换" class="headerlink" title="4.2 多个单字节与浮点数的转换"></a>4.2 多个单字节与浮点数的转换</h3><ul>
+<li>已知，主控中的dma发送是将发送结构体变量<code>bluez_tx</code>的头指针作为地址，那么这种方式下浮点数就是按一般的占据4字节进行发送。在Matlab中可以接收到4个字节与该浮点数对应。</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">raw_data1 = [byte1 byte2 byte3 byte4];</span><br><span class="line">temp = uint8(raw_data1);</span><br><span class="line">stRobot_x(count) = typecast(temp,<span class="string">'single'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过上述方法进行通信之后的变量类型转换成功</li>
+</ul>
+<h3 id="4-3-速率监测"><a href="#4-3-速率监测" class="headerlink" title="4.3 速率监测"></a>4.3 速率监测</h3><ul>
+<li>一开始我都是用串口调试助手来研究的，没有用上主控，中间尝试过一次发现主控确实在发送数据，但是Matlab端就是感觉没接收到，很是奇怪。那么我用调试助手时发现，<strong>一个包里有单个数据或是多个数据并不影响接收帧率</strong>，<strong>增大串口波特率略微提高解包帧率</strong>，但是在发送帧率到达1000fps时，数据的接收帧率只能到650fps左右。</li>
+</ul>
+<ul>
+<li>我发现，并不是Matlab没接收到主控的数据，而是没有成功解包，这个问题也一直困扰我，发送结构体变量中的总字节数理论上和实际发的不一样，在帧头和数据之间有两位<code>0x00</code>并不知道从何而来，这样总字节数多了2，dma发送字节数加了2，且在解包过程中多两个字节消耗掉就行了</li>
+</ul>
+<ul>
+<li>结果在测试主控与Matlab通信时又发现问题，由于设置的波特率为921600，虽然配置没错但是串口发送的数完全不对，向下减小一些至460800就正常了，看来这种情况波特率有了限制。并且波特率460800时帧数据肉眼可见的概率会发生传输数据错误，说明串口确实不太稳定</li>
+</ul>
+<ul>
+<li>最后我一共让主控一帧传输20个数据，能够正常接收，100fps的发送帧率对应100fps的解包帧率。再次说明数据量不影响接受帧率，并且最大帧率在600fps（发送帧率1000fps），不过这种情况在接受10s时间左右程序不再接受蓝牙数据，未找到原因。</li>
+<li>另外，如果要在<strong>接收过程中画出实时曲线，势必影响接收帧率</strong>，我尝试在发送帧率100fps的情况下，每解完一次包绘制两个变量的曲线，结果接受帧率掉到70fps。因此，不画实时图像或者仅绘制1-2张是允许的，不然影响过大。</li>
+</ul>
+<h4 id="4-3-1-帧率计算timer"><a href="#4-3-1-帧率计算timer" class="headerlink" title="4.3.1 帧率计算timer"></a>4.3.1 帧率计算<code>timer</code></h4><ul>
+<li>Matlab中也有定时器，我通过定时器1s定时来计算每秒钟的接收帧率，特别提醒往往回调函数的函数名的定义变量规范很重要。具体可以查阅帮助，下面是代码部分：</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">t = timer(<span class="string">'StartDelay'</span>,<span class="number">1</span>,<span class="string">'TimerFcn'</span>,@t_TimerFcn,<span class="string">'Period'</span>,<span class="number">1</span>,<span class="string">'ExecutionMode'</span>,<span class="string">'fixedRate'</span>);</span><br><span class="line"><span class="comment">%StartDelay：开始计时后的延时；TimerFcn：定时中断函数；Period：定时时间周期；ExecutionMode：优先级</span></span><br><span class="line"></span><br><span class="line">start(t)</span><br><span class="line"></span><br><span class="line">stop(t)</span><br><span class="line">Delete(t)</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3-2-打印变量disp"><a href="#4-3-2-打印变量disp" class="headerlink" title="4.3.2 打印变量disp()"></a>4.3.2 打印变量<code>disp()</code></h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string = sprintf(<span class="string">'Have received stRobot_x：%d'</span>,stRobot_x(count));</span><br><span class="line"><span class="built_in">disp</span>(string)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>类似于format格式化输出，打印在命令行区</li>
+</ul>
+</font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-04-13T01:08:55.000Z">2020-04-13</time>
                 
                 <div class="level-item">
@@ -390,7 +512,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            26
+                            27
                         </p>
                     </a>
                 </div>
@@ -414,7 +536,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            17
+                            20
                         </p>
                     </a>
                 </div>
@@ -555,7 +677,7 @@
                 <span class="level-item">ROBOCON2020</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/ZYC/">
@@ -584,7 +706,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 11.67px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 13.33px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16.67px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 18.33px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 10px;">定位算法</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 14px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 14px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 14px;">pytorch</a> <a href="/tags/record/" style="font-size: 18px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 10px;">定位算法</a>
     </div>
 </div>
     
@@ -596,6 +718,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T12:52:29.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于matlab的蓝牙串口通信</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -649,19 +784,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T05:46:09.000Z">2020-04-07</time></div>
-                    <a href="/2020/04/07/pytorch%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch使用说明</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -679,7 +801,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -739,13 +861,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ROBOCON2020/">
                         <span class="tag">ROBOCON2020</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/adams/">
                         <span class="tag">adams</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bluetooth/">
+                        <span class="tag">bluetooth</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -774,6 +903,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/markdown/">
                         <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matlab/">
+                        <span class="tag">matlab</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -816,6 +952,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/zyc/">
                         <span class="tag">zyc</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%B2%E5%8F%A3/">
+                        <span class="tag">串口</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -853,6 +996,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T12:52:29.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于matlab的蓝牙串口通信</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time></div>
                     <a href="/2020/04/13/ielts-5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-5</a>
                     <p class="is-size-7 is-uppercase">
@@ -901,19 +1057,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T05:46:09.000Z">2020-04-07</time></div>
-                    <a href="/2020/04/07/pytorch%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch使用说明</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -931,7 +1074,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -991,13 +1134,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ROBOCON2020/">
                         <span class="tag">ROBOCON2020</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/adams/">
                         <span class="tag">adams</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bluetooth/">
+                        <span class="tag">bluetooth</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1026,6 +1176,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/markdown/">
                         <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matlab/">
+                        <span class="tag">matlab</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1068,6 +1225,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/zyc/">
                         <span class="tag">zyc</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%B2%E5%8F%A3/">
+                        <span class="tag">串口</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

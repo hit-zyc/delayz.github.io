@@ -135,6 +135,83 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-29T18:45:22.000Z">2020-03-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 824 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/30/opencv3/">python 之 opencv-摄像头采集和视频播放</a>
+            
+        </h1>
+        <div class="content">
+            <font face='Times New Roman'>
+
+<h2 id="打开摄像头"><a href="#打开摄像头" class="headerlink" title="打开摄像头"></a>打开摄像头</h2><hr>
+<p>要使用摄像头，需要使用<code>cv2.VideoCapture(0)</code>创建VideoCapture对象，参数0指的是摄像头的编号，如果你电脑上有两个摄像头的话，访问第2个摄像头就可以传入1，依此类推。</p>
+<h4 id="capture-read"><a href="#capture-read" class="headerlink" title="capture.read"></a><strong>capture.read</strong></h4><p>函数返回的第1个参数ret(return value缩写)是一个布尔值，表示当前这一帧是否获取正确</p>
+<h4 id="cv2-cvtColor"><a href="#cv2-cvtColor" class="headerlink" title="cv2.cvtColor"></a><strong>cv2.cvtColor</strong></h4><p>用来转换颜色，这里将彩色图转成灰度图</p>
+<h4 id="cap-get-propId-、cap-set-propId-value"><a href="#cap-get-propId-、cap-set-propId-value" class="headerlink" title="cap.get(propId)、cap.set(propId,value)"></a><strong>cap.get(propId)</strong>、<strong>cap.set(propId,value)</strong></h4><p>通过<code>cap.get(propId)</code>可以获取摄像头的一些属性，比如捕获的分辨率，亮度和对比度等。propId是从0~18的数字，代表不同的属性，完整的属性列表可以参考：<a href="https://docs.opencv.org/4.0.0/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d">VideoCaptureProperties</a>。也可以使用<code>cap.set(propId,value)</code>来修改属性值</p>
+<blockquote>
+<p>经验之谈：某些摄像头设定分辨率等参数时会无效，因为它有固定的分辨率大小支持，一般可在摄像头的资料页中找到。</p>
+</blockquote>
+<h2 id="播放本地视频"><a href="#播放本地视频" class="headerlink" title="播放本地视频"></a>播放本地视频</h2><hr>
+<p>跟打开摄像头一样，如果把摄像头的编号换成视频的路径就可以播放本地视频了。回想一下<code>cv2.waitKey()</code>，它的参数表示暂停时间，所以这个值越大，视频播放速度越慢，反之，播放速度越快，通常设置为25或30。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 播放本地视频</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="string">'demo_video.mp4'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line">    cv2.imshow(<span class="string">'frame'</span>, gray)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">30</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="录制视频"><a href="#录制视频" class="headerlink" title="录制视频"></a>录制视频</h2><hr>
+<p>之前我们保存图片用的是<code>cv2.imwrite()</code>，要保存视频，我们需要创建一个<code>VideoWriter</code>的对象，需要给它传入四个参数：</p>
+<ul>
+<li>输出的文件名，如’output.avi’</li>
+<li>编码方式<a href="https://baike.baidu.com/item/fourcc/6168470?fr=aladdin">FourCC</a>码</li>
+<li>帧率<a href="https://baike.baidu.com/item/FPS/3227416">FPS</a></li>
+<li>要保存的分辨率大小</li>
+</ul>
+<p>FourCC是用来指定视频编码方式的四字节码，所有的编码可参考<a href="http://www.fourcc.org/codecs.php">Video Codecs</a>。如MJPG编码可以这样写： <code>cv2.VideoWriter_fourcc(*&#39;MJPG&#39;)</code>或<code>cv2.VideoWriter_fourcc(&#39;M&#39;,&#39;J&#39;,&#39;P&#39;,&#39;G&#39;)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义编码方式并创建VideoWriter对象</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'MJPG'</span>)</span><br><span class="line">outfile = cv2.VideoWriter(<span class="string">'output.avi'</span>, fourcc, <span class="number">25.</span>, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        outfile.write(frame)  <span class="comment"># 写入文件</span></span><br><span class="line">        cv2.imshow(<span class="string">'frame'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://blog.csdn.net/u011436429/article/details/80604590">OpenCV VideoCapture.get()参数中文详解，不太准确供参考</a></p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><hr>
+<ul>
+<li>实现一个可以拖动滑块播放视频的功能。（提示：需要用到 <code>cv2.CAP_PROP_FRAME_COUNT</code>和<code>cv2.CAP_PROP_POS_FRAMES</code>两个属性）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changetime</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> capture.set(cv2.CAP_PROP_POS_FRAMES, x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 播放本地视频</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="string">'demo_video.mp4'</span>)</span><br><span class="line"><span class="comment">#获取视频帧长度</span></span><br><span class="line">frame_count = capture.get(cv2.CAP_PROP_FRAME_COUNT)</span><br><span class="line"><span class="comment">#创建一个窗口</span></span><br><span class="line">cv2.namedWindow(<span class="string">'video'</span>)</span><br><span class="line"><span class="comment"># 创建视频滑动条</span></span><br><span class="line">cv2.createTrackbar(<span class="string">'video'</span>, <span class="string">'video'</span>, <span class="number">0</span>, int(frame_count), changetime)</span><br><span class="line"></span><br><span class="line">height = capture.get(cv2.CAP_PROP_FRAME_HEIGHT)</span><br><span class="line">width = capture.get(cv2.CAP_PROP_FRAME_WIDTH)</span><br><span class="line">print(capture.set(cv2.CAP_PROP_FRAME_HEIGHT, height * <span class="number">2</span>))</span><br><span class="line">print(capture.set(cv2.CAP_PROP_FRAME_WIDTH, width * <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        cv2.setTrackbarPos(<span class="string">'video'</span>,<span class="string">'video'</span>,int(capture.get(cv2.CAP_PROP_POS_FRAMES)))</span><br><span class="line">        cv2.imshow(<span class="string">'video'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">30</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+</font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-29T18:27:34.000Z">2020-03-30</time>
                 
                 <div class="level-item">
@@ -1591,76 +1668,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-13T10:44:57.000Z">2020-03-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 381 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/13/python%E5%AD%A6%E4%B9%A0-2/">python学习-2</a>
-            
-        </h1>
-        <div class="content">
-            <p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017261630425888">函数的各种参数类型，廖雪峰的博客</a></p>
-<p>今天主要学习了函数，函数参量的种类和一些注意事项</p>
-<ul>
-<li><p><code>From xx import xxx</code> 可以从xx.py文件中引用函数xxx(…)</p>
-</li>
-<li><p><code>isinstance(object, classinfo)</code> object-实例对象、classinfo-可以是直接或间接类名、基本类型或者由它们组成的元组；相比于<kbd>type()</kbd>，建议使用<kbd>isinstance()</kbd></p>
-</li>
-<li><p><code>x**n</code> 变量的高次幂的表示形式</p>
-</li>
-<li><p><code>def f2(a, b, c=0, *, d, **kw):</code> 函数的参数组合，注意顺序；此外，对于任意函数，都可以通过类似<kbd>func(<em>args, *</em>kw)</kbd>的形式调用它，无论它的参数是如何定义</p>
-</li>
-</ul>
-<hr>
-<ul>
-<li>递归函数，思路很重要，自己的理解能力还是太弱了，加强锻炼吧！</li>
-</ul>
-<blockquote>
-<p>递归函数的经典问题：汉诺塔；例程函数如下</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def hanoi(n,a,b,c):</span><br><span class="line">    # 当n为1时 (递归基础)</span><br><span class="line">    if n &#x3D;&#x3D; 1:</span><br><span class="line">        print(a, &#39;--&gt;&#39;, c) # 将A柱最底层的圆盘移动到C柱</span><br><span class="line">    # 当n大于1时</span><br><span class="line">    else:</span><br><span class="line">        hanoi(n-1, a, c, b) # 借助C柱，将n-1个圆盘从A柱移动到B柱</span><br><span class="line">        print(a, &#39;--&gt;&#39;, c) # 将A柱最底层的圆盘移动到C柱</span><br><span class="line">        hanoi(n-1, b, a, c) # 借助A柱，将n-1个圆盘从B柱移动到C柱</span><br></pre></td></tr></table></figure>
-<hr>
-<ul>
-<li><a href="https://www.runoob.com/python/python-func-range.html">range()函数用法</a> <code>range(start, stop[, step])</code> 基本用于for循环,生成列表或元组的一般表达形式<kbd><strong>list(range(x,x,x))</strong></kbd>或<kbd><strong>tuple(range(x,x,x))</strong></kbd></li>
-<li></li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -1727,7 +1734,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            26
+                            27
                         </p>
                     </a>
                 </div>
@@ -1751,7 +1758,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            17
+                            20
                         </p>
                     </a>
                 </div>
@@ -1892,7 +1899,7 @@
                 <span class="level-item">ROBOCON2020</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/ZYC/">
@@ -1921,7 +1928,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 11.67px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 13.33px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16.67px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 18.33px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 10px;">定位算法</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 14px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 14px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 14px;">pytorch</a> <a href="/tags/record/" style="font-size: 18px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 10px;">定位算法</a>
     </div>
 </div>
     
@@ -1933,6 +1940,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T12:52:29.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于matlab的蓝牙串口通信</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1986,19 +2006,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T05:46:09.000Z">2020-04-07</time></div>
-                    <a href="/2020/04/07/pytorch%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch使用说明</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -2016,7 +2023,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2076,13 +2083,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ROBOCON2020/">
                         <span class="tag">ROBOCON2020</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/adams/">
                         <span class="tag">adams</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bluetooth/">
+                        <span class="tag">bluetooth</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2111,6 +2125,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/markdown/">
                         <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matlab/">
+                        <span class="tag">matlab</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2153,6 +2174,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/zyc/">
                         <span class="tag">zyc</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%B2%E5%8F%A3/">
+                        <span class="tag">串口</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2190,6 +2218,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T12:52:29.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于matlab的蓝牙串口通信</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time></div>
                     <a href="/2020/04/13/ielts-5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-5</a>
                     <p class="is-size-7 is-uppercase">
@@ -2238,19 +2279,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-07T05:46:09.000Z">2020-04-07</time></div>
-                    <a href="/2020/04/07/pytorch%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch使用说明</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -2268,7 +2296,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2328,13 +2356,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ROBOCON2020/">
                         <span class="tag">ROBOCON2020</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/adams/">
                         <span class="tag">adams</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bluetooth/">
+                        <span class="tag">bluetooth</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2363,6 +2398,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/markdown/">
                         <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matlab/">
+                        <span class="tag">matlab</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2405,6 +2447,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/zyc/">
                         <span class="tag">zyc</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%B2%E5%8F%A3/">
+                        <span class="tag">串口</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
