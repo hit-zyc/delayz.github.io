@@ -78,7 +78,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Wdnmd" height="28">
+                <img src="/images/delayz.png" alt="Wdnmd" height="28">
             
             </a>
         </div>
@@ -128,6 +128,171 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 1098 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/">标定记录 2nd</a>
+            
+        </h1>
+        <div class="content">
+            <font face = 'Times New Roman'>
+
+<h3 id="2020-4-27"><a href="#2020-4-27" class="headerlink" title="2020.4.27"></a>2020.4.27</h3><hr>
+<h3 id="陀螺仪问题解决"><a href="#陀螺仪问题解决" class="headerlink" title="陀螺仪问题解决"></a>陀螺仪问题解决</h3><hr>
+<p>先做线（杜邦线），用2s锂电池单独给陀螺仪供电后问题解决</p>
+<ul>
+<li>每次转一圈的数据比较稳定，每转1080°陀螺仪若干数据之间的差不超过20</li>
+</ul>
+<h3 id="再次标定"><a href="#再次标定" class="headerlink" title="再次标定"></a>再次标定</h3><hr>
+<ul>
+<li><p>由于陀螺仪数据稳定，需要再次标定，标定后角度经验证比较准确：</p>
+<ul>
+<li>每转三圈读取的角度值在1080°±3°之间浮动</li>
+</ul>
+</li>
+<li><p>角度标准不同后，还需要整体重新标定，结果图示如下：</p>
+<ul>
+<li><p>验证<strong>正y轴</strong>：</p>
+<ul>
+<li>y方向行进约 1300 mm，x方向偏移量约为 0.7 mm</li>
+</ul>
+<p><img src="/../images/0427/1.png" alt=""></p>
+</li>
+<li><p>验证<strong>假x轴</strong>：</p>
+<ul>
+<li>x方向行进约 1400 mm，y方向偏移量约为 10 mm</li>
+</ul>
+<p><img src="/../images/0427/2.png" alt=""></p>
+</li>
+<li><p>验证<strong>正y轴转为假x轴后沿正y轴走</strong>：</p>
+<ul>
+<li>这里最终x方向偏移量约 4 mm</li>
+</ul>
+<p><img src="/../images/0427/3.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>根据上图走<strong>假x轴</strong>的x、y位移数据   acrtan（10.04 / 1373）= 0.4189653°</p>
+</li>
+</ul>
+<p>​       又推车转角为 89.5257507°</p>
+<blockquote>
+<p>89.5257507° + 0.4189653° = 89.944716° ≈ 90°</p>
+</blockquote>
+<p>​       在这里再次验证了之前的结论</p>
+<h3 id="重复性误差"><a href="#重复性误差" class="headerlink" title="重复性误差"></a>重复性误差</h3><hr>
+<ul>
+<li>在这里我推车测试了8条不同的路径（左下角到右上角），并且把每条路径最终的x、y坐标都列了出来，横线代表8个值的平均值，由于条件有限无法知道精确的实际值，所以把平均值当作实际值。</li>
+</ul>
+<p><img src="/../images/0427/4.png" alt=""></p>
+<ul>
+<li>结果发现，在推车直线距离大概 1.5 m的情况下，<strong>小车在x、y方向都可能存在5mm内的偏移</strong></li>
+</ul>
+<h3 id="旋转误差"><a href="#旋转误差" class="headerlink" title="旋转误差"></a>旋转误差</h3><hr>
+<ul>
+<li>这里每次旋转 3 - 4 圈后回到起始点，来观察小车的定位误差情况</li>
+</ul>
+<p><img src="/../images/0427/5.png" alt=""></p>
+<p><img src="/../images/0427/6.png" alt=""></p>
+<ul>
+<li>顺逆时针都测试了，发现顺时针坐标整体偏移了 5 mm，然而逆时针坐标整体偏移了约 20 mm</li>
+</ul>
+<h3 id="为何会有偏移？"><a href="#为何会有偏移？" class="headerlink" title="为何会有偏移？"></a>为何会有偏移？</h3><hr>
+<ol>
+<li><p>由上图可以发现转三圈的角度值都是1080°左右，说明陀螺仪提供的<strong>角度数据没有问题</strong></p>
+</li>
+<li><p><em>旋转算法matlab程序实现是否有问题？</em></p>
+<ul>
+<li><p>我把程序中 alpha 和 L 的值都设为 0，再次转3圈看结果：</p>
+<p>结论是<strong>与旋转算法无关</strong>，<strong>测试结果照样有十几到二十多毫米的偏移</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="/../images/0427/7.png" alt=""></p>
+<p><img src="/../images/0427/8.png" alt=""></p>
+<p>（这里发现路径图中由于是随动中心，会绕中心转圈，是对的，之前是车的中心，所以路径图比较奇怪）</p>
+<ol start="3">
+<li><p><em>直行算法matlab程序实现是否有问题？**（由于在家标定时旋转角度方向变了，我改了一部分matlab代码，所以怀疑是不是这个有问题）</em></p>
+<ul>
+<li>我把之前 Adams 的仿真理想数据带入现在的matlab程序，并且在程序里再次分别验证走正y轴，假x轴：正y轴的x方向偏移 0 mm；正x轴的y方向偏移 1.2 mm <strong>比较理想，证明程序无误</strong></li>
+</ul>
+</li>
+<li><p>综上，那就意味之标定的系数（8个）还是不准，那就再小心的标定一次</p>
+</li>
+</ol>
+<h3 id="再再次标定"><a href="#再再次标定" class="headerlink" title="再再次标定"></a>再再次标定</h3><hr>
+<ul>
+<li><p>这次标定不一样，电脑不用放在车上了，标定也用蓝牙传数据（这周第一次整体标定电脑还是放在车上的）；并且，走一个方向多次重复取平均值。</p>
+</li>
+<li><p>这一次标定效果如下：</p>
+<ul>
+<li><p>验证<strong>正y轴</strong>：</p>
+<ul>
+<li>y方向行进约 1400 mm，x方向偏移量约为 0.25 mm</li>
+</ul>
+<p><img src="/../images/0427/9.png" alt=""></p>
+</li>
+<li><p>验证<strong>假x轴</strong>：（这次两边测得正好是90°，没办法每次都测的不一样，这个车有一边有问题）</p>
+<ul>
+<li>x方向行进约 1400 mm，y方向偏移量约为 1.293 mm</li>
+</ul>
+<p><img src="/../images/0427/10.png" alt=""></p>
+</li>
+<li><p>验证<strong>正y轴转为假x轴后沿正y轴走</strong>：</p>
+<ul>
+<li>这里最终x方向偏移量约 4 mm，和这周第一次标定的效果</li>
+</ul>
+<p><img src="/../images/0427/11.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="再次看看旋转的误差大小"><a href="#再次看看旋转的误差大小" class="headerlink" title="再次看看旋转的误差大小"></a>再次看看旋转的误差大小</h4><p><img src="/../images/0427/12.png" alt=""></p>
+<ul>
+<li>旋转三圈回到起始点，依然会有 10 - 20 mm的坐标偏移</li>
+</ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><hr>
+<p>&emsp;&emsp;考虑到标定时的车身的振动，旋转时车身的振动，自身操作使随动轮前后小幅度摇摆造成回程差等等的条件受到限制。</p>
+<p>&emsp;&emsp;这一套系统的精度目前看来就是上述的研究结果。</p>
+</font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
     
 <div class="card">
     
@@ -1526,65 +1691,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-30T03:33:54.000Z">2020-03-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ZYC/">ZYC</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 234 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/30/a/">a</a>
-            
-        </h1>
-        <div class="content">
-            <font face = 'Times New Roman'>
-
-<div align=center><img src="/../images/828.png"  alt="8-28 2009 哈勃拍摄" style="zoom:30%;"  /></div>
-
-
-<blockquote>
-<p>今天是在家的第70天，这70天里我还是出去了一次，去拿了个陀螺仪，一个两万多可真他妈贵，收据和发票一定别弄丢了，👴赔不起</p>
-</blockquote>
-<blockquote>
-<p>我觉得以后还是一定要对朋友关心一些，如果我看不起任何人那我也就没有朋友，到生日了一定要送上祝福，最好能买礼物，所以平时也别太野性消费了。奶茶能不买就别喝了，好好在学校吃饭，攒钱在更有意义的地方</p>
-</blockquote>
-<blockquote>
-<p>rc比赛估计是至少延期了，这比赛我其实很没信心的，本来我就不是个自信的人，队长天天说我们菜，越南不知道哪儿的学校的设计就能把我们搞的一愣一愣的，也许是我太没自信了吧</p>
-</blockquote>
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -1651,7 +1757,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            27
+                            28
                         </p>
                     </a>
                 </div>
@@ -1816,7 +1922,7 @@
                 <span class="level-item">ROBOCON2020</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/ZYC/">
@@ -1845,7 +1951,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 14px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/ielts/" style="font-size: 16px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 14px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 14px;">pytorch</a> <a href="/tags/record/" style="font-size: 18px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 10px;">定位算法</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
     </div>
 </div>
     
@@ -1857,6 +1963,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time></div>
+                    <a href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录 2nd</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1910,19 +2029,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T11:06:49.000Z">2020-04-08</time></div>
-                    <a href="/2020/04/08/pytorch%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入了解</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1940,7 +2046,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2000,7 +2106,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ROBOCON2020/">
                         <span class="tag">ROBOCON2020</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -2084,7 +2190,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/record/">
                         <span class="tag">record</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">12</span>
                     </a>
                 </div>
                 
@@ -2105,7 +2211,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/">
                         <span class="tag">定位算法</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2135,6 +2241,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time></div>
+                    <a href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录 2nd</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T12:52:29.000Z">2020-04-14</time></div>
                     <a href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于matlab的蓝牙串口通信</a>
                     <p class="is-size-7 is-uppercase">
@@ -2183,19 +2302,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-08T11:06:49.000Z">2020-04-08</time></div>
-                    <a href="/2020/04/08/pytorch%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入了解</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -2213,7 +2319,7 @@
                     <span class="level-item">April 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2273,7 +2379,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ROBOCON2020/">
                         <span class="tag">ROBOCON2020</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -2357,7 +2463,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/record/">
                         <span class="tag">record</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">12</span>
                     </a>
                 </div>
                 
@@ -2378,7 +2484,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/">
                         <span class="tag">定位算法</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2399,7 +2505,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Wdnmd" height="28">
+                    <img src="/images/delayz.png" alt="Wdnmd" height="28">
                 
                 </a>
                 <p class="is-size-7">

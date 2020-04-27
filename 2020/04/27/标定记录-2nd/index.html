@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>标定记录 2nd - Wdnmd</title>
+
+
+    <meta name="description" content="2020.4.27 陀螺仪问题解决 先做线（杜邦线），用2s锂电池单独给陀螺仪供电后问题解决  每次转一圈的数据比较稳定，每转1080°陀螺仪若干数据之间的差不超过20  再次标定  由于陀螺仪数据稳定，需要再次标定，标定后角度经验证比较准确：  每转三圈读取的角度值在1080°±3°之间浮动   角度标准不同后，还需要整体重新标定，结果图示如下：  验证正y轴：  y方向行进约 1300 m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="标定记录 2nd">
+<meta property="og:url" content="https://hit-zyc.github.io/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/index.html">
+<meta property="og:site_name" content="Wdnmd">
+<meta property="og:description" content="2020.4.27 陀螺仪问题解决 先做线（杜邦线），用2s锂电池单独给陀螺仪供电后问题解决  每次转一圈的数据比较稳定，每转1080°陀螺仪若干数据之间的差不超过20  再次标定  由于陀螺仪数据稳定，需要再次标定，标定后角度经验证比较准确：  每转三圈读取的角度值在1080°±3°之间浮动   角度标准不同后，还需要整体重新标定，结果图示如下：  验证正y轴：  y方向行进约 1300 m">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hit-zyc.github.io/images/og_image.png">
+<meta property="article:published_time" content="2020-04-27T00:24:59.000Z">
+<meta property="article:modified_time" content="2020-04-27T00:36:55.157Z">
+<meta property="article:author" content="张砚驰">
+<meta property="article:tag" content="record">
+<meta property="article:tag" content="ROBOCON2020">
+<meta property="article:tag" content="定位算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hit-zyc.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/delayz.png" alt="标定记录 2nd" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="ZYC&#39;s Github" href="https://github.com/hit-zyc">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 1098 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                标定记录 2nd
+            
+        </h1>
+        <div class="content">
+            <font face = 'Times New Roman'>
+
+<h3 id="2020-4-27"><a href="#2020-4-27" class="headerlink" title="2020.4.27"></a>2020.4.27</h3><hr>
+<h3 id="陀螺仪问题解决"><a href="#陀螺仪问题解决" class="headerlink" title="陀螺仪问题解决"></a>陀螺仪问题解决</h3><hr>
+<p>先做线（杜邦线），用2s锂电池单独给陀螺仪供电后问题解决</p>
+<ul>
+<li>每次转一圈的数据比较稳定，每转1080°陀螺仪若干数据之间的差不超过20</li>
+</ul>
+<h3 id="再次标定"><a href="#再次标定" class="headerlink" title="再次标定"></a>再次标定</h3><hr>
+<ul>
+<li><p>由于陀螺仪数据稳定，需要再次标定，标定后角度经验证比较准确：</p>
+<ul>
+<li>每转三圈读取的角度值在1080°±3°之间浮动</li>
+</ul>
+</li>
+<li><p>角度标准不同后，还需要整体重新标定，结果图示如下：</p>
+<ul>
+<li><p>验证<strong>正y轴</strong>：</p>
+<ul>
+<li>y方向行进约 1300 mm，x方向偏移量约为 0.7 mm</li>
+</ul>
+<p><img src="/../images/0427/1.png" alt=""></p>
+</li>
+<li><p>验证<strong>假x轴</strong>：</p>
+<ul>
+<li>x方向行进约 1400 mm，y方向偏移量约为 10 mm</li>
+</ul>
+<p><img src="/../images/0427/2.png" alt=""></p>
+</li>
+<li><p>验证<strong>正y轴转为假x轴后沿正y轴走</strong>：</p>
+<ul>
+<li>这里最终x方向偏移量约 4 mm</li>
+</ul>
+<p><img src="/../images/0427/3.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>根据上图走<strong>假x轴</strong>的x、y位移数据   acrtan（10.04 / 1373）= 0.4189653°</p>
+</li>
+</ul>
+<p>​       又推车转角为 89.5257507°</p>
+<blockquote>
+<p>89.5257507° + 0.4189653° = 89.944716° ≈ 90°</p>
+</blockquote>
+<p>​       在这里再次验证了之前的结论</p>
+<h3 id="重复性误差"><a href="#重复性误差" class="headerlink" title="重复性误差"></a>重复性误差</h3><hr>
+<ul>
+<li>在这里我推车测试了8条不同的路径（左下角到右上角），并且把每条路径最终的x、y坐标都列了出来，横线代表8个值的平均值，由于条件有限无法知道精确的实际值，所以把平均值当作实际值。</li>
+</ul>
+<p><img src="/../images/0427/4.png" alt=""></p>
+<ul>
+<li>结果发现，在推车直线距离大概 1.5 m的情况下，<strong>小车在x、y方向都可能存在5mm内的偏移</strong></li>
+</ul>
+<h3 id="旋转误差"><a href="#旋转误差" class="headerlink" title="旋转误差"></a>旋转误差</h3><hr>
+<ul>
+<li>这里每次旋转 3 - 4 圈后回到起始点，来观察小车的定位误差情况</li>
+</ul>
+<p><img src="/../images/0427/5.png" alt=""></p>
+<p><img src="/../images/0427/6.png" alt=""></p>
+<ul>
+<li>顺逆时针都测试了，发现顺时针坐标整体偏移了 5 mm，然而逆时针坐标整体偏移了约 20 mm</li>
+</ul>
+<h3 id="为何会有偏移？"><a href="#为何会有偏移？" class="headerlink" title="为何会有偏移？"></a>为何会有偏移？</h3><hr>
+<ol>
+<li><p>由上图可以发现转三圈的角度值都是1080°左右，说明陀螺仪提供的<strong>角度数据没有问题</strong></p>
+</li>
+<li><p><em>旋转算法matlab程序实现是否有问题？</em></p>
+<ul>
+<li><p>我把程序中 alpha 和 L 的值都设为 0，再次转3圈看结果：</p>
+<p>结论是<strong>与旋转算法无关</strong>，<strong>测试结果照样有十几到二十多毫米的偏移</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="/../images/0427/7.png" alt=""></p>
+<p><img src="/../images/0427/8.png" alt=""></p>
+<p>（这里发现路径图中由于是随动中心，会绕中心转圈，是对的，之前是车的中心，所以路径图比较奇怪）</p>
+<ol start="3">
+<li><p><em>直行算法matlab程序实现是否有问题？**（由于在家标定时旋转角度方向变了，我改了一部分matlab代码，所以怀疑是不是这个有问题）</em></p>
+<ul>
+<li>我把之前 Adams 的仿真理想数据带入现在的matlab程序，并且在程序里再次分别验证走正y轴，假x轴：正y轴的x方向偏移 0 mm；正x轴的y方向偏移 1.2 mm <strong>比较理想，证明程序无误</strong></li>
+</ul>
+</li>
+<li><p>综上，那就意味之标定的系数（8个）还是不准，那就再小心的标定一次</p>
+</li>
+</ol>
+<h3 id="再再次标定"><a href="#再再次标定" class="headerlink" title="再再次标定"></a>再再次标定</h3><hr>
+<ul>
+<li><p>这次标定不一样，电脑不用放在车上了，标定也用蓝牙传数据（这周第一次整体标定电脑还是放在车上的）；并且，走一个方向多次重复取平均值。</p>
+</li>
+<li><p>这一次标定效果如下：</p>
+<ul>
+<li><p>验证<strong>正y轴</strong>：</p>
+<ul>
+<li>y方向行进约 1400 mm，x方向偏移量约为 0.25 mm</li>
+</ul>
+<p><img src="/../images/0427/9.png" alt=""></p>
+</li>
+<li><p>验证<strong>假x轴</strong>：（这次两边测得正好是90°，没办法每次都测的不一样，这个车有一边有问题）</p>
+<ul>
+<li>x方向行进约 1400 mm，y方向偏移量约为 1.293 mm</li>
+</ul>
+<p><img src="/../images/0427/10.png" alt=""></p>
+</li>
+<li><p>验证<strong>正y轴转为假x轴后沿正y轴走</strong>：</p>
+<ul>
+<li>这里最终x方向偏移量约 4 mm，和这周第一次标定的效果</li>
+</ul>
+<p><img src="/../images/0427/11.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="再次看看旋转的误差大小"><a href="#再次看看旋转的误差大小" class="headerlink" title="再次看看旋转的误差大小"></a>再次看看旋转的误差大小</h4><p><img src="/../images/0427/12.png" alt=""></p>
+<ul>
+<li>旋转三圈回到起始点，依然会有 10 - 20 mm的坐标偏移</li>
+</ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><hr>
+<p>&emsp;&emsp;考虑到标定时的车身的振动，旋转时车身的振动，自身操作使随动轮前后小幅度摇摆造成回程差等等的条件受到限制。</p>
+<p>&emsp;&emsp;这一套系统的精度目前看来就是上述的研究结果。</p>
+</font>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/ROBOCON2020/" rel="tag">ROBOCON2020</a>, <a class="has-link-grey -link" href="/tags/record/" rel="tag">record</a>, <a class="has-link-grey -link" href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" rel="tag">定位算法</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="/images/alipay.jpg" alt="Alipay"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">
+                <span class="level-item">基于matlab的蓝牙串口通信</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: false,
+        app_id: 'TPQWn5RsCkS2c8OwbgXhJ6CP-gzGzoHsz',
+        app_key: 'f1r3TAkLX0L1DJd7nS2KFVo9',
+        placeholder: 'Say something...'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/images/2.jpeg" alt="张砚驰">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        张砚驰
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        电子测控专业
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>湖北 武汉</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            28
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            7
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            20
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/hit-zyc" target="_blank" rel="noopener">
+                Follow</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/hit-zyc">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/hit-zyc" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">My Github</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.collinsdictionary.com/zh/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Colins</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.collinsdictionary.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.ieltscat.com/ " target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Ieltscat</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.ieltscat.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Ielts/">
+            <span class="level-start">
+                <span class="level-item">Ielts</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Image-Processing/">
+            <span class="level-start">
+                <span class="level-item">Image Processing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Magnetic-field-specialty/">
+            <span class="level-start">
+                <span class="level-item">Magnetic field specialty</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/ROBOCON2020/">
+            <span class="level-start">
+                <span class="level-item">ROBOCON2020</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/ZYC/">
+            <span class="level-start">
+                <span class="level-item">ZYC</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/hexo/">
+            <span class="level-start">
+                <span class="level-item">hexo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time></div>
+                    <a href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录 2nd</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T12:52:29.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于matlab的蓝牙串口通信</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/ielts-5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-5</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T01:08:55.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time></div>
+                    <a href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入探索续篇</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CNN/">
+                        <span class="tag">CNN</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DT35/">
+                        <span class="tag">DT35</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NNS/">
+                        <span class="tag">NNS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PIL/">
+                        <span class="tag">PIL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ROBOCON2020/">
+                        <span class="tag">ROBOCON2020</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/adams/">
+                        <span class="tag">adams</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bluetooth/">
+                        <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ielts/">
+                        <span class="tag">ielts</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jupyter/">
+                        <span class="tag">jupyter</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matlab/">
+                        <span class="tag">matlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maxwell/">
+                        <span class="tag">maxwell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pytorch/">
+                        <span class="tag">pytorch</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/record/">
+                        <span class="tag">record</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zyc/">
+                        <span class="tag">zyc</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%B2%E5%8F%A3/">
+                        <span class="tag">串口</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/">
+                        <span class="tag">定位算法</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time></div>
+                    <a href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录 2nd</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T12:52:29.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于matlab的蓝牙串口通信</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/ielts-5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-5</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T01:08:55.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time></div>
+                    <a href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入探索续篇</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CNN/">
+                        <span class="tag">CNN</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DT35/">
+                        <span class="tag">DT35</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NNS/">
+                        <span class="tag">NNS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PIL/">
+                        <span class="tag">PIL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ROBOCON2020/">
+                        <span class="tag">ROBOCON2020</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/adams/">
+                        <span class="tag">adams</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bluetooth/">
+                        <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ielts/">
+                        <span class="tag">ielts</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jupyter/">
+                        <span class="tag">jupyter</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matlab/">
+                        <span class="tag">matlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maxwell/">
+                        <span class="tag">maxwell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pytorch/">
+                        <span class="tag">pytorch</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/record/">
+                        <span class="tag">record</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zyc/">
+                        <span class="tag">zyc</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%B2%E5%8F%A3/">
+                        <span class="tag">串口</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/">
+                        <span class="tag">定位算法</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/delayz.png" alt="标定记录 2nd" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 张砚驰&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                Visited by <span id="busuanzi_value_site_uv">0</span> users
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://hit-zyc.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
