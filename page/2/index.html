@@ -135,334 +135,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-30T03:33:54.000Z">2020-03-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ZYC/">ZYC</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 234 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/30/a/">a</a>
-            
-        </h1>
-        <div class="content">
-            <font face = 'Times New Roman'>
-
-<div align=center><img src="/../images/828.png"  alt="8-28 2009 哈勃拍摄" style="zoom:30%;"  /></div>
-
-
-<blockquote>
-<p>今天是在家的第70天，这70天里我还是出去了一次，去拿了个陀螺仪，一个两万多可真他妈贵，收据和发票一定别弄丢了，👴赔不起</p>
-</blockquote>
-<blockquote>
-<p>我觉得以后还是一定要对朋友关心一些，如果我看不起任何人那我也就没有朋友，到生日了一定要送上祝福，最好能买礼物，所以平时也别太野性消费了。奶茶能不买就别喝了，好好在学校吃饭，攒钱在更有意义的地方</p>
-</blockquote>
-<blockquote>
-<p>rc比赛估计是至少延期了，这比赛我其实很没信心的，本来我就不是个自信的人，队长天天说我们菜，越南不知道哪儿的学校的设计就能把我们搞的一愣一愣的，也许是我太没自信了吧</p>
-</blockquote>
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-29T18:45:22.000Z">2020-03-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 824 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/30/opencv3/">python 之 opencv-摄像头采集和视频播放</a>
-            
-        </h1>
-        <div class="content">
-            <font face='Times New Roman'>
-
-<h2 id="打开摄像头"><a href="#打开摄像头" class="headerlink" title="打开摄像头"></a>打开摄像头</h2><hr>
-<p>要使用摄像头，需要使用<code>cv2.VideoCapture(0)</code>创建VideoCapture对象，参数0指的是摄像头的编号，如果你电脑上有两个摄像头的话，访问第2个摄像头就可以传入1，依此类推。</p>
-<h4 id="capture-read"><a href="#capture-read" class="headerlink" title="capture.read"></a><strong>capture.read</strong></h4><p>函数返回的第1个参数ret(return value缩写)是一个布尔值，表示当前这一帧是否获取正确</p>
-<h4 id="cv2-cvtColor"><a href="#cv2-cvtColor" class="headerlink" title="cv2.cvtColor"></a><strong>cv2.cvtColor</strong></h4><p>用来转换颜色，这里将彩色图转成灰度图</p>
-<h4 id="cap-get-propId-、cap-set-propId-value"><a href="#cap-get-propId-、cap-set-propId-value" class="headerlink" title="cap.get(propId)、cap.set(propId,value)"></a><strong>cap.get(propId)</strong>、<strong>cap.set(propId,value)</strong></h4><p>通过<code>cap.get(propId)</code>可以获取摄像头的一些属性，比如捕获的分辨率，亮度和对比度等。propId是从0~18的数字，代表不同的属性，完整的属性列表可以参考：<a href="https://docs.opencv.org/4.0.0/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d">VideoCaptureProperties</a>。也可以使用<code>cap.set(propId,value)</code>来修改属性值</p>
-<blockquote>
-<p>经验之谈：某些摄像头设定分辨率等参数时会无效，因为它有固定的分辨率大小支持，一般可在摄像头的资料页中找到。</p>
-</blockquote>
-<h2 id="播放本地视频"><a href="#播放本地视频" class="headerlink" title="播放本地视频"></a>播放本地视频</h2><hr>
-<p>跟打开摄像头一样，如果把摄像头的编号换成视频的路径就可以播放本地视频了。回想一下<code>cv2.waitKey()</code>，它的参数表示暂停时间，所以这个值越大，视频播放速度越慢，反之，播放速度越快，通常设置为25或30。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 播放本地视频</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="string">'demo_video.mp4'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line">    cv2.imshow(<span class="string">'frame'</span>, gray)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">30</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="录制视频"><a href="#录制视频" class="headerlink" title="录制视频"></a>录制视频</h2><hr>
-<p>之前我们保存图片用的是<code>cv2.imwrite()</code>，要保存视频，我们需要创建一个<code>VideoWriter</code>的对象，需要给它传入四个参数：</p>
-<ul>
-<li>输出的文件名，如’output.avi’</li>
-<li>编码方式<a href="https://baike.baidu.com/item/fourcc/6168470?fr=aladdin">FourCC</a>码</li>
-<li>帧率<a href="https://baike.baidu.com/item/FPS/3227416">FPS</a></li>
-<li>要保存的分辨率大小</li>
-</ul>
-<p>FourCC是用来指定视频编码方式的四字节码，所有的编码可参考<a href="http://www.fourcc.org/codecs.php">Video Codecs</a>。如MJPG编码可以这样写： <code>cv2.VideoWriter_fourcc(*&#39;MJPG&#39;)</code>或<code>cv2.VideoWriter_fourcc(&#39;M&#39;,&#39;J&#39;,&#39;P&#39;,&#39;G&#39;)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义编码方式并创建VideoWriter对象</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'MJPG'</span>)</span><br><span class="line">outfile = cv2.VideoWriter(<span class="string">'output.avi'</span>, fourcc, <span class="number">25.</span>, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        outfile.write(frame)  <span class="comment"># 写入文件</span></span><br><span class="line">        cv2.imshow(<span class="string">'frame'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://blog.csdn.net/u011436429/article/details/80604590">OpenCV VideoCapture.get()参数中文详解，不太准确供参考</a></p>
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><hr>
-<ul>
-<li>实现一个可以拖动滑块播放视频的功能。（提示：需要用到 <code>cv2.CAP_PROP_FRAME_COUNT</code>和<code>cv2.CAP_PROP_POS_FRAMES</code>两个属性）</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changetime</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> capture.set(cv2.CAP_PROP_POS_FRAMES, x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 播放本地视频</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="string">'demo_video.mp4'</span>)</span><br><span class="line"><span class="comment">#获取视频帧长度</span></span><br><span class="line">frame_count = capture.get(cv2.CAP_PROP_FRAME_COUNT)</span><br><span class="line"><span class="comment">#创建一个窗口</span></span><br><span class="line">cv2.namedWindow(<span class="string">'video'</span>)</span><br><span class="line"><span class="comment"># 创建视频滑动条</span></span><br><span class="line">cv2.createTrackbar(<span class="string">'video'</span>, <span class="string">'video'</span>, <span class="number">0</span>, int(frame_count), changetime)</span><br><span class="line"></span><br><span class="line">height = capture.get(cv2.CAP_PROP_FRAME_HEIGHT)</span><br><span class="line">width = capture.get(cv2.CAP_PROP_FRAME_WIDTH)</span><br><span class="line">print(capture.set(cv2.CAP_PROP_FRAME_HEIGHT, height * <span class="number">2</span>))</span><br><span class="line">print(capture.set(cv2.CAP_PROP_FRAME_WIDTH, width * <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        cv2.setTrackbarPos(<span class="string">'video'</span>,<span class="string">'video'</span>,int(capture.get(cv2.CAP_PROP_POS_FRAMES)))</span><br><span class="line">        cv2.imshow(<span class="string">'video'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">30</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-29T18:27:34.000Z">2020-03-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 452 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/30/opencv2/">python 之 opencv-matplotlib显示图片</a>
-            
-        </h1>
-        <div class="content">
-            <font face='Times New Roman'>
-
-<h2 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h2><hr>
-<p>Matplotlib是Python的一个很常用的绘图库，有兴趣的可以去<a href="www.matplotlib.org/">官网</a>学习更多内容。</p>
-<h3 id="显示灰度图"><a href="#显示灰度图" class="headerlink" title="显示灰度图"></a>显示灰度图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度图显示，cmap(color map)设置为gray</span></span><br><span class="line">plt.imshow(img, cmap=<span class="string">'gray'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>结果如下：</p>
-<p><img src="http://blog.codec.wang/cv2_matplotlib_show_gray_image.jpg" alt=""></p>
-<p><a href="https://blog.csdn.net/ab_1_2_3_4_5_6_7_8_9/article/details/89306797">plt.show()和plt.imshow()的区别</a></p>
-<p><a href="https://blog.csdn.net/qq_30934313/article/details/85249831"><code>plt.imshow</code> 的<code>cmap</code>颜色参数选择</a></p>
-<hr>
-<h3 id="显示彩色图"><a href="#显示彩色图" class="headerlink" title="显示彩色图"></a>显示彩色图</h3><p><strong>OpenCV中的图像是以BGR的通道顺序存储的</strong>，但Matplotlib是以RGB模式显示的，所以直接在Matplotlib中显示OpenCV图像会出现问题，因此需要转换一下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">img2 = img[:, :, ::<span class="number">-1</span>]</span><br><span class="line"><span class="comment"># 或使用</span></span><br><span class="line"><span class="comment"># img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示不正确的图</span></span><br><span class="line">plt.subplot(<span class="number">121</span>),plt.imshow(img) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示正确的图</span></span><br><span class="line">plt.subplot(<span class="number">122</span>)</span><br><span class="line">plt.xticks([]), plt.yticks([]) <span class="comment"># 隐藏x和y轴</span></span><br><span class="line">plt.imshow(img2)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>img[:,:,0]</code>表示图片的蓝色通道，<code>img[:,:,::-1]</code>就表示BGR翻转，变成RGB，说明一下：</p>
-</blockquote>
-<p>熟悉Python的童鞋应该知道，对一个字符串s翻转可以这样写：<code>s[::-1]</code>，’abc’变成’cba’，-1表示逆序。图片是二维的，所以完整地复制一副图像就是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img2 = img[:,:] <span class="comment"># 写全就是：img2 = img[0:height,0:width]</span></span><br></pre></td></tr></table></figure>
-
-<p>而图片是有三个通道，相当于一个长度为3的字符串，所以通道翻转与图片复制组合起来便是<code>img[:,:,::-1]</code>。</p>
-<p>结果如下：</p>
-<p><img src="http://blog.codec.wang/cv2_matplotlib_show_color_image.jpg" alt=""></p>
-<h3 id="加载和保存图片"><a href="#加载和保存图片" class="headerlink" title="加载和保存图片"></a>加载和保存图片</h3><p>不使用OpenCV，Matplotlib也可以加载和保存图片：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = plt.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">plt.imshow(img)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存图片，需放在show()函数之前</span></span><br><span class="line">plt.savefig(<span class="string">'lena2.jpg'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-29T10:08:03.000Z">2020-03-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 minutes read (About 877 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/29/opencv1/">python 之 opencv-简单读取操作</a>
-            
-        </h1>
-        <div class="content">
-            <font face='Times New Roman'>
-
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这几天看了很多关于图像处理的知识，知道神经网络是怎么回事，深度学习是什么东西，机器学习和他们有什么联系，又看了python语言下如何进行图像处理。我认为在接受更高层次的处理手段和算法设计前，应该打好基础，python的图像处理，学好PIL库和opencv库，我在github上找了个opencv的教程，接下来就是对opencv重点的一些备注</p>
-<hr>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr>
-<blockquote>
-<p><code>pip install opencv-python</code></p>
-</blockquote>
-<ul>
-<li>安装测试</li>
-</ul>
-<blockquote>
-<p><code>python --version</code><br><code>import cv2</code>&emsp; or&emsp; <code>print(cv2.__version__)  # &#39;3.4.1&#39;</code></p>
-</blockquote>
-<hr>
-<h3 id="使用清华镜像在python中pip安装"><a href="#使用清华镜像在python中pip安装" class="headerlink" title="使用清华镜像在python中pip安装"></a><a href="https://blog.csdn.net/weixin_34130389/article/details/94510529">使用清华镜像在python中pip安装</a></h3><hr>
-<ul>
-<li>临时使用：</li>
-</ul>
-<p>可以在使用pip的时候加参数-i <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a></p>
-<p>例如：pip install -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a> gevent，这样就会从清华这边的镜像去安装gevent库。</p>
-<hr>
-<h3 id="opencv入门"><a href="#opencv入门" class="headerlink" title="opencv入门"></a>opencv入门</h3><hr>
-<ul>
-<li>OpenCV中彩色图是以<strong>B-G-R</strong>通道顺序存储的，灰度图只有一个通道</li>
-<li>图像坐标的起始点是在<strong>左上角</strong>，所以行对应的是y，列对应的是x</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始计时</span></span><br><span class="line">start = cv2.getTickCount()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读入一张图片</span></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止计时</span></span><br><span class="line">end = cv2.getTickCount()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 单位：s</span></span><br><span class="line">print((end - start) / cv2.getTickFrequency())</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="cv2-imread"><a href="#cv2-imread" class="headerlink" title="cv2.imread"></a><strong>cv2.imread</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载灰度图</span></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>参数1：图片的文件名</p>
-<ul>
-<li>如果图片放在当前文件夹下，直接写文件名就行了，如’lena.jpg’</li>
-<li>否则需要给出绝对路径，如’D:\OpenCVSamples\lena.jpg’</li>
-</ul>
-</li>
-<li><p>参数2：读入方式，省略即采用默认值</p>
-<ul>
-<li><code>cv2.IMREAD_COLOR</code>：彩色图，默认值(1)</li>
-<li><code>cv2.IMREAD_GRAYSCALE</code>：灰度图(0)</li>
-<li><code>cv2.IMREAD_UNCHANGED</code>：包含透明通道的彩色图(-1)</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>经验之谈：路径中不能有中文噢，并且没有加载成功的话是不会报错的，<code>print(img)</code>的结果为None，后面处理才会报错，算是个小坑。</p>
-</blockquote>
-<hr>
-<h4 id="cv2-imshow、cv2-waitKey"><a href="#cv2-imshow、cv2-waitKey" class="headerlink" title="cv2.imshow、cv2.waitKey"></a><strong>cv2.imshow</strong>、<strong>cv2.waitKey</strong></h4><hr>
-<p>使用<code>cv2.imshow()</code>显示图片，窗口会自适应图片的大小：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">'lena'</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>参数1是窗口的名字，参数2是要显示的图片。不同窗口之间用窗口名区分，所以窗口名相同就表示是同一个窗口</p>
-<hr>
-<p><code>cv2.waitKey()</code>是让程序暂停的意思，参数是等待时间（毫秒ms）。时间一到，会继续执行接下来的程序，传入0的话表示一直等待。等待期间也可以获取用户的按键输入：<code>k = cv2.waitKey(0)</code></p>
-<hr>
-<h4 id="cv2-namedWindow"><a href="#cv2-namedWindow" class="headerlink" title="cv2.namedWindow"></a><strong>cv2.namedWindow</strong></h4><hr>
-<p>我们也可以先用<code>cv2.namedWindow()</code>创建一个窗口，之后再显示图片：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先定义窗口，后显示图片</span></span><br><span class="line">cv2.namedWindow(<span class="string">'lena2'</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.imshow(<span class="string">'lena2'</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>参数1依旧是窗口的名字，参数2默认是<code>cv2.WINDOW_AUTOSIZE</code>，表示窗口大小自适应图片，也可以设置为<code>cv2.WINDOW_NORMAL</code>，表示窗口大小可调整。图片比较大的时候，可以考虑用后者。</p>
-<hr>
-<h4 id="cv2-imwrite"><a href="#cv2-imwrite" class="headerlink" title="cv2.imwrite"></a><strong>cv2.imwrite</strong></h4><hr>
-<p>使用<code>cv2.imwrite()</code>保存图片，参数1是包含后缀名的文件名：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.imwrite(<span class="string">'lena_gray.jpg'</span>, img)</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ul>
-<li>打开lena.jpg并显示，s如果按下’s’，就保存图片为’lena_save.bmp’，否则就结束程序</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">cv2.imshow(<span class="string">'lena'</span>, img)</span><br><span class="line"></span><br><span class="line">k = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"><span class="comment"># ord()用来获取某个字符的编码</span></span><br><span class="line"><span class="keyword">if</span> k == ord(<span class="string">'s'</span>):</span><br><span class="line">    cv2.imwrite(<span class="string">'lena_save.bmp'</span>, img)</span><br></pre></td></tr></table></figure>
-
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-28T12:02:44.000Z">2020-03-28</time>
+                <time class="level-item has-text-grey" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
@@ -472,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 658 words)
+                    5 minutes read (About 757 words)
                 </span>
                 
                 
@@ -481,38 +154,41 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/28/Ielts%E5%B0%8F%E7%8F%AD%E8%AF%BE%E5%AD%A6%E4%B9%A0-3/">Ielts小班课学习-3</a>
+                <a class="has-link-black-ter" href="/2020/04/13/ielts-5/">Ielts小班课学习-5</a>
             
         </h1>
         <div class="content">
             <font face="Times New Roman">
 
-<h2 id="雅思口语"><a href="#雅思口语" class="headerlink" title="雅思口语"></a>雅思口语</h2><table>
+<h1 id="雅思口语"><a href="#雅思口语" class="headerlink" title="雅思口语"></a>雅思口语</h1><ul>
+<li>回答part1、2时尤其是part1回答的内容尽量展开，不需要死揪住一个问题想回答他，而是可以先泛泛的回答，具体回答可以不用那么详细</li>
+</ul>
+<table>
 <thead>
 <tr>
-<th align="left">口语中如何表达喜欢</th>
+<th align="center">单词</th>
+<th align="center">释义</th>
+<th align="center">单词</th>
+<th align="center">释义</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">I come to like…&emsp;表示渐进的过程</td>
+<td align="center">three kingdoms period</td>
+<td align="center">三国时期</td>
+<td align="center">QR code(quick responds)</td>
+<td align="center">二维码</td>
 </tr>
 <tr>
-<td align="left">sth. is my cup of tea</td>
+<td align="center">turn to sb for help</td>
+<td align="center">寻求帮助</td>
+<td align="center">tricky problem</td>
+<td align="center">麻烦的问题</td>
 </tr>
 <tr>
-<td align="left">sth. takes my fancy most</td>
-</tr>
-<tr>
-<td align="left">I’m quite fond of…</td>
-</tr>
-<tr>
-<td align="left">I’m really into…</td>
-</tr>
-<tr>
-<td align="left">I’m quite/really keen on…</td>
-</tr>
-<tr>
-<td align="left">I’m a big/massive fan of…</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
 </tr>
 </tbody></table>
 <table>
@@ -522,235 +198,160 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">just take myself as an example</td>
+<td align="left">be used to … &emsp;&emsp;过去常常</td>
 </tr>
 <tr>
-<td align="left">honestly, i don’t really know, guess might just be</td>
+<td align="left">It’s no big deal. &emsp;&emsp;这没什么大不了的</td>
 </tr>
 <tr>
-<td align="left">from time to time</td>
+<td align="left">well, let me see ..&emsp;&emsp;（用在开头思考时避免冷场）</td>
 </tr>
 <tr>
-<td align="left">change my sedentary lifestyle&emsp;改变久坐的生活方式</td>
+<td align="left">i haven’t thought about that. but if you ask me ,i would say that i …</td>
 </tr>
 <tr>
-<td align="left">there might be…</td>
+<td align="left">this question really got me at the beginning</td>
 </tr>
 <tr>
-<td align="left">perhaps , i would/probably say…</td>
+<td align="left">it’s quiet different .. &emsp;&emsp;（想起来这种表达）</td>
 </tr>
 <tr>
-<td align="left">on top of that&emsp;除此之外</td>
+<td align="left">have made lots of contributions to (have done) &emsp;&emsp;做过很多帮助、成就（时态加分）</td>
 </tr>
 <tr>
-<td align="left">to tell you the truth</td>
+<td align="left">i can give a relevant example here &emsp;&emsp;给一个类似的例子</td>
 </tr>
 <tr>
-<td align="left">harness the power of the wind/swift current&emsp;借助风/湍流的力量。。</td>
+<td align="left">take sth. as an example</td>
 </tr>
 <tr>
-<td align="left">can’t wait to give it a try</td>
+<td align="left">fall out of my chair &emsp;&emsp;形容笑得不行</td>
 </tr>
 <tr>
-<td align="left">hair blowing in the wind&emsp;微风轻拂过你的头发</td>
+<td align="left">are all my first choice &amp; on my top of list &emsp;&emsp;表达都是我的最爱</td>
 </tr>
 <tr>
-<td align="left">i don’t know. if you’re talking about xxx</td>
+<td align="left">do v.  &emsp;&emsp;注意口语中通过这种方式表强调</td>
 </tr>
 <tr>
-<td align="left">i have got used to&emsp;我已经习惯于</td>
+<td align="left">as for … &amp; moving on to … &emsp;&emsp;内容的转换如何连接</td>
 </tr>
 <tr>
-<td align="left">it may be more likely for me to…&emsp;更可能</td>
-</tr>
-<tr>
-<td align="left">after my retirement&emsp;退休之后</td>
-</tr>
-<tr>
-<td align="left">how fantastic!</td>
-</tr>
-<tr>
-<td align="left">gentle breeze from the sea&emsp;轻柔的海风</td>
-</tr>
-<tr>
-<td align="left">bask in the morning sun&emsp;晒晒早上的太阳</td>
-</tr>
-<tr>
-<td align="left">It kind of depends on&emsp;一定程度上取决于。。</td>
-</tr>
-<tr>
-<td align="left"></td>
+<td align="left">back then … &emsp;&emsp;那时候</td>
 </tr>
 </tbody></table>
-<h3 id="口语词汇"><a href="#口语词汇" class="headerlink" title="口语词汇"></a>口语词汇</h3><table>
-<thead>
-<tr>
-<th align="center">单词</th>
-<th align="center">释义</th>
-<th align="center">单词</th>
-<th align="center">释义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">soothing</td>
-<td align="center">a. 舒缓的，使人宽心的</td>
-<td align="center">therapy</td>
-<td align="center">n. 治疗，疗法</td>
-</tr>
-<tr>
-<td align="center">medium</td>
-<td align="center">n. 媒介；方法</td>
-<td align="center">intensive</td>
-<td align="center">a. 高强度的</td>
-</tr>
-<tr>
-<td align="center">fly-boarding</td>
-<td align="center">水上飞行</td>
-<td align="center">water skiing</td>
-<td align="center">滑水运动</td>
-</tr>
-<tr>
-<td align="center">breathtaking</td>
-<td align="center">a. 惊艳的</td>
-<td align="center">goggles</td>
-<td align="center">n. 护目镜</td>
-</tr>
-<tr>
-<td align="center">well-liked</td>
-<td align="center">a. 受喜爱的</td>
-<td align="center">coastal city</td>
-<td align="center">沿海城市</td>
-</tr>
-<tr>
-<td align="center">sports fanatics</td>
-<td align="center">体育爱好者</td>
-<td align="center">breaststroke</td>
-<td align="center">蛙泳</td>
-</tr>
-</tbody></table>
+<div align=center><img src="/../images/i4.png"   style="zoom:40%;"  /></div>
+<div align=center><img src="/../images/i5.png"   style="zoom:40%;"  /></div>
+<div align=center><img src="/../images/i6.png"   style="zoom:40%;"  /></div>
+<div align=center><img src="/../images/i7.png"   style="zoom:40%;"  /></div>
+<div align=center><img src="/../images/i8.png"   style="zoom:40%;"  /></div>
+
+
+
+
+
+<h1 id="雅思小作文"><a href="#雅思小作文" class="headerlink" title="雅思小作文"></a>雅思小作文</h1><p>&emsp;&emsp;小作文两种文章结构都可以，结尾写在前面有助于可能没有时间写完的时候，由于结尾部分影响评分，所以写在前面</p>
 <ul>
-<li><strong>表示非常的副词</strong>：pretty、quite、extremely、comparatively</li>
+<li>开头+主体+结尾</li>
+<li>开头+结尾+主体</li>
 </ul>
-<hr>
-<h2 id="雅思作文"><a href="#雅思作文" class="headerlink" title="雅思作文"></a>雅思作文</h2><h3 id="“利弊分析题”大作文结构"><a href="#“利弊分析题”大作文结构" class="headerlink" title="“利弊分析题”大作文结构"></a><strong>“利弊分析题”</strong>大作文结构</h3><table>
-<thead>
-<tr>
-<th align="center">段落</th>
-<th align="center">五五开式</th>
-<th align="center">有偏向式1</th>
-<th align="center">有偏向式1</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">开头段</td>
-<td align="center">开头段</td>
-<td align="center">开头段</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">（既有好处又有坏处）</td>
-<td align="center">一个观点</td>
-<td align="center">一个观点</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">好处1+论证</td>
-<td align="center">我方观点1</td>
-<td align="center">让步段</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">好处2+论证</td>
-<td align="center">理由+论证</td>
-<td align="center">说明对方观点+论证</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">坏处1+论证</td>
-<td align="center">我方观点2</td>
-<td align="center">我方观点1</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">坏处2+论证</td>
-<td align="center">理由+论证</td>
-<td align="center">理由+论证</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="center">结尾段</td>
-<td align="center">让步段</td>
-<td align="center">我方观点2</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center">说明对方观点+论证</td>
-<td align="center">理由+论证</td>
-</tr>
-<tr>
-<td align="center">5</td>
-<td align="center"></td>
-<td align="center">结尾段</td>
-<td align="center">结尾段</td>
-</tr>
-</tbody></table>
-<hr>
-<ul>
-<li><strong>表转折的连接词</strong>：whereas、while、but、however、nevertheless、</li>
-<li><strong>小作文中表程度的词</strong>：severely、dramatically、rapidly、significantly、sharply、considerately;slightly、slowly;steadily、gently、moderately </li>
-<li><strong>小作文中“超过”含义</strong>：exceed、overtake</li>
-<li>小作文结尾，常用<code>Overall:</code>开头</li>
-</ul>
-<h3 id="作文词汇"><a href="#作文词汇" class="headerlink" title="作文词汇"></a>作文词汇</h3><table>
-<thead>
-<tr>
-<th align="center">单词</th>
-<th align="center">释义</th>
-<th align="center">单词</th>
-<th align="center">释义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">cultivate</td>
-<td align="center">v. 栽培；耕种</td>
-<td align="center">fluctuate</td>
-<td align="center">v. 波动，涨落</td>
-</tr>
-<tr>
-<td align="center">fluctuation</td>
-<td align="center">n. 波动，起伏</td>
-<td align="center">respectively</td>
-<td align="center">adv. 各自地</td>
-</tr>
-<tr>
-<td align="center">approximately</td>
-<td align="center">adv. 近似地，大约</td>
-<td align="center">much less significantly</td>
-<td align="center">相较而言不重要的</td>
-</tr>
-</tbody></table>
+<blockquote>
+<p>在遇到table图表类的小作文信息题时，要注意找到重点，就是该按什么样的顺序写。存在多个可分类同等信息列时（比如同时存在数个国家，数个资源的动态图），要分析是按国家一个一个写，还是一个一个资源依次写，防止过多的重复和冗余。</p>
+</blockquote>
 <table>
 <thead>
 <tr>
-<th align="center">短语</th>
+<th align="center">单词</th>
 <th align="center">释义</th>
-<th align="center">短语</th>
+<th align="center">单词</th>
 <th align="center">释义</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">all-round development</td>
-<td align="center">全面发展</td>
-<td align="center">cultivate the comprehensive quality</td>
-<td align="center">培养综合素质</td>
+<td align="center">substantial</td>
+<td align="center">相当程度的;牢固的</td>
+<td align="center">fundamental</td>
+<td align="center">十分重大的;根本的;基础的</td>
 </tr>
 <tr>
-<td align="center">professional knowledge</td>
-<td align="center">专业知识</td>
-<td align="center">compulsory curriculum/education</td>
-<td align="center">必修课程/教育</td>
+<td align="center">marginal</td>
+<td align="center">小的;微不足道的;不重要的</td>
+<td align="center">outnumber</td>
+<td align="center">v. (在数量上)压倒，比…多</td>
+</tr>
+<tr>
+<td align="center">yield</td>
+<td align="center">v. 出产;产生  n. 产量;产出</td>
+<td align="center">industrial</td>
+<td align="center">a. 勤奋的(diligent)</td>
+</tr>
+<tr>
+<td align="center">inherit</td>
+<td align="center">v. 继承</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h1 id="雅思阅读"><a href="#雅思阅读" class="headerlink" title="雅思阅读"></a>雅思阅读</h1><div align=center><img src="/../images/i9.png"  alt="如何寻找主旨句" style="zoom:40%;"  /></div>
+
+<h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h3><div align=center><img src="/../images/i10.png"  alt="整理生词、错题" style="zoom:80%;"  /></div>
+
+<h2 id="4-09-生词积累"><a href="#4-09-生词积累" class="headerlink" title="4.09 生词积累"></a>4.09 生词积累</h2><table>
+<thead>
+<tr>
+<th align="center">生词</th>
+<th align="center">释义</th>
+<th align="center">生词</th>
+<th align="center">释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">linguistic</td>
+<td align="center">a.语言的,语言学的  n.语言学</td>
+<td align="center">deteriorate</td>
+<td align="center">v.变坏,恶化,退化</td>
+</tr>
+<tr>
+<td align="center">invective</td>
+<td align="center">n.咒骂;痛骂</td>
+<td align="center">polemic</td>
+<td align="center">n.争辩,辩论</td>
+</tr>
+<tr>
+<td align="center">exempt</td>
+<td align="center">a.被免除的,被豁免的</td>
+<td align="center">aptitude</td>
+<td align="center">n.天资,天赋,才能</td>
+</tr>
+<tr>
+<td align="center">inherently</td>
+<td align="center">a.内在的;固有的</td>
+<td align="center">propound</td>
+<td align="center">v.提出(观点)供考虑</td>
+</tr>
+<tr>
+<td align="center">adherent</td>
+<td align="center">n.(政党、思想的)拥护者，追随者，信徒</td>
+<td align="center">deviation</td>
+<td align="center">n.偏常;反常;离经叛道;(统计学中的)离差，偏差</td>
+</tr>
+<tr>
+<td align="center">authoritarian</td>
+<td align="center">a.专制的;独裁的</td>
+<td align="center">prescribe</td>
+<td align="center">v.开(药、处方);(人、法律、规则)规定，指定</td>
+</tr>
+<tr>
+<td align="center">tenet</td>
+<td align="center">n. (理论、信仰的)基本原则，根本信条</td>
+<td align="center">quasi-political</td>
+<td align="center">a.准政治的</td>
+</tr>
+<tr>
+<td align="center">elitist</td>
+<td align="center">a.精英主义的;精英论的    n.精英主义者;精英论者;精英</td>
+<td align="center"></td>
+<td align="center"></td>
 </tr>
 </tbody></table>
 </font>
@@ -775,252 +376,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-27T14:03:57.000Z">2020-03-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 245 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/27/PYTHON-%E4%B9%8B-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">pillow初识、format格式化、绝对相对路径说明</a>
-            
-        </h1>
-        <div class="content">
-            <font face="Times New Roman">
-
-<blockquote>
-<p>python -m -pip install –upgrade pip   #升级python的pip</p>
-</blockquote>
-<blockquote>
-<p>pip install pillow   #安装pillow库</p>
-</blockquote>
-<blockquote>
-<p>pip install django-simple-captcha    #安装captcha库</p>
-</blockquote>
-<blockquote>
-<p>pip install opencv-python   #安装opencv库</p>
-</blockquote>
-<blockquote>
-<p>pip install matplotlib    #安装matplotlib库</p>
-</blockquote>
-<hr>
-<p><a href="https://www.php.cn/python-tutorials-372980.html">pillow的小程度基本入门</a></p>
-<ul>
-<li>可以对图像进行简单的读取、生成、裁剪、缩放、复制、翻转、旋转、粘贴、拉伸</li>
-<li>图像的模糊、边缘增强、锐利、平滑等常见操作</li>
-<li>在图像中加入文本，将图片变色</li>
-</ul>
-<hr>
-<h3 id="文件绝对路径和相对路径的表示形式不同"><a href="#文件绝对路径和相对路径的表示形式不同" class="headerlink" title="文件绝对路径和相对路径的表示形式不同"></a>文件绝对路径和相对路径的表示形式不同</h3><ol>
-<li>windows系统中绝对路径用<code>\</code>展开，而在其他系统中会出现用<code>/</code>的展开</li>
-<li>相对路径中则使用<code>/</code>，比如返回上一级文件夹<code>../</code>，当前文件夹前不需要加斜杠，前往下一级文件夹的某文件则类似于<code>/xx/xx.c</code></li>
-</ol>
-<h3 id="python语法：格式化输出之format用法"><a href="#python语法：格式化输出之format用法" class="headerlink" title="python语法：格式化输出之format用法"></a><a href="https://www.cnblogs.com/lovejh/p/9201219.html">python语法：格式化输出之format用法</a></h3></font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-25T15:58:18.000Z">2020-03-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    18 minutes read (About 2713 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/25/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E5%A4%84%E7%90%86/">图像识别与处理</a>
-            
-        </h1>
-        <div class="content">
-            <font face="Times New Roman">
-前言：图像识别与处理的大实验，需要完成的任务是基于嵌入式的字符识别
-
-<p>我目前想到的方案：</p>
-<ul>
-<li>硬件方面：利用手里有的stm32f4开发板，再买一个ov2460的摄像头采集图像，最后借助手上的蓝牙模块传输信息到电脑上。</li>
-<li>算法部分：做基于python的程序编写，那么准备利用好github上的各种方法，将这一块的图像处理学透,比如得到一个原始图像的初步处理，后面的支持向量机（SVM）、深度学习等</li>
-</ul>
-<h1 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a><strong>CNN</strong></h1><p><a href="https://www.jianshu.com/p/c0215d26d20a">一个通俗易懂的卷积神经网络的内容介绍</a></p>
-<ul>
-<li>这是一个非常容易理解的CNN卷积神经网络的入门介绍，一个图像的信息以RGB的形式输入，那么就是一个3维的且“厚度”为3阶（一个RGB像素点含三个数）的矩阵，经过</li>
-</ul>
-<blockquote>
-<p><strong>卷积层</strong>（矩阵样式的过滤器，很好理解）</p>
-</blockquote>
-<blockquote>
-<p><strong>激活函数</strong>（比如relu，对每一层后得到的矩阵处理）</p>
-</blockquote>
-<blockquote>
-<p><strong>池化层</strong>（分成中块对每个中块进行处理，来简化阶数）</p>
-</blockquote>
-<blockquote>
-<p><strong>全连接层</strong>（涉及传统的神经网络，这一层是每一个单元都和前一层的每一个单元相连接，所以称之为“全连接”）</p>
-</blockquote>
-<ul>
-<li>到了全连接层之后的操作，就跟普通的神经网络无异了,卷积神经网络比较于传统神经网络的优势在于：</li>
-</ul>
-<blockquote>
-<p>1.<strong>参数共享机制</strong>：对于不同的区域，我们都共享同一个filter，因此就共享这同一组参数；有效地避免过拟合；由于filter的参数共享，即使图片进行了一定的平移操作，我们照样可以识别出特征，这叫做 “平移不变性”。因此，模型就更加稳健了</p>
-</blockquote>
-<blockquote>
-<p>2.<strong>连接的稀疏性</strong>：传统神经网络中，由于都是全连接，所以输出的任何一个单元，都要受输入的所有的单元的影响。这样无形中会对图像的识别效果大打折扣。比较，每一个区域都有自己的专属特征，我们不希望它受到其他区域的影响</p>
-</blockquote>
-<hr>
-<hr>
-<h1 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a><strong>Logistic Regression</strong></h1><p><a href="https://www.jianshu.com/p/4cf34bf158a1">逻辑分析的理解</a></p>
-<ul>
-<li>逻辑分析的含义：</li>
-</ul>
-<ol>
-<li>有一个列向量，其中包含着一张照片的所有有效信息，他可能有10个数据，也可能有10000个数据，通常是像素值；每一个数据都对应着一个权重，那么自然这些权重也会组成一个列向量。所有数据加权求和之后加上一个系数b就会有一个输出，可以理解成一张照片就会有一个总输出</li>
-</ol>
-<blockquote>
-<p>x<sub>0</sub>w<sub>0</sub>+x<sub>1</sub>w<sub>1</sub>+…+x<sub>12287</sub>w<sub>12287</sub>+b=W<sup>T</sup>x+b</p>
-</blockquote>
-<ol start="2">
-<li>对于总输出的处理，他会作为一个<strong>激活函数</strong>（对于神经元的）（对于逻辑分析就指的是<strong>sigmoid函数</strong>）的变量输入，函数的输出就是这张照片的一个预测结果y’，sigmoid函数**输出在0-1范围内，对于图像处理最终结果的判断就在0-1中且分为了几个区间，y’在这个区间说明图片是“xx”，在那个区间又说明什么。。。</li>
-</ol>
-<blockquote>
-<p>y’ = σ(W<sup>T</sup>x+b)</p>
-</blockquote>
-<ol start="3">
-<li>而其实这都是根据一个前置处理（加权求和、带入激活函数）得出的预测值，他就不会一定准，所以有一个<strong>损失函数</strong>来衡量y’与真实值y（比如sigmoid函数输出对应的0或1）的差距</li>
-</ol>
-<blockquote>
-<p>L(y’,y) = -[y·log(y’)+(1-y)·log(1-y’)]</p>
-</blockquote>
-<ol start="4">
-<li>那么对于一个我们用来训练的图片集来说，每一张照片都有一个预测值y’。这些y’的损失函数的输出值的平均值尽量小，那就是综合了所有图片数据得到的模型。寻找W和b的较好的值，就靠这个平均值，也叫<strong>平均损失</strong>（其函数名称叫<strong>代价函数</strong>）求得，这个函数的导数为零的那一点应该是极小值，那损失就是极小值。</li>
-</ol>
-<blockquote>
-<p>J(W,b) = 1/m·Σ<sup>m</sup><sub>i=1</sub>L(y’<sup>(i)</sup>,y<sup>(i)</sup>)</p>
-</blockquote>
-<ol start="5">
-<li>通常用梯度下降法，那么操作起来就是，求得函数在目前的W、b处对W的导数，如果梯度（导数）为正，说明曲线之后向上走，所以W的值应该减小才能往低处走，梯度为负那就往前走正好是往低了走，重复一次成为一个<strong>迭代</strong>，当然还有对b的偏导，一次次迭代，一次次更新W和b的参数。梯度下降法中<strong>学习率</strong>（α）相当于每次迭代步长</li>
-</ol>
-<blockquote>
-<p>w := w - α(dJ/dw)</p>
-</blockquote>
-<ol start="6">
-<li>最后那这对（W、b）就可以用来检验对于图像识别的准确率了</li>
-</ol>
-<hr>
-<p><a href="https://zhuanlan.zhihu.com/p/28415991">一个对逻辑回归分析更清晰的介绍</a></p>
-<ol>
-<li>简单来说， 逻辑回归（Logistic Regression）是一种用于解决二分类（0 or 1）问题的机器学习方法，用于估计某种事物的可能性。</li>
-<li>上文所提到的代价函数称之为<strong>交叉熵</strong>，是对「出乎意料」（译者注：原文使用suprise）的度量。那么，交叉熵衡量的是我们在知道y的真实值时的平均「出乎意料」程度。当输出是我们期望的值，我们的「出乎意料」程度比较低；当输出不是我们期望的，我们的「出乎意料」程度就比较高。</li>
-<li>sigmoid函数为决策边境，他是线性的。</li>
-</ol>
-<hr>
-<hr>
-<h1 id="NNS"><a href="#NNS" class="headerlink" title="NNS"></a><strong>NNS</strong></h1><p><a href="https://blog.csdn.net/illikang/article/details/82019945">传统神经网络的基础入门</a></p>
-<ol>
-<li><p>作为对前面碎片化学习的延申。我认为只能说一次逻辑回归可能只能应用于线性问题，而有多个计算层的神经网络是可以解决非线性问题的。这是由于每一个计算层，或者说每一个单元的处理都是线性的，但是前一个计算层将<strong>数据空间扭曲</strong>了（两层间的权重矩阵是转换的关键），使得下一个计算层就算是线性的，也可以很好的划分出决策边境。因此，多层的神经网络的本质就是<strong>复杂函数拟合</strong></p>
-</li>
-<li><p>神经网络通常有</p>
-</li>
-</ol>
-<blockquote>
-<p><strong>输入层</strong>（包含已知的若干特征）</p>
-</blockquote>
-<blockquote>
-<p><strong>隐藏层</strong>（对输入特征一层层的抽象，获得更深一层的含义）</p>
-</blockquote>
-<blockquote>
-<p><strong>输出层</strong>（希望获得的目标，可以是单一值，也可以是向量）</p>
-</blockquote>
-<blockquote>
-<p><strong>偏置单元</strong>：它本质上是一个只含有存储功能，且存储值永远为1的单元。在神经网络的每个层次中，除了输出层以外，都会含有这样一个偏置单元。正如线性回归模型与逻辑回归模型中的一样。</p>
-</blockquote>
-<ol start="3">
-<li><p>对于只有输入层和输出层的神经网络称为<strong>感知器</strong>，它只能做线性的分类任务；而<strong>多层神经网络</strong>（深度学习）就能更深入的表示特征，以及拥有更强的函数模拟能力</p>
-</li>
-<li><p>传统神经网络中一个单元（节点 or 神经元）的处理基本上可以陈述为：上一层所有节点的输出向量矩阵乘上两层之间的权重矩阵，得到的结果矩阵，再作为<strong>激活函数</strong>（<strong>转移函数</strong>）的变量输入。函数输出值作为这个节点的输出向下一层传递、或者作为目标直接输出</p>
-</li>
-<li><p>在单层神经网络时，我们使用的激活函数是sgn函数。到了两层神经网络时，我们使用的最多的是sigmoid函数。而到了多层神经网络时，通过一系列的研究发现，ReLU函数在训练多层神经网络时，更容易收敛，并且预测性能更好。因此，目前在深度学习中，最流行的非线性函数是ReLU函数。</p>
-</li>
-</ol>
-<blockquote>
-<p>ReLU函数：不是传统的非线性函数，而是分段线性函数。其表达式非常简单，就是y=max(x,0)。简而言之，在x大于0，输出就是输入，而在x小于0时，输出就保持为0。这种函数的设计启发来自于生物神经元对于激励的线性响应，以及当低于某个阈值后就不再响应的模拟。</p>
-</blockquote>
-<ol start="6">
-<li><strong>训练</strong>：训练的主题仍然是<font color=red>优化</font>和<font color=green>泛化</font>。</li>
-</ol>
-<blockquote>
-<p><font color=red>优化</font>：<strong>梯度下降算法</strong>以及<strong>反向传播算法</strong>（BP）在多层神经网络中的训练中仍然工作的很好。目前学术界主要的研究既在于开发新的算法，也在于对这两个算法进行不断的优化。</p>
-<blockquote>
-<p><strong>反向传播算法</strong>:即由后层向前层一层层的递推，递推什么呢，就是<strong>代价函数</strong>对于这些个<strong>权重的偏导数</strong>，由于高等数学中的偏导数中的<strong>链式法则</strong></p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p><font color=green>泛化</font>：在深度学习中，泛化技术变的比以往更加的重要。这主要是因为神经网络的层数增加了，参数也增加了，表示能力大幅度增强，很容易出现<strong>过拟合现象</strong>。因此<strong>正则化技术</strong>就显得十分重要。目前，Dropout技术，以及数据扩容（Data-Augmentation）技术是目前使用的最多的正则化技术。</p>
-</blockquote>
-<p><img src="/../images/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9B%BE%E8%A7%A3.jpg" alt="神经网络的类别" title="神经网络的类别"></p>
-<p>深度学习就是多层神经网络，而机器学习则不同，他大概是人工智能算法的一个总称，他的算法包含了回归算法、神经网络、SVM等等，是一个宽泛的课题</p>
-<p><a href="https://baijiahao.baidu.com/s?id=1636567480736287260&wfr=spider&for=pc">深度学习之卷积神经网络经典模型</a></p>
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-20T16:48:15.000Z">2020-03-21</time>
+                <time class="level-item has-text-grey" datetime="2020-04-13T01:08:55.000Z">2020-04-13</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
@@ -1030,7 +386,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 179 words)
+                    4 minutes read (About 604 words)
                 </span>
                 
                 
@@ -1039,282 +395,49 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/21/adams/">adams仿真自学</a>
+                <a class="has-link-black-ter" href="/2020/04/13/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95/">标定记录</a>
             
         </h1>
         <div class="content">
-            <h3 id="HITCRT分享adams仿真教程（目前删除）"><a href="#HITCRT分享adams仿真教程（目前删除）" class="headerlink" title="HITCRT分享adams仿真教程（目前删除）"></a>HITCRT分享adams仿真教程（目前删除）</h3><hr>
-<h3 id="初步仿真步骤"><a href="#初步仿真步骤" class="headerlink" title="初步仿真步骤"></a>初步仿真步骤</h3><hr>
+            <font face = 'Times New Roman'>
+
+<h3 id="2020-4-13"><a href="#2020-4-13" class="headerlink" title="2020.4.13"></a>2020.4.13</h3><hr>
+<p>&emsp;&emsp;周末测试的定位算法，算是一个阶段性的理解。发现了一些问题并且改正；<br>其中包括：</p>
 <ol>
-<li>新建一个模型，设置各种单位规范</li>
-<li>导入solidworks中生成的模型<kbd>.x_t</kbd>类型文件</li>
-<li>建立约束，<strong>注意方向</strong>（包括固定副、旋转副但不限于此）（可依此设置机构初始状态）</li>
-<li>建立驱动（驱动方程可联系至matlab描述，遵循教程）</li>
-<li>建立力的接触（设置两实体的碰撞、摩擦等参数）<a href="/../documents/Adams材料碰撞参数.xls" target="_blank"><strong>Adams材料碰撞参数(excel)</strong></a></li>
-<li>开始仿真，步数（<kbd>steps</kbd>）越大计算时间越久，计算结果越准确</li>
-<li>设置测量量，以图表形式显示</li>
+<li>在标定过程中，以近y轴为基准的话，那么旋转来测量x轴行进数据时，需要特别注意<strong>旋转方向</strong><ul>
+<li>以前测量时，全都是顺时针旋转约90°，所有公式都是以顺时针旋转来推导的，原本以为只要规定了正方向，结果应该都一样</li>
+<li>但是由于昨天测量时是逆时针，在结算代入数据时发现求出的数据不对，重新推算了一遍发现顺逆时针旋转的算法结算有略微差别</li>
+<li>本次差别在于：x轴行进时的A、B轮相对行进方向角度的余弦值，顺逆时针是<em>相反地</em></li>
+</ul>
+</li>
 </ol>
+<p>下图为两种旋转方向的图示：</p>
+<div align=center><img src="/../images/ni.png"  alt="逆时针旋转处理" style="zoom:40%;"  /></div>
+<div align=center><img src="/../images/shun.png"  alt="顺时针旋转处理" style="zoom:40%;"  /></div>
 
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-20T16:28:28.000Z">2020-03-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 440 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/21/Ielts-2/">Ielts学习-2</a>
-            
-        </h1>
-        <div class="content">
-            <font face="Times New Roman">
-
-<h2 id="雅思听力"><a href="#雅思听力" class="headerlink" title="雅思听力"></a>雅思听力</h2><ul>
-<li>完成剑雅3个section，正确率正常不过用时较长，进入状态太慢</li>
-<li>以下是学术背景的听力相关词汇积累，<a href="https://www.ieltscat.com/intensive/intensive/364/1/24">雅思喵807听力词汇</a></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>A</th>
-<th align="center">B</th>
-<th align="center">C</th>
-<th align="left">D</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>orientation</td>
-<td align="center">resume</td>
-<td align="center">curriculum</td>
-<td align="left">curriculum vitae</td>
-</tr>
-<tr>
-<td>extra-curriculum</td>
-<td align="center">assessment</td>
-<td align="center">virtual</td>
-<td align="left">compulsory</td>
-</tr>
-<tr>
-<td>trimester</td>
-<td align="center">semester</td>
-<td align="center">term</td>
-<td align="left">session</td>
-</tr>
-<tr>
-<td>obligatory</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-</tbody></table>
+<p>这里备份了两种相似算法的matlab程序<br><a href="/../documents/followwheel_moves_20200322.m">逆时针算法</a><br><a href="/../documents/shunshizhen_moves_20200413.m">顺时针算法</a></p>
 <hr>
-<h2 id="雅思作文"><a href="#雅思作文" class="headerlink" title="雅思作文"></a>雅思作文</h2><ul>
-<li>思维发散小技巧</li>
+<ol start="2">
+<li>旋转方法也进行了测试，之前一直没有一个比较具体的有效的验证<ul>
+<li>首先，采用的验证方法是已知小推车的模型参数，从而得到理论上的几何中心和随动中心的距离L、以及对应夹角</li>
+<li>条件是在测完直行标定，并计算出8个变量<em>带入程序<em>；</em>并且程序中的L、alpha改成0</em></li>
+<li>其次，操作小推车旋转约180°（顺逆时针皆可）旋转前后都会有一条铝管作为基准边，得到计算出的x、y坐标的变化</li>
+<li>带入matlab旋转算法结算程序，求得L与alpha（<strong>注意matlab中的alpha为顺时针为正方向计算，程序中需要取负号</strong>）</li>
+<li>将理论和计算出的长度、角度变量比较，发现长度误差1.2mm，角度误差1.2°，考虑到加工精度误差、以及人为操作误差，结果可以接受</li>
 </ul>
-<blockquote>
-<p>s-e-c-r-e-t  of cheese <strong>知识的秘密</strong></p>
-<p>skill<br>education<br>carrer,communication,comments,curriculum<br>read,reveal,review,record,refresh<br>elevate,estimate<br>tell,teach,threshold,translate,target,topic,</p>
-</blockquote>
-<ul>
-<li>Ielts作文评分标准</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">任务完成度</th>
-<th align="center">连贯与衔接</th>
-<th align="center">词汇资源</th>
-<th align="center">语法结构</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">TA</td>
-<td align="center">CC</td>
-<td align="center">LR</td>
-<td align="center">GRA</td>
-</tr>
-<tr>
-<td align="center">Task Achievement</td>
-<td align="center">Coherence and Cohesion</td>
-<td align="center">Lexical Resource</td>
-<td align="center">Grammatical Range Accuracy</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">其他扣分点</th>
-<th align="center"></th>
-<th align="center"></th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">underlength</td>
-<td align="center">篇幅不够</td>
-<td align="center">no of words</td>
-<td align="center">字数</td>
-</tr>
-<tr>
-<td align="center">off-topic</td>
-<td align="center">偏题</td>
-<td align="center">memorised</td>
-<td align="center">套用模板</td>
-</tr>
-<tr>
-<td align="center">illegible</td>
-<td align="center">字迹潦草</td>
-<td align="center">penalty</td>
-<td align="center">作弊</td>
-</tr>
-</tbody></table>
-<hr>
-<h4 id="小作文"><a href="#小作文" class="headerlink" title="小作文"></a>小作文</h4><ul>
-<li>动态图（依据年份）、静态图</li>
-<li>线（string）、柱（bar）、饼（pie）、表（form）、流程（flow）、地图（map）</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">图表</th>
-<th align="center">上升</th>
-<th align="center">下降</th>
-<th align="center">维持不变</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">diagram</td>
-<td align="center">rise</td>
-<td align="center">decrease</td>
-<td align="center">stay steady</td>
-</tr>
-<tr>
-<td align="center">chart</td>
-<td align="center">rocket</td>
-<td align="center">go down</td>
-<td align="center">remain constant</td>
-</tr>
-<tr>
-<td align="center">graph</td>
-<td align="center">soar</td>
-<td align="center">decline</td>
-<td align="center">keep stable</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">surge</td>
-<td align="center">drop</td>
-<td align="center">maintain this level</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">climb</td>
-<td align="center">fall</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">go up</td>
-<td align="center">diminish</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">increase</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">boom</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<p>(a(an) upward/downward trend:一个上升下降趋势)</p>
-<hr>
-<h2 id="雅思阅读"><a href="#雅思阅读" class="headerlink" title="雅思阅读"></a>雅思阅读</h2><ul>
-<li>平行阅读法：读完一遍文章后，全部题目做完，即按顺序阅读文章包括题目</li>
-</ul>
-<blockquote>
-<p>判断题中的NG选项出现形势：1.完全没提及 2.提到一部分，另一部分没提及</p>
-</blockquote>
-<ul>
-<li>作业：<strong>剑雅10</strong> <strong>Test 3</strong> <strong>-Passage 2</strong></li>
-</ul>
-<hr>
-<h2 id="生词记忆"><a href="#生词记忆" class="headerlink" title="生词记忆"></a>生词记忆</h2><table>
-<thead>
-<tr>
-<th>生词</th>
-<th align="center">释义</th>
-<th align="center">生词</th>
-<th align="left">释义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>proofread</td>
-<td align="center">v. 校对</td>
-<td align="center">punctuation</td>
-<td align="left">n. 标点符号</td>
-</tr>
-<tr>
-<td>preposition</td>
-<td align="center">n. 介词</td>
-<td align="center">carnival</td>
-<td align="left">n. 狂欢节，嘉年华</td>
-</tr>
-<tr>
-<td>infinitive</td>
-<td align="center">n. （动词的）不定式</td>
-<td align="center">reinvent</td>
-<td align="left">v. 以新形式出现</td>
-</tr>
-<tr>
-<td>pigment</td>
-<td align="center">n. 色素，颜料</td>
-<td align="center">illegible</td>
-<td align="left">a. 难以辨认的</td>
-</tr>
-<tr>
-<td>penalty</td>
-<td align="center">n. 惩罚</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-</tbody></table>
+</li>
+</ol>
+<div align=center><img src="/../images/rr.png"  alt="旋转算法结果" style="zoom:40%;"  /></div>
+
+
+
+<p>这里备份了旋转算法的matlab程序&emsp;&emsp;&emsp;&emsp;<a href="/../documents/followwheel_rotate_20200413.m">旋转算法</a></p>
+<h4 id="—理论数据—"><a href="#—理论数据—" class="headerlink" title="—理论数据—"></a><strong>—理论数据—</strong></h4><p>  横间距：<strong>37.5 mm</strong></p>
+<p>  长间距：<strong>-29.84 mm</strong></p>
+<p>  矢量绝对值：<strong>47.9236 mm</strong></p>
+<p>  夹角：<strong>-2.24293 rad</strong>  ( -128.5104 °)</p>
+<h4 id="—计算数据—"><a href="#—计算数据—" class="headerlink" title="—计算数据—"></a><strong>—计算数据—</strong></h4><p>  矢量绝对值：<strong>46.698439058181290 mm</strong></p>
+<p>  夹角：<strong>-2.222503658302204 rad</strong>  ( -127.33 °)</p>
 </font>
         </div>
         
@@ -1337,17 +460,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-18T15:18:19.000Z">2020-03-18</time>
+                <time class="level-item has-text-grey" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 725 words)
+                    a minute read (About 127 words)
                 </span>
                 
                 
@@ -1356,66 +479,20 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/18/python-3/">python学习-3</a>
+                <a class="has-link-black-ter" href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/">pytorch深入探索续篇</a>
             
         </h1>
         <div class="content">
-            <ul>
-<li><p><a href="https://www.runoob.com/python/python-func-enumerate.html"><kbd><strong>enumerate()</strong></kbd>函数</a>:用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在<kbd>for</kbd>循环当中</p>
-</li>
-<li><p><a href="https://www.runoob.com/python3/python3-func-sorted.html"><kbd><strong>sorted()</strong></kbd>函数</a>:对所有可迭代的对象进行排序操作（链接内含<kbd>sort()</kbd>函数与<kbd>sorted()</kbd>函数区别）</p>
-</li>
-<li><p><a href="https://www.runoob.com/python3/python3-string-lower.html"><kbd><strong>lower()</strong></kbd>函数</a>:将字符串中所有字母进行小写操作，（不能对其他类型数据进行操作，会报错）</p>
-</li>
-<li><p><a href="https://www.runoob.com/python3/python3-att-dictionary-items.html"><kbd><strong>items()</strong></kbd>函数</a>:以列表返回可遍历的(键，值)元组数组，(<kbd>xxx.items()</kbd>)</p>
-</li>
-</ul>
-<hr>
-<font face="Times New Roman">
+            <font face='Times New Roman'>
 
-<blockquote>
-<p><strong>lambda</strong> : 匿名函数</p>
-</blockquote>
-<blockquote>
-<p><strong>装饰器（Decorator）</strong>是通过python的@语法实现的</p>
-</blockquote>
-<blockquote>
-<p><strong>OOP</strong>（Object Oriented Programming）：面向对象的编程，是一种程序设计思想</p>
-</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp;由于前一段时间在搞定位算法，暂时没有时间来学习、记录pytorch的学习过程。在这里就先提及需要详细解释的一些部分</p>
 <ul>
-<li>数据封装、继承和多态只是面向对象程序设计中最基础的3个概念</li>
+<li>优化器<code>optimizer</code>的种类、各自的优势，以及我应该如何选取</li>
+<li>正则化、过拟合、<code>batch normalization</code>的解释和应用</li>
+<li>学习更多的深度学习算法来更好的应用在实际例子中</li>
+<li>更多pytorch例程的研究记录</li>
 </ul>
-<blockquote>
-<p>Python允许使用<strong>多重继承</strong>，因此，<strong>MixIn</strong> 就是一种常见的设计</p>
-</blockquote>
-<blockquote>
-<p>如果想将一个类用作for … in循环，类似list或tuple，那么必须有一个<code>__iter__()</code>方法来返回一个迭代对象，但是要注意他就是一个类，当然经过实验发现你通过类建立实例也可以等价的做for循环，注意<code>__iter__</code>要配合<code>__next__</code>使用</p>
-</blockquote>
-<blockquote>
-<p>我们自己定义的类表现得和Python自带的list、tuple、dict没什么区别，这完全归功于动态语言的“鸭子类型”，不需要强制继承某个接口。</p>
-</blockquote>
-<blockquote>
-<p><code>__call__()</code>还可以定义参数。对实例进行直接调用就好比对一个函数进行调用一样，所以你完全可以把对象看成函数，把函数看成对象，因为这两者之间本来就没啥根本的区别</p>
-<p>通过<code>callable()</code>函数，我们就可以判断一个对象是否是“可调用”对象。</p>
-</blockquote>
-<blockquote>
-<p>Python的class允许定义许多定制方法，可以让我们非常方便地生成特定的类。</p>
-<p>本节介绍的是最常用的几个定制方法，还有很多可定制的方法，请参考<a href="http://docs.python.org/3/reference/datamodel.html#special-method-names">Python的官方文档</a>。</p>
-</blockquote>
-<hr>
-<p>借用一个例子深刻理解<code>__str__</code>、<code>__repr__</code>、<code>__getattr__</code>、<code>__call__</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">输出个性化URL:</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chain</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path=<span class="string">''</span>)</span>:</span></span><br><span class="line">       self.__path = path</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">       <span class="keyword">return</span> Chain(<span class="string">'%s/%s'</span> % (self.__path, path))</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">       <span class="keyword">return</span> Chain(<span class="string">'%s/%s'</span> % (self.__path, path))</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">       <span class="keyword">return</span> self.__path</span><br><span class="line"></span><br><span class="line">   __repr__ = __str__</span><br><span class="line"></span><br><span class="line">   print(Chain().users(<span class="string">'michael'</span>).repos) <span class="comment"># /users/michael/repos</span></span><br></pre></td></tr></table></figure>
-
-
-
-<hr>
-<p><a href="https://segmentfault.com/a/1190000017327003">python的枚举类型</a></p>
-<blockquote>
-<p>正常情况下，我们都用<code>class Xxx...</code>来定义类，但是，<code>type()</code>函数也允许我们动态创建出类来</p>
-</blockquote>
 </font>
-
-
         </div>
         
         
@@ -1447,6 +524,10 @@
             <li><a class="pagination-link is-current" href="/page/2/">2</a></li>
             
             <li><a class="pagination-link has-text-black-ter" href="/page/3/">3</a></li>
+            
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/10/">10</a></li>
             
         </ul>
     </nav>
@@ -1496,7 +577,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            28
+                            29
                         </p>
                     </a>
                 </div>
@@ -1508,7 +589,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            7
+                            8
                         </p>
                     </a>
                 </div>
@@ -1520,7 +601,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            20
+                            21
                         </p>
                     </a>
                 </div>
@@ -1598,17 +679,6 @@
                 </a>
             </li>
         
-            <li>
-                <a class="level is-mobile" href="https://www.ieltscat.com/ " target="_blank" rel="noopener">
-                    <span class="level-left">
-                        <span class="level-item">Ieltscat</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">www.ieltscat.com</span>
-                    </span>
-                </a>
-            </li>
-        
         </ul>
         </div>
     </div>
@@ -1624,6 +694,14 @@
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/Biomedical-Engineering/">
+            <span class="level-start">
+                <span class="level-item">Biomedical Engineering</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Ielts/">
             <span class="level-start">
                 <span class="level-item">Ielts</span>
@@ -1690,7 +768,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/fMRI/" style="font-size: 10px;">fMRI</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
     </div>
 </div>
     
@@ -1702,6 +780,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-23T04:01:49.000Z">2020-06-23</time></div>
+                    <a href="/2020/06/23/fMRI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fMRI学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Biomedical-Engineering/">Biomedical Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1755,19 +846,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time></div>
-                    <a href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入探索续篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1778,6 +856,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1859,6 +948,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/bluetooth/">
                         <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fMRI/">
+                        <span class="tag">fMRI</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1980,6 +1076,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-23T04:01:49.000Z">2020-06-23</time></div>
+                    <a href="/2020/06/23/fMRI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fMRI学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Biomedical-Engineering/">Biomedical Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time></div>
                     <a href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录 2nd</a>
                     <p class="is-size-7 is-uppercase">
@@ -2028,19 +1137,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time></div>
-                    <a href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入探索续篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -2051,6 +1147,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -2132,6 +1239,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/bluetooth/">
                         <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fMRI/">
+                        <span class="tag">fMRI</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

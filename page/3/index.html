@@ -135,7 +135,328 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-14T08:35:16.000Z">2020-03-14</time>
+                <time class="level-item has-text-grey" datetime="2020-04-08T11:06:49.000Z">2020-04-08</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    23 minutes read (About 3388 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/08/pytorch%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3/">pytorch深入了解</a>
+            
+        </h1>
+        <div class="content">
+            <font face='Times New Roman'>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp;经过这几天的零碎学习，我真是觉得神经网络的搭建真的太复杂了，复杂到什么程度呢？就是一个概念不懂，找到解释后，发现解释里又包含着好几个你根本不知道的概念，不过还好我做了一些学习准备，也不算是完全没有头绪。但是目前暴露的缺陷有：</p>
+<ul>
+<li>python高级语法知识的欠缺</li>
+<li>pytorch搭建神经网络的细节问题不懂</li>
+<li>对于神经网络的每一个相关细节概念的理解和了解不足</li>
+</ul>
+<p>&emsp;&emsp;那么针对这些，我认为可以在学习一些实例、教程时碎片化的学习来完善自己的知识框架，所以有了以下的“深入了解”学习阶段</p>
+<h1 id="学习阶段————深入了解"><a href="#学习阶段————深入了解" class="headerlink" title="学习阶段————深入了解"></a>学习阶段————深入了解</h1><p>思考：</p>
+<ul>
+<li>神经网络的框架如何根据自己的要求、向适合解决问题的网络结构改进？</li>
+</ul>
+<blockquote>
+</blockquote>
+<ul>
+<li>学习如何使用GPU来训练模型？</li>
+</ul>
+<blockquote>
+</blockquote>
+<ul>
+<li>jupyter notebook 中如何正常运行pytorch网络？</li>
+</ul>
+<blockquote>
+</blockquote>
+<hr>
+<h2 id="二、结合实例理解，弥补缺失的框架体系知识"><a href="#二、结合实例理解，弥补缺失的框架体系知识" class="headerlink" title="二、结合实例理解，弥补缺失的框架体系知识"></a>二、结合实例理解，弥补缺失的框架体系知识</h2><h3 id="1-读取文件必要的Dataset与DataLoader？"><a href="#1-读取文件必要的Dataset与DataLoader？" class="headerlink" title="1. 读取文件必要的Dataset与DataLoader？"></a>1. 读取文件必要的<code>Dataset</code>与<code>DataLoader</code>？</h3><ul>
+<li>&emsp;&emsp;获取数据一直应该都是神经网络的一个要点。有些时候可以通过某些官方渠道的统一数据集来进行训练。但对于实际的项目，往往无法这样做，那么对于这一次我的大作业也就是获取图像信息来说，每一张图像的数据不一样，尺寸也都不一样，如何把这些杂乱的数据统一的放入神经网络中学习呢？在这里<code>Dataset</code>与<code>DataLoader</code>就起到了必要的作用</li>
+</ul>
+<ul>
+<li><code>Dataset</code>与<code>DataLoader</code>分别对应数据的读取和操作，他们是官网提供给我们处理数据的一个范例。</li>
+</ul>
+<hr>
+<h4 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a><strong><code>Dataset</code></strong></h4><ul>
+<li><code>Dataset</code>位于<code>torch.utils.data.Dataset</code>中，往往我们需要创建自己的获取数据集的<code>Mydataset</code>类，他必须继承官方的<code>Dataset</code>类，并且必须要实现其两个成员函数：<code>__len__()</code>、<code>__getitem__()</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">datasets</span><span class="params">(Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,data,transform = None,test = False)</span>:</span></span><br><span class="line">        imgs = []</span><br><span class="line">        labels = []</span><br><span class="line">        self.test = test</span><br><span class="line">        self.len = len(data)</span><br><span class="line">        self.data = data</span><br><span class="line">        self.transform = transform</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.data:</span><br><span class="line">            imgs.append(i[<span class="number">0</span>])</span><br><span class="line">            self.imgs = imgs</span><br><span class="line">            labels.append(int(i[<span class="number">1</span>]) ) <span class="comment">#pytorch中交叉熵需要从0开始</span></span><br><span class="line">            self.labels  = labels</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self,index)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.test:</span><br><span class="line">            filename = self.imgs[index]</span><br><span class="line">            filename = filename</span><br><span class="line">            img_path = self.imgs[index]</span><br><span class="line">            img = cv2.imread(img_path)</span><br><span class="line">            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span><br><span class="line">            img = cv2.resize(img, (config.img_width, config.img_height))</span><br><span class="line">            img = transforms.ToTensor()(img)</span><br><span class="line">            <span class="keyword">return</span> img,filename</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            img_path = self.imgs[index]</span><br><span class="line">            label = self.labels[index]</span><br><span class="line">            <span class="comment">#label = int(label)</span></span><br><span class="line">            img = cv2.imread(img_path)</span><br><span class="line">            img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)</span><br><span class="line">            img = cv2.resize(img,(config.img_width,config.img_height))</span><br><span class="line">            <span class="comment"># img = transforms.ToTensor()(img)</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> self.transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                img = Image.fromarray(img)</span><br><span class="line">                img = self.transform(img)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                img = transforms.ToTensor()(img)</span><br><span class="line">            <span class="keyword">return</span> img,label</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.data)<span class="comment">#self.len</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在这个实例中，在初始化时需要的参数是，需要训练或者测试的数据，<code>transform</code>操作（这个具体在后面说明），至于后面的<code>test</code>参数也和transform有关</li>
+</ul>
+<ul>
+<li><p>重点看类里内置的方法</p>
+<ul>
+<li><p><code>__getitem__(self,index)</code>:该方法支持从 0 到<code>len(self)</code>的索引<br>&emsp;&emsp;在我们自己的Dataset中必须需要一个这个方法获取数据集中的每一组数据。比如在此例中，由于在建立dataset实例时出入的<code>data</code>数据是所有的<code>.jpg</code>文件，那么当我们需要获取图片进行训练或测试时，需要利用opencv的方法读取图片数据、将图片转换成RGB格式，把每个图片的尺寸统一为设定的模板尺寸，最后将图片信息数据转换为<code>tensor</code>张量形式</p>
+</li>
+<li><p><code>__len__(self)</code><br>&emsp;&emsp;这个方法比较简单，用起来也很方便。目的就是，返回数据集的长度。但这个方法必须有。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>现存问题：在初始化时，类里面的一些赋值操作，是否存在必要性。当然，数据必须保存在数据集中，所以一个循环读取全部数据内容的操作应该要有。所以我猜测是自己如果需要用到就加，如果不会用到就不需要写在初始化方法中。 </li>
+</ul>
+<hr>
+<h4 id="DataLoader"><a href="#DataLoader" class="headerlink" title="DataLoader"></a><strong><code>DataLoader</code></strong></h4><ul>
+<li><code>torch.utils.data</code>已经提供的类：<code>Dataset</code>，但是通过这种方式只能一个个的数据的把数据全部读出来，定义了数据读取的方式，不能实现<strong>批量</strong>的把数据读取出来，为此pytorch有提供了一个方法：<code>DataLoader()</code><br>&emsp;&emsp;简单点说，就是通过<code>DataLoader</code>将<code>Dataset</code>中的数据集以每次<code>Batch_size</code>个大小的组，读取出来，以供训练</li>
+</ul>
+<ul>
+<li><code>Dataloader</code>本质是一个可迭代对象，使用<code>iter()</code>访问，不能使用<code>next()</code>访问，由于它本身就是一个可迭代对象，可以使用<code>for inputs, labels in dataloaders</code>进行可迭代对象的访问</li>
+</ul>
+<ul>
+<li>我们一般不需要再自己去实现<code>DataLoader</code>的方法了，只需要在构造函数中指定相应的参数即可，比如常见的<code>batch_size</code>，<code>shuffle</code>等等参数。所以使用DataLoader十分简洁方便。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#自己定义的函数：获取数据并将数据分为训练集和测试集两类</span></span><br><span class="line">test_list , train_list = get_files(config.data_folder,config.ratio)</span><br><span class="line"></span><br><span class="line"><span class="comment">#训练集 需要数据增强 transform 使用之前定义好的</span></span><br><span class="line">input_traindata = datasets(train_list,transform = transform)  </span><br><span class="line">train_loader = DataLoader(input_traindata,batch_size = config.batch_size,shuffle = <span class="literal">True</span>,collate_fn = collate_fn ,pin_memory = <span class="literal">False</span>,num_workers = <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#测试集 不要数据增强 transform = None</span></span><br><span class="line">input_testdata = datasets(test_list,transform = <span class="literal">None</span>)</span><br><span class="line">test_loader = DataLoader(input_testdata,batch_size = config.batch_size,shuffle = <span class="literal">False</span>,collate_fn = collate_fn,num_workers = <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上述例子可以看到，根据自己定义的<code>dataset</code>创建了训练和测试两个实例，训练需要<strong>数据增强</strong>而测试不需要，所以两个实例除数据不同，<code>tranform</code>也不同</li>
+<li><code>DataLoader</code>的参数<ul>
+<li><code>X_dataset</code>：数据集的实例</li>
+<li><code>batch_size</code>：训练的提取数据的单位内所含个数</li>
+<li><code>shuffle</code> ：布尔值True或者是False ，表示每一个epoch之后是否对样本进行随机打乱，默认是False</li>
+<li><code>collate_fn</code>：这个是一个问题，因为通常由自己确定。是一个自己对于数据选取的方法，但是我不知道他有什么意义，或者优势</li>
+<li><code>pin_memory</code>：如果设置为True，那么data loader将会在返回它们之前，将tensors拷贝到CUDA中的固定内存（CUDA pinned memory）中</li>
+<li><code>num_workers</code>：这个参数决定了有几个进程来处理data loading。0意味着所有的数据都会被load进主进程。（默认为0）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="1-2-典型的批训练"><a href="#1-2-典型的批训练" class="headerlink" title="1.2 典型的批训练"></a>1.2 典型的批训练</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.utils.data <span class="keyword">as</span> Data</span><br><span class="line"></span><br><span class="line">torch.manual_seed(<span class="number">1</span>)    <span class="comment"># reproducible</span></span><br><span class="line"></span><br><span class="line">BATCH_SIZE = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">x = torch.linspace(<span class="number">1</span>, <span class="number">10</span>, <span class="number">10</span>)       <span class="comment"># this is x data (torch tensor)</span></span><br><span class="line">y = torch.linspace(<span class="number">10</span>, <span class="number">1</span>, <span class="number">10</span>)       <span class="comment"># this is y data (torch tensor)</span></span><br><span class="line"></span><br><span class="line">torch_dataset = Data.TensorDataset(x, y)</span><br><span class="line">loader = Data.DataLoader(</span><br><span class="line">    dataset=torch_dataset,      <span class="comment"># torch TensorDataset format</span></span><br><span class="line">    batch_size=BATCH_SIZE,      <span class="comment"># mini batch size</span></span><br><span class="line">    shuffle=<span class="literal">True</span>,               <span class="comment"># random shuffle for training</span></span><br><span class="line">    num_workers=<span class="number">2</span>,              <span class="comment"># subprocesses for loading data</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_batch</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">3</span>):   <span class="comment"># train entire dataset 3 times</span></span><br><span class="line">        <span class="keyword">for</span> step, (batch_x, batch_y) <span class="keyword">in</span> enumerate(loader):  <span class="comment"># for each training step</span></span><br><span class="line">            <span class="comment"># train your data...</span></span><br><span class="line"></span><br><span class="line">            print(<span class="string">'Epoch: '</span>, epoch, <span class="string">'| Step: '</span>, step, <span class="string">'| batch x: '</span>,</span><br><span class="line">                  batch_x.numpy(), <span class="string">'| batch y: '</span>, batch_y.numpy())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    show_batch()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不难发现，其实批训练的实现就是对<code>Dataset</code>与<code>DataLoader</code>的使用，这里很简单，只是看一个思路。</li>
+<li>那么其实每一次训练的时候，对于loader实例的索引，他将带出一组<code>Batch_size</code>个数的数据，但是你的神经网络的输入层的结构不会因为<code>batch_size</code>的变化受到影响</li>
+<li>批训练中<code>batch_size</code>对CNN结果的影响，<a href="https://blog.csdn.net/xuaho0907/article/details/88027224">点击这里了解</a></li>
+</ul>
+<hr>
+<h3 id="1-3-collate-fn如何在加载数据时起作用？"><a href="#1-3-collate-fn如何在加载数据时起作用？" class="headerlink" title="1.3 collate_fn如何在加载数据时起作用？"></a>1.3 <code>collate_fn</code>如何在加载数据时起作用？</h3><ul>
+<li>DataLoader能够为我们自动生成一个多线程的迭代器，只要传入几个参数进行就可以了,但是你真的懂得它是如何工作的么？</li>
+</ul>
+<h4 id="问题就在这个collate-fn上"><a href="#问题就在这个collate-fn上" class="headerlink" title="问题就在这个collate_fn上"></a>问题就在这个<code>collate_fn</code>上</h4><ul>
+<li><code>collate_fn</code>默认是等于<code>default_collate</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span>    <span class="comment">#这是DataLoader的关于迭代的方法的源码</span></span><br><span class="line">    <span class="keyword">if</span> self.num_workers == <span class="number">0</span>:  <span class="comment"># same-process loading        </span></span><br><span class="line">        indices = next(self.sample_iter)  <span class="comment"># may raise StopIteration        </span></span><br><span class="line">        batch = self.collate_fn([self.dataset[i] <span class="keyword">for</span> i <span class="keyword">in</span> indices])  <span class="comment"># 在这里调用了collate_fn函数，传递的参数是一个列表        </span></span><br><span class="line">        <span class="keyword">if</span> self.pin_memory:            </span><br><span class="line">            batch = pin_memory_batch(batch)        </span><br><span class="line">        <span class="keyword">return</span> batch</span><br></pre></td></tr></table></figure>
+<ul>
+<li>那么其实<code>collate_fn</code>这个函数的输入就是一个list，list的长度是一个<code>batch size</code>，list中的每个元素都是<code>__getitem__</code>得到的结果，想要知道详解<a href="https://blog.csdn.net/qq_27825451/article/details/96130126">点击这里</a>，那么<code>batch</code>中的每一个元素其实就是<code>Dataset</code>中<code>__getitem__</code>方法得到的比如（图片信息img、标签label）</li>
+</ul>
+<ul>
+<li><p>那么如果理解了以上的意思，再看<code>collate_fn</code>就能较快地上手了</p>
+</li>
+<li><p>那什么时候该使用DataLoader的<code>collate_fn</code>这个参数？<br>  &emsp;&emsp;当定义<code>DataSet</code>类中的<code>__getitem__</code>函数的时候，由于每次返回的是一组类似于<code>（x,y）</code>的样本，但是如果在返回的每一组样本x,y中出现什么错误，或者是还需要进一步对x,y进行一些处理的时候，我们就需要再定义一个<code>collate_fn</code>函数来实现这些功能。当然我也可以自己在实现<code>__getitem__</code>的时候就实现这些后处理也是可以的。</p>
+</li>
+<li><p><code>collate_fn</code>，中单词<code>collate</code>的含义是：核对，校勘，对照，整理。顾名思义，这就是一个对每一组样本数据进行一遍“核对和重新整理”，现在可能更好理解一些</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-1-torchvision是什么？"><a href="#2-1-torchvision是什么？" class="headerlink" title="2.1 torchvision是什么？"></a>2.1 <code>torchvision</code>是什么？</h3><ul>
+<li><code>torchvision</code>是PyTorch中专门用来处理图像的库，PyTorch官网的安装教程，也会让你安装上这个包。</li>
+<li>这个包中有四个大类<ul>
+<li><code>torchvision.datasets</code></li>
+<li><code>torchvision.models</code></li>
+<li><code>torchvision.transforms</code></li>
+<li><code>torchvision.utils</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="torchvision-datasets"><a href="#torchvision-datasets" class="headerlink" title="torchvision.datasets"></a><code>torchvision.datasets</code></h4><ul>
+<li><p><code>torchvision.datasets</code> 是用来进行数据加载的，PyTorch团队在这个包中帮我们提前处理好了很多很多图片数据集。</p>
+<ul>
+<li><code>MNISTCOCO</code></li>
+<li><code>Captions</code></li>
+<li><code>Detection</code></li>
+<li><code>LSUN</code></li>
+<li><code>ImageFolder</code></li>
+<li><code>Imagenet-12</code></li>
+<li><code>CIFAR</code></li>
+<li><code>STL10</code></li>
+<li><code>SVHN</code></li>
+<li><code>PhotoTour</code></li>
+</ul>
+</li>
+<li><p>我们可以直接使用，示例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"></span><br><span class="line">trainset = torchvison.datasets.MNIST(</span><br><span class="line">        root = <span class="string">'./data'</span>, <span class="comment">#表示MNIST数据的加载的相对目录</span></span><br><span class="line">        train = <span class="literal">True</span>, <span class="comment">#表示是否加载数据库的训练集，false的时候加载测试集</span></span><br><span class="line">        download = <span class="literal">True</span>， <span class="comment">#表示是否自动下载MNIST数据集</span></span><br><span class="line">        transform = <span class="literal">None</span> <span class="comment">#表示是否需要对数据进行预处理，None为不进行预处理</span></span><br><span class="line">)</span><br><span class="line"><span class="comment"># 上面代码完成了MNIST数据 训练集的加载环节</span></span><br><span class="line">train_loader2 = Dateloader(</span><br><span class="line">    dataset = trainset,</span><br><span class="line">    batch_size = <span class="number">32</span>,</span><br><span class="line">    shuffle = <span class="literal">True</span></span><br><span class="line">)</span><br><span class="line">print(<span class="string">"训练集总长度为："</span>,len(trainset))</span><br><span class="line">print(<span class="string">"每个mini-batch的size为32，一共有："</span>,len(train_loader2),<span class="string">"个"</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="torchvision-models"><a href="#torchvision-models" class="headerlink" title="torchvision.models"></a><code>torchvision.models</code></h4><ul>
+<li><p><code>torchvision.models</code>中为我们提供了已经训练好的模型，让我们可以加载之后，直接使用</p>
+</li>
+<li><p><code>torchvision.models</code>模块的子模块中包含以下模型结构。</p>
+<ul>
+<li><code>AlexNet</code></li>
+<li><code>VGG</code></li>
+<li><code>ResNet</code></li>
+<li><code>SqueezeNet</code></li>
+<li><code>DenseNet</code></li>
+</ul>
+</li>
+<li><p>我们可以直接使用如下代码来快速创建一个权重随机初始化的模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models</span><br><span class="line"></span><br><span class="line">resnet18 = models.resnet18()</span><br><span class="line">alexnet = models.alexnet()</span><br><span class="line">squeezenet = models.squeezenet1_0()</span><br><span class="line">densenet = models.densenet_161()</span><br></pre></td></tr></table></figure></li>
+<li><p>也可以通过使用<code>pretrained=True</code>来加载一个别人预训练好的模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models</span><br><span class="line"></span><br><span class="line">resnet18 = models.resnet18(pretrained=<span class="literal">True</span>)</span><br><span class="line">alexnet = models.alexnet(pretrained=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="torchvision-transforms"><a href="#torchvision-transforms" class="headerlink" title="torchvision.transforms"></a><code>torchvision.transforms</code></h4><ul>
+<li><p><code>transforms</code>提供了一般的图像转换操作类，这就是我在一开始<code>Dataset</code>中提到了<code>transform</code>，还记得么？哈哈，可以翻一翻上面的例程中在创建<code>Mydataset</code>类的<code>getitem</code>方法中是如何使用transforms的</p>
+</li>
+<li><p>其实我猜测例程中，作者想在获取每一个图像信息时，除了进行<code>opencv</code>的操作外，训练时还要对图像数据信息做更多处理，而测试时当然就不需要这种处理</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们这里还是对MNIST进行处理，初始的MNIST是 28 * 28，我们把它处理成 96 * 96 的torch.Tensor的格式</span></span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图像预处理步骤</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.Resize(<span class="number">96</span>), <span class="comment"># 缩放到 96 * 96 大小</span></span><br><span class="line">    transforms.ToTensor(),</span><br><span class="line">    transforms.Normalize((<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>), (<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>)) <span class="comment"># 归一化</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">DOWNLOAD = <span class="literal">True</span></span><br><span class="line">BATCH_SIZE = <span class="number">32</span></span><br><span class="line"></span><br><span class="line">train_dataset = torchvision.datasets.MNIST(root=<span class="string">'./data/'</span>, train=<span class="literal">True</span>, transform=transform, download=DOWNLOAD)</span><br><span class="line">train_loader = DataLoader(dataset=train_dataset,</span><br><span class="line">                          batch_size=BATCH_SIZE,</span><br><span class="line">                          shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">print(len(train_dataset))</span><br><span class="line">print(len(train_loader))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>例程中是将从<code>torchvision.datasets</code>中获取的图像数据做transform，这样更简单，那如何在自己定义的Dataset类中加入Transform呢？<ul>
+<li>第一步：定义自己的<code>DataSet</code>，并重写<code>__getitem__</code>，在里面实现关键的<code>transform</code>操作</li>
+<li>第二步：将多个数据增强方式组合起来合成一个<code>transforms</code>，通过<code>Compose</code>类来实现，注意这个类的返回值哦！</li>
+<li>第三步：构造<code>DataSet</code>的对象，将组合起来的<code>transform</code>传递进去，这样就会对每一个<code>batch_size</code>的图像都进行相关的数据增强操作了</li>
+</ul>
+</li>
+<li>细节问题在于，我没太搞懂这种的数据类型的转换，一会是图片类型，一会是<code>numpy</code>矩阵类型，最后又要转换成<code>tensor</code>张量类型，这个要之后细究</li>
+</ul>
+<hr>
+<h3 id="3-1-什么是Resnet？"><a href="#3-1-什么是Resnet？" class="headerlink" title="3.1 什么是Resnet？"></a>3.1 什么是<code>Resnet</code>？</h3><p>👴也不知道，👴正在学</p>
+</font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-07T05:46:09.000Z">2020-04-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 minutes read (About 637 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/07/pytorch%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">pytorch使用说明</a>
+            
+        </h1>
+        <div class="content">
+            <font face='Times New Roman'>
+
+<h4 id="torch-normal-means-std-out-None"><a href="#torch-normal-means-std-out-None" class="headerlink" title="torch.normal(means, std, out=None)"></a><code>torch.normal(means, std, out=None)</code></h4><ul>
+<li>返回满足正态分布的张量</li>
+<li><code>means</code>和<code>std</code>分别给出均值和标准差</li>
+</ul>
+<hr>
+<h4 id="torch-rand-sizes-out-None-→-Tensor"><a href="#torch-rand-sizes-out-None-→-Tensor" class="headerlink" title="torch.rand(*sizes, out=None) → Tensor"></a><code>torch.rand(*sizes, out=None) → Tensor</code></h4><ul>
+<li><strong>均匀分布</strong>：返回一个张量，包含了从区间[0, 1)的均匀分布中抽取的一组随机数。张量的形状由参数sizes定义</li>
+</ul>
+<hr>
+<h4 id="torch-randn-sizes-out-None-→-Tensor"><a href="#torch-randn-sizes-out-None-→-Tensor" class="headerlink" title="torch.randn(*sizes, out=None) → Tensor"></a><code>torch.randn(*sizes, out=None) → Tensor</code></h4><ul>
+<li><strong>标准正态分布</strong>：返回一个张量，包含了从标准正态分布（均值为0，方差为1，即高斯白噪声）中抽取的一组随机数。张量的形状由参数sizes定义</li>
+</ul>
+<hr>
+<h4 id="torch-squeeze-a-N"><a href="#torch-squeeze-a-N" class="headerlink" title="torch.squeeze(a,N)"></a><code>torch.squeeze(a,N)</code></h4><ul>
+<li>对数据的维度进行压缩，去掉指定个维数为1的维度，注意：如果不加第二个参数’N’，就是去掉<strong>所有</strong>维数为1的维度</li>
+<li>另一种形式，<code>a.squeeze(N)</code> 也是去掉a中指定的维数为一的维度，去掉的维度数为N</li>
+</ul>
+<hr>
+<h4 id="torch-unsqueeze"><a href="#torch-unsqueeze" class="headerlink" title="torch.unsqueeze()"></a><code>torch.unsqueeze()</code></h4><ul>
+<li>对数据维度进行扩充。给指定位置加上维数为1的维度,同样有另外一种形式<code>a.squeeze(N)</code></li>
+<li><strong>注意！</strong>当对神经网络的输入层的特征数据提前处理时，可能需要使用该函数，因为输入数据必须是一个至少二维的张量</li>
+</ul>
+<hr>
+<blockquote>
+<p>可以关注一下python自带的<code>numpy</code>数字计算库和<code>torch</code>的数据处理，其实相似度很高</p>
+</blockquote>
+<hr>
+<h4 id="torch-cat-A-B-0"><a href="#torch-cat-A-B-0" class="headerlink" title="torch.cat((A,B),0)"></a><code>torch.cat((A,B),0)</code></h4><ul>
+<li>将两个张量（tensor）拼接在一起，第一个参数是两个张量组成的元组，第二个参数是行拼接(1)或者列拼接(0)</li>
+<li><a href="https://blog.csdn.net/qq_39709535/article/details/80803003">实例</a></li>
+</ul>
+<h4 id="np-hstack-A-B-C-amp-np-vstack-A-B-C"><a href="#np-hstack-A-B-C-amp-np-vstack-A-B-C" class="headerlink" title="np.hstack((A,B,C..)) &amp; np.vstack((A,B,C..))"></a><code>np.hstack((A,B,C..))</code> &amp; <code>np.vstack((A,B,C..))</code></h4><ul>
+<li>将参数元组的元素数组按<strong>水平/垂直</strong>方向进行叠加，可以和上面的torch.cat比较一下</li>
+</ul>
+<h4 id="torch-stack-tensor1-tensor2-tensor3…-dim-0"><a href="#torch-stack-tensor1-tensor2-tensor3…-dim-0" class="headerlink" title="torch.stack([tensor1, tensor2, tensor3…], dim=0)"></a><code>torch.stack([tensor1, tensor2, tensor3…], dim=0)</code></h4><ul>
+<li>将几个矩阵按照dim指定维度堆叠在一起</li>
+<li><a href="https://blog.csdn.net/orangerfun/article/details/103931343">实例</a></li>
+</ul>
+<hr>
+<h4 id="np-random-shuffle-x"><a href="#np-random-shuffle-x" class="headerlink" title="np.random.shuffle(x)"></a><code>np.random.shuffle(x)</code></h4><ul>
+<li>现场修改序列，改变自身内容。（类似洗牌，打乱顺序）</li>
+<li>对多维数组进行打乱排列时，默认是对第一个维度也就是<strong>列维度进行随机打乱</strong></li>
+</ul>
+<hr>
+<h4 id="np-transpose-x"><a href="#np-transpose-x" class="headerlink" title="np.transpose(x)"></a><code>np.transpose(x)</code></h4><ul>
+<li>常用于二维数组的<strong>转置</strong></li>
+</ul>
+<hr>
+<h4 id="torch-div-input-value-out-None"><a href="#torch-div-input-value-out-None" class="headerlink" title="torch.div(input, value, out=None)"></a><code>torch.div(input, value, out=None)</code></h4><ul>
+<li>将input逐元素除以标量值value，并返回结果到输出张量out。</li>
+</ul>
+<hr>
+<h4 id="plt-scatter-x-y-c-39-r-39-s-20-marker-quot-quot-lw-2"><a href="#plt-scatter-x-y-c-39-r-39-s-20-marker-quot-quot-lw-2" class="headerlink" title="plt.scatter(x,y,c=&#39;r&#39;,s=20,marker=&quot;.&quot;,lw=2)"></a><code>plt.scatter(x,y,c=&#39;r&#39;,s=20,marker=&quot;.&quot;,lw=2)</code></h4><ul>
+<li><code>matplotlib</code>库中画散点图的函数，注意<code>c</code>这个参数的特别用法</li>
+<li><a href="https://blog.csdn.net/qiu931110/article/details/68130199/">详解</a></li>
+</ul>
+</font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-04T09:20:19.000Z">2020-04-04</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
@@ -145,7 +466,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 612 words)
+                    2 minutes read (About 303 words)
                 </span>
                 
                 
@@ -154,706 +475,144 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/14/2020-3-14/">Ielts小班课学习-1</a>
+                <a class="has-link-black-ter" href="/2020/04/04/Ielts-4/">Ielts小班课学习-4</a>
             
         </h1>
         <div class="content">
-            <h3 id="雅思听力（今日重点：地图题）"><a href="#雅思听力（今日重点：地图题）" class="headerlink" title="雅思听力（今日重点：地图题）"></a>雅思听力（今日重点：地图题）</h3><ul>
-<li>常见单词</li>
-</ul>
-<hr>
-<table>
+            <font face="Times New Roman">
+
+<h1 id="雅思口语词汇"><a href="#雅思口语词汇" class="headerlink" title="雅思口语词汇"></a>雅思口语词汇</h1><table>
 <thead>
 <tr>
-<th>所在位置</th>
-<th align="center">形 状</th>
-<th align="center">交汇处</th>
-<th align="center">最高点</th>
-<th align="center">底 点</th>
-<th align="right">人行横道</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>entrance</td>
-<td align="center">diamond(菱形)</td>
-<td align="center">intersection</td>
-<td align="center">top</td>
-<td align="center">bottom</td>
-<td align="right">pavement</td>
-</tr>
-<tr>
-<td>access</td>
-<td align="center">oval(椭圆)</td>
-<td align="center">junction</td>
-<td align="center">peak</td>
-<td align="center">base</td>
-<td align="right">sidewalk</td>
-</tr>
-<tr>
-<td>entry gate</td>
-<td align="center">square</td>
-<td align="center">crossing</td>
-<td align="center">summit</td>
-<td align="center">foot</td>
-<td align="right">pedestrian crossing</td>
-</tr>
-<tr>
-<td>lobby</td>
-<td align="center">circle</td>
-<td align="center">cross-road</td>
-<td align="center">climax</td>
-<td align="center">lowest point</td>
-<td align="right"></td>
-</tr>
-<tr>
-<td>reception block</td>
-<td align="center">rectangular</td>
-<td align="center">cross-street</td>
-<td align="center">crest</td>
-<td align="center"></td>
-<td align="right"></td>
-</tr>
-<tr>
-<td>information centre</td>
-<td align="center">triangular</td>
-<td align="center">corner</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="right"></td>
-</tr>
-<tr>
-<td>car park</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="right"></td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="雅思口语（回顾第一题，发音练习）"><a href="#雅思口语（回顾第一题，发音练习）" class="headerlink" title="雅思口语（回顾第一题，发音练习）"></a>雅思口语（回顾第一题，发音练习）</h3><ul>
-<li>口语表达短语</li>
-</ul>
-<ol>
-<li><p><code>over the moon</code>  <kbd>--> extremely happy/pleased</kbd></p>
-</li>
-<li><p><code>an arm and a leg</code>  <kbd>--> very expensive</kbd><br><kbd>eg. It cost me an arm and a leg,....</kbd></p>
-</li>
-<li><p><code>a blessing in disguise</code>  <kbd>--></kdb> 因祸得福</p>
-</li>
-<li><p><code>(feel/be) down in the dumps</code>  <kdb>--> sad</kbd></p>
-</li>
-<li><p><code>the in thing</code>  <kbd>--> something fashionable</kbd></p>
-</li>
-</ol>
-<hr>
-<h3 id="雅思写作（大作文：报告类题目）"><a href="#雅思写作（大作文：报告类题目）" class="headerlink" title="雅思写作（大作文：报告类题目）"></a>雅思写作（大作文：报告类题目）</h3><hr>
-<table>
-<thead>
-<tr>
-<th>大作文所有题型</th>
-<th align="left">问法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>利弊分析题</td>
-<td align="left"><kbd>1.Do the advantages outweigh disadvantages?</kbd></td>
-</tr>
-<tr>
-<td></td>
-<td align="left"><kbd>2.Is this a positive or negative development?</kbd></td>
-</tr>
-<tr>
-<td>是否同意</td>
-<td align="left"><kbd>To what extent do you agree or disagree?</kbd></td>
-</tr>
-<tr>
-<td>报告类题目</td>
-<td align="left">问题将在下面给出</td>
-</tr>
-<tr>
-<td>双边讨论题</td>
-<td align="left"><kbd>Discuss both views and give your own opinion.</kbd></td>
-</tr>
-</tbody></table>
-<hr>
-<ul>
-<li>报告类题目通过题目最后的两个问句(引起的问题?如何解决?)来判断，其次思考以下三个问题</li>
-</ul>
-<blockquote>
-<p><kbd><font color=#00CED1>What are the reasons?<br>What can be done to solve it?<br>What are the effects of it?</font></kbd></p>
-</blockquote>
-<ul>
-<li>报告类题目作文结构：</li>
-</ul>
-<ol>
-<li><strong>开头段</strong>（可以较简洁）：背景句、改写句、观点句（例如：在下面的文章中将介绍问题和解决方法）</li>
-<li><strong>主体段</strong>（3段左右）：引起的问题（论点+解释论句–因果、对比、举例）</li>
-<li><strong>总结段</strong>：没有新增内容，关于总结的短语+观点+回答</li>
-</ol>
-<hr>
-<table>
-<thead>
-<tr>
-<th align="center">报告类大作文结构1</th>
-<th align="center">报告类大作文结构2</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">开头段</td>
-<td align="center">开头段</td>
-</tr>
-<tr>
-<td align="center">原因1+论证</td>
-<td align="center">原因1</td>
-</tr>
-<tr>
-<td align="center">原因2+论证</td>
-<td align="center">解决方案1</td>
-</tr>
-<tr>
-<td align="center">（原因3+论证）</td>
-<td align="center">原因2</td>
-</tr>
-<tr>
-<td align="center">解决方案1+论证</td>
-<td align="center">解决方案2</td>
-</tr>
-<tr>
-<td align="center">解决方案2+论证</td>
-<td align="center">原因3</td>
-</tr>
-<tr>
-<td align="center">（解决方案3+论证）</td>
-<td align="center">解决方案3</td>
-</tr>
-<tr>
-<td align="center">结尾段</td>
-<td align="center">结尾段</td>
-</tr>
-</tbody></table>
-<hr>
-<ul>
-<li>以下为一篇例文中的结构</li>
-</ul>
-<blockquote>
-<ul>
-<li><kbd><font color=#CD9B1D>In the following essay,I will discuss some of the problems this causes and also offer some solutions.</font><kbd></li>
-<li><kbd><font color=#CD9B1D>One of the main problems ...</font><kbd></li>
-<li><kbd><font color=#CD9B1D>Perhaps the most significant problems ...</font><kbd></li>
-<li><kbd><font color=#CD9B1D>I believe the solution to these problems ... First .. Secondly,and perhaps more importantly ... consequenly ...</font><kbd></li>
-<li><kbd><font color=#CD9B1D>In conclusion ...</font><kbd></li>
-</ul>
-</blockquote>
-<h3 id="生词记忆"><a href="#生词记忆" class="headerlink" title="生词记忆"></a>生词记忆</h3><hr>
-<table>
-<thead>
-<tr>
-<th>单词</th>
+<th align="center">单词</th>
 <th align="center">释义</th>
 <th align="center">单词</th>
-<th align="left">释义</th>
+<th align="center">释义</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>jog</td>
-<td align="center">慢跑</td>
-<td align="center">corridor</td>
-<td align="left">房间走廊</td>
+<td align="center">burmese</td>
+<td align="center">缅甸人</td>
+<td align="center">burma</td>
+<td align="center">缅甸</td>
 </tr>
 <tr>
-<td>auditorium</td>
-<td align="center">礼堂、观众席</td>
-<td align="center">marsh</td>
-<td align="left">沼泽、湿地</td>
+<td align="center">portuguese</td>
+<td align="center">葡萄牙人</td>
+<td align="center">portugal</td>
+<td align="center">葡萄牙</td>
 </tr>
 <tr>
-<td>stables</td>
-<td align="center">牲畜棚</td>
-<td align="center">row of buliding</td>
-<td align="left">一排建筑</td>
+<td align="center">iraqi</td>
+<td align="center">伊拉克人</td>
+<td align="center">kuwaiti</td>
+<td align="center">科威特人</td>
 </tr>
 <tr>
-<td>confidentiality</td>
-<td align="center">机密</td>
-<td align="center">naval</td>
-<td align="left">海军的</td>
+<td align="center">cab</td>
+<td align="center">出租车</td>
+<td align="center">distractor</td>
+<td align="center">干扰项</td>
 </tr>
 <tr>
-<td>bump into</td>
-<td align="center">撞见</td>
-<td align="center">issue</td>
-<td align="left">发行，分发</td>
+<td align="center">northern</td>
+<td align="center">注意拼写</td>
+<td align="center">southern</td>
+<td align="center">注意拼写</td>
 </tr>
 <tr>
-<td>back then</td>
-<td align="center">在那时</td>
-<td align="center">haze</td>
-<td align="left">雾霾</td>
+<td align="center">hostel</td>
+<td align="center">小旅馆</td>
+<td align="center">prompts</td>
+<td align="center">提示</td>
 </tr>
 <tr>
-<td>respect</td>
-<td align="center">方面</td>
-<td align="center">cosmetic</td>
-<td align="left">化妆品的</td>
-</tr>
-<tr>
-<td>water sprinkling</td>
-<td align="center">泼水节</td>
-<td align="center">lantern festival</td>
-<td align="left">元宵节</td>
-</tr>
-<tr>
-<td>dragon boat fastival</td>
-<td align="center">端午节</td>
-<td align="center"></td>
-<td align="left"></td>
+<td align="center">introverted</td>
+<td align="center">内向的</td>
+<td align="center">arduous</td>
+<td align="center">非常困难的</td>
 </tr>
 </tbody></table>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
+<h2 id="part-two"><a href="#part-two" class="headerlink" title="part two"></a><strong>part two</strong></h2><hr>
+<div align=center><img src="/../images/i1.png"  alt="describe change" style="zoom:50%;"  /></div>
 
 
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-13T10:44:57.000Z">2020-03-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 381 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/13/python%E5%AD%A6%E4%B9%A0-2/">python学习-2</a>
-            
-        </h1>
-        <div class="content">
-            <p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017261630425888">函数的各种参数类型，廖雪峰的博客</a></p>
-<p>今天主要学习了函数，函数参量的种类和一些注意事项</p>
-<ul>
-<li><p><code>From xx import xxx</code> 可以从xx.py文件中引用函数xxx(…)</p>
+<table>
+<thead>
+<tr>
+<th align="left">口语表达积累</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">I’d like to talk about ….&emsp;&emsp;开头</td>
+</tr>
+<tr>
+<td align="left">to be honest, this question really got me at the beginning (because  ….)</td>
+</tr>
+<tr>
+<td align="left">to tell the truth ,a (little) bit</td>
+</tr>
+<tr>
+<td align="left">the idea come to my mind</td>
+</tr>
+<tr>
+<td align="left">why not ….   which ….</td>
+</tr>
+<tr>
+<td align="left">specialised for people who …</td>
+</tr>
+<tr>
+<td align="left">you know/see</td>
+</tr>
+<tr>
+<td align="left">so in this case/in that way , ..</td>
+</tr>
+<tr>
+<td align="left">be able to&emsp;&emsp;直接替换can，不要用can了</td>
+</tr>
+<tr>
+<td align="left">it would be a relief for people</td>
+</tr>
+<tr>
+<td align="left">have cool feet when&emsp;&emsp;害怕</td>
+</tr>
+</tbody></table>
+<h1 id="雅思小作文"><a href="#雅思小作文" class="headerlink" title="雅思小作文"></a>雅思小作文</h1><ul>
+<li><p>在小作文地比较中，表示倍数可以使用<code>times</code>、<code>fold(like eightfold)</code>，表示百分比有<code>percentage</code>、<code>proportion</code>，表示“占比”的动词有<code>account for</code>、<code>make up</code>、<code>represent</code></p>
 </li>
-<li><p><code>isinstance(object, classinfo)</code> object-实例对象、classinfo-可以是直接或间接类名、基本类型或者由它们组成的元组；相比于<kbd>type()</kbd>，建议使用<kbd>isinstance()</kbd></p>
-</li>
-<li><p><code>x**n</code> 变量的高次幂的表示形式</p>
-</li>
-<li><p><code>def f2(a, b, c=0, *, d, **kw):</code> 函数的参数组合，注意顺序；此外，对于任意函数，都可以通过类似<kbd>func(<em>args, *</em>kw)</kbd>的形式调用它，无论它的参数是如何定义</p>
+<li><p>那么占比的三种表达方式，不要细究句意与难度，记住形式</p>
 </li>
 </ul>
-<hr>
-<ul>
-<li>递归函数，思路很重要，自己的理解能力还是太弱了，加强锻炼吧！</li>
-</ul>
-<blockquote>
-<p>递归函数的经典问题：汉诺塔；例程函数如下</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def hanoi(n,a,b,c):</span><br><span class="line">    # 当n为1时 (递归基础)</span><br><span class="line">    if n &#x3D;&#x3D; 1:</span><br><span class="line">        print(a, &#39;--&gt;&#39;, c) # 将A柱最底层的圆盘移动到C柱</span><br><span class="line">    # 当n大于1时</span><br><span class="line">    else:</span><br><span class="line">        hanoi(n-1, a, c, b) # 借助C柱，将n-1个圆盘从A柱移动到B柱</span><br><span class="line">        print(a, &#39;--&gt;&#39;, c) # 将A柱最底层的圆盘移动到C柱</span><br><span class="line">        hanoi(n-1, b, a, c) # 借助A柱，将n-1个圆盘从B柱移动到C柱</span><br></pre></td></tr></table></figure>
-<hr>
-<ul>
-<li><a href="https://www.runoob.com/python/python-func-range.html">range()函数用法</a> <code>range(start, stop[, step])</code> 基本用于for循环,生成列表或元组的一般表达形式<kbd><strong>list(range(x,x,x))</strong></kbd>或<kbd><strong>tuple(range(x,x,x))</strong></kbd></li>
-<li></li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. the percent of excellent evaluation climb to 28%</span><br><span class="line">2. The excellent part accounts for 28 percent of the questionnaire</span><br><span class="line">3. 28% customer service evaluation is excellent</span><br></pre></td></tr></table></figure>
 
-        </div>
-        
-        
-        
-    </div>
-</div>
+<table>
+<thead>
+<tr>
+<th align="center">单词</th>
+<th align="center">释义</th>
+<th align="center">单词</th>
+<th align="center">释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">subsequently</td>
+<td align="center">随后（放句首）</td>
+<td align="center">once-in-a-lifetime</td>
+<td align="center">一生一次的</td>
+</tr>
+<tr>
+<td align="center">Conversely</td>
+<td align="center">相反地</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h1 id="雅思阅读"><a href="#雅思阅读" class="headerlink" title="雅思阅读"></a>雅思阅读</h1><div align=center><img src="/../images/i2.png"  alt="雅思阅读十种题型" style="zoom:50%;"  /></div>
 
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T12:00:22.000Z">2020-03-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 412 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/12/Python/">Python!</a>
-            
-        </h1>
-        <div class="content">
-            <p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017092876846880">python学习目前进度，廖雪峰的教程</a></p>
-<ul>
-<li>本来创建博客的想法是想记录学习python的过程，结果一个hexo博客花了我四五天的时间，不过还好搞出来了，有点小成就感，好了现在继续学习Python！！gogogo</li>
-</ul>
-<blockquote>
-<p>以下是最新写的一个非常简单的成绩查询小程序，<font color=red>注意，有失败的地方已经标出</font></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#2020.3.9</span><br><span class="line">#学习python第二个小程序</span><br><span class="line">#计算今年成绩较去年的变化</span><br><span class="line">n&#x3D;1</span><br><span class="line">m&#x3D;1</span><br><span class="line"></span><br><span class="line">while n&#x3D;&#x3D;1:</span><br><span class="line">    #输入若干信息</span><br><span class="line">    name&#x3D;input(&#39;请输入学生姓名：&#39;);print(&#39;\n&#39;)</span><br><span class="line">    s1&#x3D;input(&#39;请输入%s去年的成绩：&#39;%name)</span><br><span class="line"></span><br><span class="line">    while m&#x3D;&#x3D;1:#这样的方法失败了，目前无法解决成绩输入不是数字的重复正确输入问题</span><br><span class="line">        if type(s1)&#x3D;&#x3D;float or type(s1)&#x3D;&#x3D;int:</span><br><span class="line">            if s1&gt;&#x3D;0:</span><br><span class="line">                m&#x3D;0</span><br><span class="line">                s2&#x3D;float(input(&#39;请输入%s今年的成绩：&#39;%name));print(&#39;\n&#39;)</span><br><span class="line">            else:</span><br><span class="line">                s1&#x3D;input(&#39;输入失败，请正确输入%s去年的成绩：&#39;%name)</span><br><span class="line">        else:</span><br><span class="line">            s1&#x3D;input(&#39;输入失败，请正确输入%s去年的成绩：&#39;%name)</span><br><span class="line"></span><br><span class="line">    else:</span><br><span class="line">    </span><br><span class="line">        #判断成绩走向并计算变化率</span><br><span class="line">        if s2&gt;s1:</span><br><span class="line">            rate&#x3D;(s2-s1)&#x2F;s2*100</span><br><span class="line">            print(&#39;%s同学你好，祝贺你进步了,成绩增长率为 %.2f%%\n&#39;%(name,rate))</span><br><span class="line">    </span><br><span class="line">        elif s1&#x3D;&#x3D;s2:</span><br><span class="line">            print(&#39;%s同学你好，不错，成绩保持住了\n&#39;%name)</span><br><span class="line">            rate&#x3D;0.00</span><br><span class="line"></span><br><span class="line">        else:</span><br><span class="line">            rate&#x3D;(s1-s2)&#x2F;s2*100</span><br><span class="line">            print(&#39;%s同学你好，很遗憾你退步了，成绩下降率为 %.2f%%\n&#39;%(name,rate))</span><br><span class="line"></span><br><span class="line">        n&#x3D;int(input(&#39;如果希望继续查询，请输入1，否则输入其他任意键退出&#39;))</span><br><span class="line"></span><br><span class="line">else:</span><br><span class="line">    #结尾</span><br><span class="line">    print(&#39;欢迎再次使用,再见&#39;)</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
+<h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h3><div align=center><img src="/../images/i3.png"  alt="整理生词、错题" style="zoom:100%;"  /></div>
 
 
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T10:53:23.000Z">2020-03-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 553 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/12/DT35%E7%9B%B8%E5%85%B3%E7%9A%84%E5%A4%87%E5%BF%98%E8%AF%B4%E6%98%8E/">DT35相关的备忘说明</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="零点标定的初步方法"><a href="#零点标定的初步方法" class="headerlink" title="零点标定的初步方法"></a>零点标定的初步方法</h3><ul>
-<li>现在认为电压与距离的关系即<font color=blue>D(mm)=0.000995*V(uV,直接的读取值)+50</font>；那么在这个基础上，50mm内的测量肯定不可靠，DT35零位标定方法就初定为</li>
-</ul>
-<blockquote>
-<p>均匀选取10个左右的距离值，D=0.000995*V+50+R，这些值与实际距离真值做差产生10个残差，求当残差的平方和有最小值时的R（求导数为零的情况）</p>
-</blockquote>
-<blockquote>
-<p>matlab实现如下，其中actual_data为距离真值，roughdeal_data为通过上述一元公式求得的，最后运行后打印出Xs0就是R的值，R即为尺子零点到DT35零点的距离（即DT35零点为尺子上刻度为R的地方）（小心方向）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">syms x %零点补偿量</span><br><span class="line">y&#x3D;0;</span><br><span class="line">for i&#x3D;1:length(actual_data)</span><br><span class="line">   y&#x3D;y+(actual_data(i)-roughdeal_data(i)-x)^2;</span><br><span class="line">end</span><br><span class="line">dy&#x3D;diff(y,x);</span><br><span class="line">Xs0&#x3D;solve(dy,x);</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="判断激光光线是否垂直车边的初步方法"><a href="#判断激光光线是否垂直车边的初步方法" class="headerlink" title="判断激光光线是否垂直车边的初步方法"></a>判断激光光线是否垂直车边的初步方法</h3><blockquote>
-<p>利用约6m长的标定架，车固定在其中一端，测量激光发射中点到侧边标定架的距离；理论上激光应平行于标定架射向另一端，在另一端再次测量激光中点到侧边标定架的距离，两次测量应相等，目前规定差值不能大于1mm，至少测量三次，可能还需要换边测量</p>
-</blockquote>
-<ul>
-<li><font color=red>这样的方法只能让光线与由两个侧向导轮确定的直线平行,所以导轮的安装必须尽量规范，全场定位技术也需要这一点！！</font></li>
-</ul>
-<hr>
-<h3 id="采集卡相关问题"><a href="#采集卡相关问题" class="headerlink" title="采集卡相关问题"></a>采集卡相关问题</h3><ul>
-<li>在主控ucos操作系统上的速率和准确率测试需要完善</li>
-<li>电压输入探针：现在通道1因为电阻焊盘焊掉失效了；已知通道1分压电阻阻值为M级，温漂百分级，可能需要换成千分级，已测，最大误差5mm以内；3、4通道也要分压电阻不过阻值过小，可能要重新焊M级电阻；其余通道都只是一个保护电阻</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-11T15:33:41.000Z">2020-03-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Magnetic-field-specialty/">Magnetic field specialty</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 292 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/11/maxwell%E7%A3%81%E5%9C%BA%E4%BB%BF%E7%9C%9F/">maxwell磁场仿真记录</a>
-            
-        </h1>
-        <div class="content">
-            <p><img src="/../images/maxwell1.png" alt="安装了新的ansys electronic 18，16.0版本许可证已经过期啦" title="学长的毕设开始了"><br><a href="https://pan.baidu.com/s/1UJVBr-kFQ14cjJ4VcnOk_w#list/path=%2F">这里是ansys electronic 18安装地址 可用 提取码：se7i</a><br><a href="https://www.mr-wu.cn/ansys-electromagnetics-suite-19-free-download/">这里是详细安装、破解教程，可用</a></p>
-<hr>
-<h2 id="2020-3-11"><a href="#2020-3-11" class="headerlink" title="2020/3/11"></a>2020/3/11</h2><p>  这两天又开始和李忠港学长搞磁场仿真了，哎，说到这个专业，我也不知道我到底感不感兴趣。</p>
-<ul>
-<li>府学长之前的文档里说0.4的规律（圆形线圈内径与外径之比）自己做仿真大概确实了这一点，仿的是矩形线圈，我个人感觉矩形线圈的对应系数可能略小于0.4，具体没有确定，如果以后自己做项目，追求目标比较极致，可能会需要确定</li>
-</ul>
-<h2 id="2020-3-12"><a href="#2020-3-12" class="headerlink" title="2020/3/12"></a>2020/3/12</h2><p>副边的旋转看样子对k的影响不大。不过对于一对矩形线圈，0°和90°的k值竟然不一样，难道是加入电流的边不对应电流有相位差？（瞎想，估计不是）</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-10T06:21:25.000Z">2020-03-10</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 116 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/10/markdown/">Nice to meet you,Markdown</a>
-            
-        </h1>
-        <div class="content">
-            <ul>
-<li><a href="https://www.jianshu.com/p/191d1e21f7ed/">markdown语法的主要说明</a></li>
-<li><a href="https://www.cnblogs.com/klchang/p/10203404.html">如何加入不同字长的空格</a></li>
-<li><a href="https://blog.csdn.net/heimu24/article/details/81189700">如何改变字体颜色大小等</a></li>
-<li><a href="https://blog.csdn.net/qq_39782872/article/details/86651868">字体颜色大全</a></li>
-<li><a href="https://www.cnblogs.com/yanh0606/p/10488356.html">如何插入文档下载链接</a></li>
-<li><a href="https://blog.csdn.net/l1216766050/article/details/88962973">如何插入本地视频</a></li>
-<li><a href="https://www.cnblogs.com/JohnTsai/p/4027229.html">进行页内跳转、建立目录</a></li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-09T15:14:18.000Z">2020-03-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 minutes read (About 567 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/09/hexo/">Hexo Learning Record</a>
-            
-        </h1>
-        <div class="content">
-            <p> <img src="/../images/hexo-github.png" alt="hexo × github" title="hexo × github"></p>
-<hr>
-<h1 id="目录索引"><a href="#目录索引" class="headerlink" title="目录索引"></a>目录索引</h1><p><a href="#1">2020/3/09 利用hexo在github上创建个人博客</a><br><a href="#2">2020/3/10 更换hexo博客主题为icarus</a><br><a href="#3">2020/3/11 开始学习修改icarus主题配置文件</a><br><a href="#4">2020/3/12 使用valine开启评论功能</a></p>
-<hr>
-<h2 id="1">2020/3/09 利用hexo在github上创建个人博客</h2>
-
-<ul>
-<li>一直想有一个私人的空间记录自己不管是日常生活还是各种知识学习，b站真是个好东西，30分钟自主搭建成功自己的小网页，以后可以好好耍一耍了</li>
-<li><a href="https://www.bilibili.com/video/av44544186?from=search&seid=18115415769740001358">此处附上hexo入门视频，感谢网络</a></li>
-</ul>
-<hr>
-<h2 id="2">2020/3/10 更换hexo博客主题为icarus</h2>
-
-<h3 id="缺少cheerio文件或库"><a href="#缺少cheerio文件或库" class="headerlink" title="缺少cheerio文件或库"></a>缺少cheerio文件或库</h3><ul>
-<li>首先更换主题完后进行hexo指令发现直接出现错误，以为是download&nbsp; zip直接下载剪切进去太粗暴，于是又在github上直接clone到icarus文件夹中，问题还有，定睛一看错误的具体内容，有个叫cheerio的东西没安装，百度咋办，安装呗</li>
-</ul>
-<blockquote>
-<p><code>npm install cheerio</code></p>
-</blockquote>
-<h3 id="无法部署到远程github网站"><a href="#无法部署到远程github网站" class="headerlink" title="无法部署到远程github网站"></a>无法部署到远程github网站</h3><ul>
-<li>按好了之后终于可以套在自己的文章上了（虽然啥都没写），localhost/4000上预览之后准备推到github网站上，结果出了第二个问题，无法deploy到git，爷气死了，这又是啥玩意啊，不过还好百度找到了答案</li>
-</ul>
-<blockquote>
-<p>hexo更新到3.0之后，deploy的type的github需要改成git<br><code>npm install hexo-deployer-git --save</code>&emsp;改了之后执行，然后再部署试试</p>
-</blockquote>
-<ul>
-<li><p><a href="https://www.jianshu.com/p/5e0ca2b14815">这是参考解答链接</a>&emsp;<a href="https://www.v2ex.com/t/175940">另一个参考</a></p>
-</li>
-<li><p>好了，可以开始学习icarus主题上的设置更改和优化了</p>
-</li>
-</ul>
-<hr>
-<h2 id="3">2020/3/11 开始学习修改icarus主题配置文件</h2>
-
-<ul>
-<li><p><a href="https://github.com/ppoffice/hexo-theme-icarus">首先，放上github源（含部分介绍），本次只是记录部分不能理解或者不会使用的功能以及些许理解</a></p>
-<p>分享网上的详细讲解，就不多说了</p>
-</li>
-<li><p><a href="https://blog.51cto.com/14006572/2437990">非常详细，黄小邪</a></p>
-</li>
-</ul>
-<hr>
-<h2 id="4">2020/3/12 使用valine开启评论功能</h2>
-
-<ul>
-<li><a href="https://valine.js.org/quickstart.html">这里是valine的详细获取APP id与APP key的说明</a></li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-09T14:55:32.000Z">2020-03-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/hexo/">hexo</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 122 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/09/nice%20to%20meet%20hexo/">Nice to meet you,Hexo</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="basic-instruction"><a href="#basic-instruction" class="headerlink" title="basic instruction"></a>basic instruction</h2><blockquote>
-<p>hexo init&emsp;&nbsp;&thinsp;–&gt;<strong>初始化一个新博客</strong><br>hexo n&emsp;&emsp;–&gt;<strong>新建一个博客文档</strong><br>hexo s&emsp;&emsp;&thinsp;–&gt;<strong>加载本地博客服务器</strong></p>
-<p>hexo clean&ensp;–&gt;<strong>清理数据库</strong><br>hexo g&emsp;&emsp;–&gt;<strong>生成、更新博客</strong></p>
-<p>hexo d&emsp;&emsp;–&gt;<strong>部署到远端，即github下的html网站</strong></p>
-</blockquote>
-<h2 id="update-flow"><a href="#update-flow" class="headerlink" title="update flow"></a>update flow</h2><blockquote>
-<p>hexo clean –&gt;  hexo g –&gt;  hexo s –&gt;  hexo d</p>
-</blockquote>
-<h2 id="use-hexo-theme-from-github"><a href="#use-hexo-theme-from-github" class="headerlink" title="use hexo theme from github:"></a>use hexo theme from github:</h2><blockquote>
-<ol>
-<li>git clone <a href="https://github.com/xxx.git">https://github.com/xxx.git</a> theme/xxx</li>
-<li>_config.yml 中替换theme为新文件夹名称</li>
-<li>hexo clean –&gt; hexo g –&gt; hexo s –&gt; hexo d</li>
-</ol>
-</blockquote>
-
+</font>
         </div>
         
         
@@ -875,7 +634,7 @@
         <div class="pagination-previous">
             <a class="is-flex-grow has-text-black-ter" href="/page/2/">Previous</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
+        <div class="pagination-next">
             <a class="is-flex-grow has-text-black-ter" href="/page/4/">Next</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
@@ -885,6 +644,12 @@
             <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
             
             <li><a class="pagination-link is-current" href="/page/3/">3</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/4/">4</a></li>
+            
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/10/">10</a></li>
             
         </ul>
     </nav>
@@ -934,7 +699,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            28
+                            29
                         </p>
                     </a>
                 </div>
@@ -946,7 +711,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            7
+                            8
                         </p>
                     </a>
                 </div>
@@ -958,7 +723,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            20
+                            21
                         </p>
                     </a>
                 </div>
@@ -1036,17 +801,6 @@
                 </a>
             </li>
         
-            <li>
-                <a class="level is-mobile" href="https://www.ieltscat.com/ " target="_blank" rel="noopener">
-                    <span class="level-left">
-                        <span class="level-item">Ieltscat</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">www.ieltscat.com</span>
-                    </span>
-                </a>
-            </li>
-        
         </ul>
         </div>
     </div>
@@ -1062,6 +816,14 @@
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/Biomedical-Engineering/">
+            <span class="level-start">
+                <span class="level-item">Biomedical Engineering</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Ielts/">
             <span class="level-start">
                 <span class="level-item">Ielts</span>
@@ -1128,7 +890,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/fMRI/" style="font-size: 10px;">fMRI</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
     </div>
 </div>
     
@@ -1140,6 +902,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-23T04:01:49.000Z">2020-06-23</time></div>
+                    <a href="/2020/06/23/fMRI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fMRI学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Biomedical-Engineering/">Biomedical Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1193,19 +968,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time></div>
-                    <a href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入探索续篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1216,6 +978,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1297,6 +1070,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/bluetooth/">
                         <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fMRI/">
+                        <span class="tag">fMRI</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1418,6 +1198,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-23T04:01:49.000Z">2020-06-23</time></div>
+                    <a href="/2020/06/23/fMRI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fMRI学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Biomedical-Engineering/">Biomedical Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time></div>
                     <a href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录 2nd</a>
                     <p class="is-size-7 is-uppercase">
@@ -1466,19 +1259,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time></div>
-                    <a href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入探索续篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1489,6 +1269,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1570,6 +1361,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/bluetooth/">
                         <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fMRI/">
+                        <span class="tag">fMRI</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

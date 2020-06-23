@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Category: Image Processing - Wdnmd</title>
+
+
+    <meta name="description" content="哈尔滨工业大学仪器学院本科生">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wdnmd">
+<meta property="og:url" content="https://hit-zyc.github.io/categories/Image-Processing/page/2/index.html">
+<meta property="og:site_name" content="Wdnmd">
+<meta property="og:description" content="哈尔滨工业大学仪器学院本科生">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hit-zyc.github.io/images/og_image.png">
+<meta property="article:author" content="张砚驰">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hit-zyc.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/delayz.png" alt="Wdnmd" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="ZYC&#39;s Github" href="https://github.com/hit-zyc">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/categories">Categories</a></li>
+            
+            <li class="is-active"><a href="#" aria-current="page">Image Processing</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-03T06:19:15.000Z">2020-04-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 minutes read (About 2279 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/03/pytorch%E5%88%9D%E8%AF%86/">pytorch、jupyter初识</a>
+            
+        </h1>
+        <div class="content">
+            <font face='Times New Roman'>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp;如何逐渐掌握深度学习呢，是一个难题，网上参差不齐没有一个非常好非常全面的教程，只能一点一点自己累计，寻找例程来模仿主要理解他是怎么一步步完成任务的、思考一个普遍性的解决问题的过程，如何搭建深度学习的神经网络框架，现在暂时选择<code>pytorch</code>。<br>&emsp;&emsp;然后，目前推荐搭建框架过程使用<code>jupyter notebook</code>，所以也要学习如何使用它，那么我想在每一阶段都解决和思考一些问题记录下来，来一步步稳扎稳打的学习深度学习</p>
+<h3 id="个人思路"><a href="#个人思路" class="headerlink" title="个人思路"></a>个人思路</h3><p>&emsp;&emsp;其实，深度学习说难不难，说简单肯定不简单，你真的可以甚至1天快速入门、上手，只要你懂一些python语法，稍微看看比较通俗的神经网络的介绍文章，学一种搭建框架的方式就能让你用上你设计的网络结构，大批量的规则化的图像信息甚至也可以从网上获取，然后非常方便的使用、训练、测试。<br>&emsp;&emsp;但是你想真正用神经网络来解决问题你自己的实际问题，那么这些将远远不够，至少我是这样认为的，所以我寻找了很多比较有顺序的深度学习教程（pytorch的），都需要一篇篇的仔细阅读，深化概念，让之后的进阶操作能更快理解。</p>
+<hr>
+<h1 id="学习阶段————初次接触"><a href="#学习阶段————初次接触" class="headerlink" title="学习阶段————初次接触"></a>学习阶段————初次接触</h1><p>思考：</p>
+<ul>
+<li>如何将一大批尺寸不一、随机的图像统一标准化的作为深度学习的输入、以及同时集合这些输入的label–对应的解，即真实值（来和输出层的计算值比较损失）？</li>
+</ul>
+<blockquote>
+</blockquote>
+<ul>
+<li>神经网络的框架如何根据自己的要求、向适合解决问题的网络结构改进？</li>
+</ul>
+<blockquote>
+</blockquote>
+<ul>
+<li>学习如何使用GPU来训练模型？</li>
+</ul>
+<blockquote>
+</blockquote>
+<ul>
+<li>jupyter notebook 中如何正常运行pytorch网络？</li>
+</ul>
+<blockquote>
+</blockquote>
+<hr>
+<h2 id="一、在Morvan莫烦的pytorch教程中，再次理解神经网络"><a href="#一、在Morvan莫烦的pytorch教程中，再次理解神经网络" class="headerlink" title="一、在Morvan莫烦的pytorch教程中，再次理解神经网络"></a>一、在Morvan莫烦的pytorch教程中，再次理解神经网络</h2><h3 id="1-1-神经网络是什么"><a href="#1-1-神经网络是什么" class="headerlink" title="1.1 神经网络是什么"></a>1.1 神经网络是什么</h3><ul>
+<li>之前虽然理解了一种说法，好像没提出来，这里讲一讲，但不讲太多，没啥意义</li>
+<li>首先，人们希望模仿人类的大脑，即生物神经网络，人类如何形成条件反射？如何学习？如何记忆？大脑内神经元如何工作？神经元之间有什么样的联系？</li>
+<li>人工神经网络相比，相似，又不相似，所有神经元的连接在同一时间都是固定的，不会凭空产生新联结，它是一种逐次接近正确答案的训练手段，其中“误差反向传递”起到关键作用</li>
+</ul>
+<h3 id="1-2-神经网络的简单结构概念"><a href="#1-2-神经网络的简单结构概念" class="headerlink" title="1.2 神经网络的简单结构概念"></a>1.2 神经网络的简单结构概念</h3><ul>
+<li><code>Gradient Descent</code>：梯度下降&emsp;&emsp;&emsp;&emsp;<code>Cost Function</code>：损失函数</li>
+<li><strong>输入层、隐含层（第1层。。。第n层）、输出层</strong>就对应着<strong>特征–&gt;代表特征1–&gt;…–&gt;代表特征n–&gt;输出</strong>，这些代表特征是越来越抽象的，人越来越无法理解，但计算机就对他比较敏感了</li>
+<li><strong>迁移学习</strong>：即在当你现有的一般神经网络足够处理比如图片内容种类识别、字符识别的任务后。如果我们在输出层前再加入几层神经网络来训练，就能来完成进阶的任务，比如不仅识别数字，还能知道数字的书写字体。。等等</li>
+</ul>
+<h3 id="2-1-选择Pytorch"><a href="#2-1-选择Pytorch" class="headerlink" title="2.1 选择Pytorch"></a>2.1 选择<code>Pytorch</code></h3><ul>
+<li>好用、使用广泛、新颖、直观、动态建立框架</li>
+<li><strong><code>torchvision</code></strong>里已经有一些它搭建好的网络，比如resnet（可以可以，我知道例程是这样用的了），然后你用这个已有的网络来训练自己的任务</li>
+</ul>
+<blockquote>
+<p>将<code>jupyter notebook</code>工作目录更改为自定义，即在属性栏启动目录将<code>userprofile/</code>..双引号内的内容改为自己希望前往的目录地址，重启即可</p>
+</blockquote>
+<ul>
+<li><a href="http://pytorch.org/docs/torch.html#math-operations">pytorch常用函数的详解</a>&emsp;&emsp;&emsp;&emsp;<a href="https://www.bilibili.com/video/BV1Vx411j7kT?p=7">numpy矩阵类型与pytorch中tensor（张量）矩阵转换</a></li>
+</ul>
+<h3 id="2-2-什么是Variable"><a href="#2-2-什么是Variable" class="headerlink" title="2.2 什么是Variable"></a>2.2 什么是<code>Variable</code></h3><ul>
+<li><p>&emsp;&emsp;它在神经网络的训练中是一个关键，为什么这么说？思考一下，神经网络的反向传播算法常用梯度下降法，那其中如何求梯度呢？<br>&emsp;&emsp;大家都知道就是求偏导数，导数就是梯度，torch里求导数的小帮手就是<code>variable</code>，将tensor张量放进variable中，开启自动求梯度的配置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable = Variable(tensor,requires_grad=<span class="literal">True</span>) <span class="comment">#requires_grad = True</span></span><br></pre></td></tr></table></figure>
+<p>那么，你以后含variable的运算就都和variable本身建立了某种联系，可以快速得到以后的结果相对variable的梯度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v_out = torch.mean(variable*variable)  <span class="comment">#例如求个平均数的运算</span></span><br><span class="line">v_out.backward()  <span class="comment">#求梯度</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>variable</code>变量不同于<code>tensor</code>，但是<code>variable.data</code>可以得到tensor，如果想进行tensor和numpy_array的转换，那么就要<code>xx.data</code>先得到tensor</p>
+</li>
+<li><p><code>variable</code>的运算和<code>tensor</code>相似，但不完全相同</p>
+</li>
+</ul>
+<h3 id="2-3-激励函数-AF–activation-function-？"><a href="#2-3-激励函数-AF–activation-function-？" class="headerlink" title="2.3 激励函数(AF–activation function)？"></a>2.3 激励函数(AF–activation function)？</h3><ul>
+<li>&emsp;&emsp;激励函数广泛应用在各种层，各种用，可是为什么要激励函数呢？因为复杂问题中，输入输出往往都<strong>不是线性关系</strong>，不是线性，你就不能简单在他们中间乘个系数。<br>&emsp;&emsp;进阶的操作就是，在输入做完简单线性处理（乘k）的结果代入一个非线性函数</li>
+</ul>
+<ul>
+<li>&emsp;&emsp;常用的非线性激活函数由<code>relu</code>、<code>sigmoid</code>、<code>tanh</code>方程，甚至可以自己创造激励函数来求解，不过要注意，这些激励函数必须都是<strong>可以微分的</strong>，因为需要求梯度求导</li>
+</ul>
+<ul>
+<li>&emsp;&emsp;当隐藏层不多时，可以尝试任意一个激励函数；不过当隐藏层中含有非常多个<code>layer</code>，就有慎重选择，可能出现<em>梯度爆炸</em>、<em>梯度消失</em>（我也不太懂，再学学）。其次，具体案例中，少量隐藏层可以有多种选择，<strong>卷积神经网络</strong>首选<code>relu</code>，<strong>循环神经网络</strong>首选<code>relu</code>、<code>tanh</code></li>
+</ul>
+<h4 id="如何应用activation-function"><a href="#如何应用activation-function" class="headerlink" title="如何应用activation function"></a><strong>如何应用activation function</strong></h4><ul>
+<li>理解代码然后实验即可<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># fake data</span></span><br><span class="line"></span><br><span class="line">x = torch.linspace(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">200</span>)  <span class="comment"># x data (tensor), shape=(100, 1)</span></span><br><span class="line">x = Variable(x)</span><br><span class="line">x_np = x.data.numpy()   <span class="comment"># numpy array for plotting</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># following are popular activation functions</span></span><br><span class="line"></span><br><span class="line">y_relu = torch.relu(x).data.numpy()</span><br><span class="line">y_sigmoid = torch.sigmoid(x).data.numpy()</span><br><span class="line">y_tanh = torch.tanh(x).data.numpy()</span><br><span class="line">y_softplus = F.softplus(x).data.numpy() <span class="comment"># there's no softplus in torch</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="3-1-构建网络：回归"><a href="#3-1-构建网络：回归" class="headerlink" title="3.1 构建网络：回归"></a>3.1 构建网络：回归</h3><ul>
+<li><p>利用<code>Pytorch</code>建立一个简单的神经网络</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, xxx, xxx, xxx, ...)</span>:</span></span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        <span class="comment"># xxxxxxxx</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="comment"># xxxxxxxx</span></span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure></li>
+<li><p>定义一个实际的神经网络</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net = Net(xxx=<span class="number">1</span>, xxx=<span class="number">10</span>, xxx=<span class="number">1</span>, ...)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义优化器<code>optimizer</code>和损失函数<code>loss function</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">optimizer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.2</span>)  <span class="comment">#net.parameters()：包含了神经网络的所有参数  lr：学习率（步长）</span></span><br><span class="line">loss_func = torch.nn.MSELoss()  <span class="comment"># this is for regression mean squared loss</span></span><br></pre></td></tr></table></figure></li>
+<li><p>那么在训练的时候</p>
+<ul>
+<li>首先定义网络的输出位置<code>prediction</code>，真正计算损失<code>loss</code></li>
+<li>每次利用优化器清除掉网络中之前计算的梯度</li>
+<li>然后开始运行反向传播算法</li>
+<li>最后向正确方向迈出一步，用计算出的梯度再计算出新一轮的网络参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prediction = net(x)     <span class="comment"># input x and predict based on x</span></span><br><span class="line">loss = loss_func(prediction, y)     <span class="comment"># must be (1. nn output, 2. target)</span></span><br><span class="line">optimizer.zero_grad()   <span class="comment"># clear gradients for next train</span></span><br><span class="line">loss.backward()         <span class="comment"># backpropagation, compute gradients</span></span><br><span class="line">optimizer.step()        <span class="comment"># apply gradients</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当然本节是对于简单的回归问题，所以定义输出量的变量简单，损失计算也是简单的均方差算法</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="3-2-构建网络：分类"><a href="#3-2-构建网络：分类" class="headerlink" title="3.2 构建网络：分类"></a>3.2 构建网络：分类</h3><ul>
+<li>与简单的回归神经网络不同的是，分类神经网络的输入量和输出量都不只有一个</li>
+<li>输入量可以是一组坐标，甚至可以是一张图片的一个三维张量，而输出则可以是一个输入张量对所有类别的概率判断</li>
+<li>分类的损失函数选择和回归是不一样的，教程中选择了<code>loss_func = torch.nn.CrossEntropyLoss()</code></li>
+<li>当然，对于我要解决的字符识别问题而言，输入就要复杂得多，远不是一对坐标那么简单，输出的类别也会有很多，所以更透彻的学习将在第二阶段进行</li>
+</ul>
+</font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-03T05:06:41.000Z">2020-04-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 minutes read (About 2488 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/03/opencv-4/">python 之 opencv 阶段总结篇</a>
+            
+        </h1>
+        <div class="content">
+            <font face='Times New Roman'>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li>没想到吧，这就总结了。没错我学习的三分钟热度真的太强了，这几天作业都没好好做，全在看这一套opencv的教程。那么就在大概第四天的时候把这一套教程给全部实验了一遍。</li>
+<li>不管怎么说，这一套教程呢，我作为小白学者觉得非常不错，讲的不深也有一些小挑战（略微简单，不过需要细品）。其实可以通过这些知识和技巧来做自己的延申，我还没有多尝试，唯一一次尝试使用对比字母轮廓形状的方法找到正确的字母，用他给的‘A’成功了，自己在网上找了个‘C’，预处理还做了闭运算轮廓只有一条，结果算法结果是像A我真的吐了。</li>
+<li>那么鉴于我一下子就学完了，而且每一章都像之前那样复制性的总结其实没多大意义，教程我电脑里也有，想复习了再去看看就可，所以这次来一个总结，目的就是略微的提到写我觉得的重点。</li>
+</ul>
+<h1 id="知识点回忆"><a href="#知识点回忆" class="headerlink" title="知识点回忆"></a>知识点回忆</h1><hr>
+<p><a href="#1">1. 摄像头 or 视频</a><br><a href="#2">2. matplotlib的使用</a><br><a href="#3">3. 图像基本操作</a><br><a href="#4">4. 颜色空间转换</a><br><a href="#5">5. 阈值分割</a><br><a href="#6">6. 图形几何变换</a><br><a href="#7">7. 绘图功能</a><br><a href="#8">8. 图像混合</a></p>
+<hr>
+<h3 id="1">1. 摄像头 or 视频</h3>
+
+
+<ul>
+<li>我看了下，之前讲完了前三个部分，调用电脑摄像头，可以用来截取一帧图像、可以将摄像头的连续若干帧图像保存成视频的形式</li>
+</ul>
+<ul>
+<li>可以打开一个视频，如果你利用cv2来<strong>创建一个滑动条</strong><code>cv2.createTrackbar()</code>（滑动就会对应有回调函数）还能<strong>实现拖动视频播放进度</strong>，借助<code>cv2.setTrackbarPos()</code>、<code>cv2.getTrackbarPos()</code>其实看函数名也知道是干什么的，这里不多讲了  </li>
+</ul>
+<ul>
+<li><code>cv2.VideoCapture()</code>可以<strong>打开摄像头或者视频文件</strong>，<code>cap.get(propId)</code>、<code>cap.set(propId,value)</code>来<strong>得到和修改摄像头的很多属性</strong></li>
+</ul>
+<ul>
+<li><p><code>cv2.imwrite()</code>来<strong>保存图片或者视频</strong>，保存视频的时候要注意提前设置好视频编码方式，我看有挺多的可能根据需要到时候就会了解吧、当然<strong>读取图片</strong>还是得<code>cv2.imread()</code></p>
+</li>
+<li><p>捕获视频中的一帧<code>ret, frame = capture.read()</code></p>
+</li>
+</ul>
+<hr>
+<h3 id="2">2. matplotlib的使用</h3>  
+
+
+<ul>
+<li>其实这整套教程也没咋用到，他和matlab里的plot用法有点像，都是subplot。不过要注意，他来显示图像时，<code>plt.imshow()</code>中后一个参数cmap的参数选择，灰度图就是<code>cmap = &#39;gray&#39;</code>，而且imshow之后必须要加<code>plt.show()</code>，要不然图片就不显示，可以看一下老师怎么写的</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">titles &#x3D; [&#39;Original&#39;, &#39;BINARY&#39;, &#39;BINARY_INV&#39;, &#39;TRUNC&#39;, &#39;TOZERO&#39;, &#39;TOZERO_INV&#39;]</span><br><span class="line">images &#x3D; [img, th1, th2, th3, th4, th5]</span><br><span class="line"></span><br><span class="line"># 使用Matplotlib显示</span><br><span class="line">for i in range(6):</span><br><span class="line">    plt.subplot(2, 3, i + 1)</span><br><span class="line">    plt.imshow(images[i], &#39;gray&#39;)</span><br><span class="line">    plt.title(titles[i], fontsize&#x3D;8)</span><br><span class="line">    plt.xticks([]), plt.yticks([])  # 隐藏坐标轴</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>matplotlib中图像显示RGB顺序，opencv是BGR，显示时需要通道<strong>倒置</strong>一下</li>
+</ul>
+<hr>
+<h3 id="3">3. 图像基本操作</h3>
+
+<ul>
+<li>读取像素点的值直接<code>img[100, 90]</code>，修改也是这样。</li>
+</ul>
+<ul>
+<li><code>img.shape</code>形状中包括行数、列数和通道数</li>
+</ul>
+<ul>
+<li><strong>截取ROI</strong>，非常简单一看就懂，<code>face = img[100:200, 115:188]</code>，这也只能是个矩形，不过得到轮廓或者利用掩码方式得到一块想要的区域也行</li>
+</ul>
+<ul>
+<li>彩色图的BGR三个通道是可以<strong>分开</strong>单独访问的，<code>b, g, r = cv2.split(img)</code>；也可以<strong>合并</strong>组成图像<code>img = cv2.merge((b, g, r))</code></li>
+</ul>
+<hr>
+<h3 id="4">4. 颜色空间转换</h3>
+
+<ul>
+<li><code>img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</code>图像形式转换，教程中用他来转换成HSV颜色模型，改成<code>cv2.COLOR_BGR2HSV</code>就行了</li>
+</ul>
+<ul>
+<li><code>mask = cv2.inRange(hsv, lower_blue, upper_blue)</code>，其实inRange这个函数我感觉不太重要，因为后面有阈值分割，但可能这个是<strong>针对真彩图像</strong>，与阈值分割多是用于灰度图</li>
+</ul>
+<ul>
+<li>然后很重要的一个<code>res = cv2.bitwise_and(frame, frame, mask=mask)</code>，这个位操作是图像只存在0和255也就是二值图像的关键操作，可以在以后的二值图像处理里起到作用，特别是<strong>应用在掩码图的得到</strong></li>
+</ul>
+<hr>
+<h3 id="5">5. 阈值分割</h3>
+
+<ul>
+<li>这一段是之后的基础，全都讲起来有点麻烦了，我就不多说。额，先说一句，这个应该是用在<strong>处理灰度图上的</strong></li>
+</ul>
+<ul>
+<li><strong>固定阈值</strong>：<code>ret, th = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)</code>，第二个参数是设定的阈值，第三个是最大值，最后一个阈值的方式，<a href="https://docs.opencv.org/4.0.0/d7/d1b/group__imgproc__misc.html#gaa9e58d2860d4afa658ef70a9b1115576">种类主要5种</a></li>
+</ul>
+<ul>
+<li><strong>自适应阈值</strong>：<code>th2 = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 4)</code>，不同之处就在第三个参数，小区域阈值的计算方式；最后一个参数：最终阈值等于小区域计算出的阈值再减去此值（光看看不懂，想试试就自己试试）</li>
+</ul>
+<ul>
+<li><p><strong>Otsu阈值</strong>：看代码就知道怎么用了，原理自便</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 固定阈值法</span><br><span class="line">ret1, th1 &#x3D; cv2.threshold(img, 100, 255, cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line"># Otsu阈值法</span><br><span class="line">ret2, th2 &#x3D; cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)</span><br><span class="line"></span><br><span class="line"># 先进行高斯滤波，再使用Otsu阈值法</span><br><span class="line">blur &#x3D; cv2.GaussianBlur(img, (5, 5), 0)</span><br><span class="line">ret3, th3 &#x3D; cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>光线不均匀的图片就用自适应阈值就完事了</p>
+</li>
+</ul>
+<hr>
+<h3 id="6">6. 图形几何变换</h3>
+
+<ul>
+<li>其实我觉得这一章是很重要的，因为图像处理应该会有很多时候待处理的目标是需要几何变换特别是立体上的仿射变换</li>
+</ul>
+<ul>
+<li><code>cv2.resize()</code><strong>可以自己定义大小，也可以按比例缩放</strong>，用处会很多，我不知道和下面这个有什么关系，用处大不大，或者说在哪里使用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lower &#x3D; cv2.pyrDown(img)  # 向下采样一级</span><br><span class="line">higher &#x3D; cv2.pyrUp(img)  # 向上采样一级</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><code>cv2.flip(img, 1)</code>第二个参数决定是<strong>镜像、垂直、镜像垂直翻转</strong></li>
+</ul>
+<ul>
+<li><strong>平移图片</strong>，需要用到矩阵，用<strong>仿射变换函数</strong><code>cv2.warpAffine()</code>实现；<strong>旋转</strong>也是，而且用这个函数前，还要加个得到旋转对应的矩阵的函数<code>cv2.getRotationMatrix2D()</code>，你看这还只是2D的</li>
+</ul>
+<p>$$<br>M = \left[<br> \begin{matrix}<br>   1 &amp; 0 &amp; t_x \newline<br>   0 &amp; 1 &amp; t_y<br>  \end{matrix}<br>  \right]<br>$$</p>
+<h4 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a><strong>仿射变换</strong></h4><ul>
+<li><strong>二维的</strong>，懂了吗，基本的图像变换就是二维坐标的变换：从一种二维坐标(x,y)到另一种二维坐标(u,v)的线性变换，你得先得到一个矩阵，那么就可以转换了，矩阵<strong>T(2×3)</strong>就称为仿射变换的变换矩阵</li>
+</ul>
+<p>$$<br>\begin{matrix}<br>   u=a_1x+b_1y+c_1 \newline<br>   v=a_2x+b_2y+c_2<br>  \end{matrix}<br>$$</p>
+<hr>
+<p>$$<br>\left[<br> \begin{matrix}<br>   u \newline<br>   v<br>  \end{matrix}<br>  \right]  = \left[<br> \begin{matrix}<br>   a_1 &amp; b_1  \newline<br>   a_2 &amp; b_2<br>  \end{matrix}<br>  \right] \left[<br> \begin{matrix}<br>   x \newline<br>   y<br>  \end{matrix}<br>  \right]+\left[<br> \begin{matrix}<br>   c_1 \newline<br>   c_2<br>  \end{matrix}<br>  \right]<br>$$</p>
+<hr>
+<p>$$<br>R=\left[<br> \begin{matrix}<br>   a_1 &amp; b_1  \newline<br>   a_2 &amp; b_2<br>  \end{matrix}<br>  \right], t=\left[<br> \begin{matrix}<br>   c_1 \newline<br>   c_2<br>  \end{matrix}<br>  \right],T=\left[<br> \begin{matrix}<br>   R &amp; t<br>  \end{matrix}<br>  \right]<br>$$</p>
+<hr>
+<ul>
+<li>然后几行代码看懂，现根据三个点和对应的三个点得到变换矩阵，然后直接转整个图像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 变换前的三个点</span><br><span class="line">pts1 &#x3D; np.float32([[50, 65], [150, 65], [210, 210]])</span><br><span class="line"># 变换后的三个点</span><br><span class="line">pts2 &#x3D; np.float32([[50, 100], [150, 65], [100, 250]])</span><br><span class="line"></span><br><span class="line"># 生成变换矩阵</span><br><span class="line">M &#x3D; cv2.getAffineTransform(pts1, pts2)</span><br><span class="line">dst &#x3D; cv2.warpAffine(img, M, (cols, rows))</span><br></pre></td></tr></table></figure>
+
+<h4 id="透视变换"><a href="#透视变换" class="headerlink" title="透视变换"></a><strong>透视变换</strong></h4><ul>
+<li><strong>三维的</strong>，就是<strong>立体上</strong>如何把一个目标看得顺眼一点，一个身份证你斜着拍的，那我想让他能像平着拍的一样舒服，那就用这个方法</li>
+</ul>
+<p>$$<br>\begin{matrix}<br>   X=a_1 x + b_1 y + c_1 \newline<br>   Y=a_2 x + b_2 y + c_2  \newline<br>   Z=a_3 x + b_3 y + c_3<br>  \end{matrix}<br>$$</p>
+<hr>
+<p>$$<br>\left[<br> \begin{matrix}<br>   X \newline<br>   Y \newline<br>   Z<br>  \end{matrix}<br>  \right]  = \left[<br> \begin{matrix}<br>   a_1 &amp; b_1 &amp; c_1  \newline<br>   a_2 &amp; b_2 &amp; c_2  \newline<br>   a_3 &amp; b_3 &amp; c_3<br>  \end{matrix}<br>  \right] \left[<br> \begin{matrix}<br>   x \newline<br>   y \newline<br>   1<br>  \end{matrix}<br>  \right]<br>$$</p>
+<ul>
+<li>OpenCV中首先根据变换前后的四个点用<code>cv2.getPerspectiveTransform()</code>生成3×3的变换矩阵，然后再用<code>cv2.warpPerspective()</code>进行透视变换</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 原图中卡片的四个角点</span><br><span class="line">pts1 &#x3D; np.float32([[148, 80], [437, 114], [94, 247], [423, 288]])</span><br><span class="line"># 变换后分别在左上、右上、左下、右下四个点</span><br><span class="line">pts2 &#x3D; np.float32([[0, 0], [320, 0], [0, 178], [320, 178]])</span><br><span class="line"></span><br><span class="line"># 生成透视变换矩阵</span><br><span class="line">M &#x3D; cv2.getPerspectiveTransform(pts1, pts2)</span><br><span class="line"># 进行透视变换，参数3是目标图像大小</span><br><span class="line">dst &#x3D; cv2.warpPerspective(img, M, (320, 178))</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">变换</th>
+<th align="center">矩阵</th>
+<th align="center">自由度</th>
+<th align="center">保持性质</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">平移</td>
+<td align="center">[I, t]（2×3）</td>
+<td align="center">2</td>
+<td align="center">方向/长度/夹角/平行性/直线性</td>
+</tr>
+<tr>
+<td align="center">刚体</td>
+<td align="center">[R, t]（2×3）</td>
+<td align="center">3</td>
+<td align="center">长度/夹角/平行性/直线性</td>
+</tr>
+<tr>
+<td align="center">相似</td>
+<td align="center">[sR, t]（2×3）</td>
+<td align="center">4</td>
+<td align="center">夹角/平行性/直线性</td>
+</tr>
+<tr>
+<td align="center">仿射</td>
+<td align="center">[T]（2×3）</td>
+<td align="center">6</td>
+<td align="center">平行性/直线性</td>
+</tr>
+<tr>
+<td align="center">透视</td>
+<td align="center">[T]（3×3）</td>
+<td align="center">8</td>
+<td align="center">直线性</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="7">7. 绘图功能</h3>
+
+<ul>
+<li><p>感觉画图功能不太用得到，不过也是用起来很方便，绘制形状的函数有一些共同的参数</p>
+<ul>
+<li>color：绘制的颜色,是彩色图就估计是BGR，就输一个三维元组ok；灰度图就一个255以内的数</li>
+<li>thickness：线宽，默认为1；<strong>对于矩形/圆之类的封闭形状而言，传入-1表示填充形状</strong></li>
+<li>建议画什么线型都加一个<code>lineType=cv2.LINE_AA</code>比较好看</li>
+</ul>
+</li>
+<li><p><code>img = np.zeros((512, 512, 3), np.uint8)</code>可以直接用这样一句话来<strong>创建一个纯色图</strong></p>
+</li>
+</ul>
+<ul>
+<li><code>cv2.line(img, (0, 0), (512, 512), (255, 0, 0), 5)</code>，<strong>起点</strong>、<strong>终点</strong></li>
+</ul>
+<ul>
+<li><code>cv2.rectangle(img, (384, 0), (510, 128), (0, 255, 0), 3)</code>，<strong>左上</strong>、<strong>右下</strong></li>
+</ul>
+<ul>
+<li><code>cv2.circle(img, (447, 63), 63, (0, 0, 255), -1)</code>，<strong>圆心</strong>、<strong>半径</strong></li>
+</ul>
+<ul>
+<li><code>cv2.ellipse(img, (256, 256), (100, 50), 0, 0, 180, (255, 0, 0), -1)</code>，<strong>椭圆中心</strong>、<strong>x/y轴长度</strong>、<strong>旋转角度</strong>、<strong>起始角度</strong>、<strong>结束角度</strong>，具体自己试试</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 使用cv2.polylines()画多条直线</span><br><span class="line">line1 &#x3D; np.array([[100, 20],  [300, 20]], np.int32).reshape((-1, 1, 2))</span><br><span class="line">line2 &#x3D; np.array([[100, 60],  [300, 60]], np.int32).reshape((-1, 1, 2))</span><br><span class="line">line3 &#x3D; np.array([[100, 100],  [300, 100]], np.int32).reshape((-1, 1, 2))</span><br><span class="line">cv2.polylines(img, [line1, line2, line3], True, (0, 255, 255))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>添加文字</strong>：<code>cv2.putText(img, &#39;ex2tron&#39;, (10, 500), font,4, (255, 255, 255), 2, lineType=cv2.LINE_AA)</code></li>
+</ul>
+<hr>
+<h3 id="8">8. 图像混合</h3>
+
+
+
+<p>👴乏了，找时间再写吧</p>
+</font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-29T18:45:22.000Z">2020-03-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 824 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/30/opencv3/">python 之 opencv-摄像头采集和视频播放</a>
+            
+        </h1>
+        <div class="content">
+            <font face='Times New Roman'>
+
+<h2 id="打开摄像头"><a href="#打开摄像头" class="headerlink" title="打开摄像头"></a>打开摄像头</h2><hr>
+<p>要使用摄像头，需要使用<code>cv2.VideoCapture(0)</code>创建VideoCapture对象，参数0指的是摄像头的编号，如果你电脑上有两个摄像头的话，访问第2个摄像头就可以传入1，依此类推。</p>
+<h4 id="capture-read"><a href="#capture-read" class="headerlink" title="capture.read"></a><strong>capture.read</strong></h4><p>函数返回的第1个参数ret(return value缩写)是一个布尔值，表示当前这一帧是否获取正确</p>
+<h4 id="cv2-cvtColor"><a href="#cv2-cvtColor" class="headerlink" title="cv2.cvtColor"></a><strong>cv2.cvtColor</strong></h4><p>用来转换颜色，这里将彩色图转成灰度图</p>
+<h4 id="cap-get-propId-、cap-set-propId-value"><a href="#cap-get-propId-、cap-set-propId-value" class="headerlink" title="cap.get(propId)、cap.set(propId,value)"></a><strong>cap.get(propId)</strong>、<strong>cap.set(propId,value)</strong></h4><p>通过<code>cap.get(propId)</code>可以获取摄像头的一些属性，比如捕获的分辨率，亮度和对比度等。propId是从0~18的数字，代表不同的属性，完整的属性列表可以参考：<a href="https://docs.opencv.org/4.0.0/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d">VideoCaptureProperties</a>。也可以使用<code>cap.set(propId,value)</code>来修改属性值</p>
+<blockquote>
+<p>经验之谈：某些摄像头设定分辨率等参数时会无效，因为它有固定的分辨率大小支持，一般可在摄像头的资料页中找到。</p>
+</blockquote>
+<h2 id="播放本地视频"><a href="#播放本地视频" class="headerlink" title="播放本地视频"></a>播放本地视频</h2><hr>
+<p>跟打开摄像头一样，如果把摄像头的编号换成视频的路径就可以播放本地视频了。回想一下<code>cv2.waitKey()</code>，它的参数表示暂停时间，所以这个值越大，视频播放速度越慢，反之，播放速度越快，通常设置为25或30。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 播放本地视频</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="string">'demo_video.mp4'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line">    cv2.imshow(<span class="string">'frame'</span>, gray)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">30</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="录制视频"><a href="#录制视频" class="headerlink" title="录制视频"></a>录制视频</h2><hr>
+<p>之前我们保存图片用的是<code>cv2.imwrite()</code>，要保存视频，我们需要创建一个<code>VideoWriter</code>的对象，需要给它传入四个参数：</p>
+<ul>
+<li>输出的文件名，如’output.avi’</li>
+<li>编码方式<a href="https://baike.baidu.com/item/fourcc/6168470?fr=aladdin">FourCC</a>码</li>
+<li>帧率<a href="https://baike.baidu.com/item/FPS/3227416">FPS</a></li>
+<li>要保存的分辨率大小</li>
+</ul>
+<p>FourCC是用来指定视频编码方式的四字节码，所有的编码可参考<a href="http://www.fourcc.org/codecs.php">Video Codecs</a>。如MJPG编码可以这样写： <code>cv2.VideoWriter_fourcc(*&#39;MJPG&#39;)</code>或<code>cv2.VideoWriter_fourcc(&#39;M&#39;,&#39;J&#39;,&#39;P&#39;,&#39;G&#39;)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义编码方式并创建VideoWriter对象</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'MJPG'</span>)</span><br><span class="line">outfile = cv2.VideoWriter(<span class="string">'output.avi'</span>, fourcc, <span class="number">25.</span>, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        outfile.write(frame)  <span class="comment"># 写入文件</span></span><br><span class="line">        cv2.imshow(<span class="string">'frame'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://blog.csdn.net/u011436429/article/details/80604590">OpenCV VideoCapture.get()参数中文详解，不太准确供参考</a></p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><hr>
+<ul>
+<li>实现一个可以拖动滑块播放视频的功能。（提示：需要用到 <code>cv2.CAP_PROP_FRAME_COUNT</code>和<code>cv2.CAP_PROP_POS_FRAMES</code>两个属性）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changetime</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> capture.set(cv2.CAP_PROP_POS_FRAMES, x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 播放本地视频</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="string">'demo_video.mp4'</span>)</span><br><span class="line"><span class="comment">#获取视频帧长度</span></span><br><span class="line">frame_count = capture.get(cv2.CAP_PROP_FRAME_COUNT)</span><br><span class="line"><span class="comment">#创建一个窗口</span></span><br><span class="line">cv2.namedWindow(<span class="string">'video'</span>)</span><br><span class="line"><span class="comment"># 创建视频滑动条</span></span><br><span class="line">cv2.createTrackbar(<span class="string">'video'</span>, <span class="string">'video'</span>, <span class="number">0</span>, int(frame_count), changetime)</span><br><span class="line"></span><br><span class="line">height = capture.get(cv2.CAP_PROP_FRAME_HEIGHT)</span><br><span class="line">width = capture.get(cv2.CAP_PROP_FRAME_WIDTH)</span><br><span class="line">print(capture.set(cv2.CAP_PROP_FRAME_HEIGHT, height * <span class="number">2</span>))</span><br><span class="line">print(capture.set(cv2.CAP_PROP_FRAME_WIDTH, width * <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        cv2.setTrackbarPos(<span class="string">'video'</span>,<span class="string">'video'</span>,int(capture.get(cv2.CAP_PROP_POS_FRAMES)))</span><br><span class="line">        cv2.imshow(<span class="string">'video'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">30</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+</font>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous">
+            <a class="is-flex-grow has-text-black-ter" href="/categories/Image-Processing/">Previous</a>
+        </div>
+        <div class="pagination-next">
+            <a class="is-flex-grow has-text-black-ter" href="/categories/Image-Processing/page/3/">Next</a>
+        </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/Image-Processing/">1</a></li>
+            
+            <li><a class="pagination-link is-current" href="/categories/Image-Processing/page/2/">2</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/Image-Processing/page/3/">3</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/Image-Processing/page/4/">4</a></li>
+            
+        </ul>
+    </nav>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/images/3.jpeg" alt="张砚驰">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        张砚驰
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        电子测控专业
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>湖北 武汉</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            29
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            8
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            21
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/hit-zyc" target="_blank" rel="noopener">
+                Follow</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/hit-zyc">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/hit-zyc" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">My Github</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.collinsdictionary.com/zh/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Colins</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.collinsdictionary.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Biomedical-Engineering/">
+            <span class="level-start">
+                <span class="level-item">Biomedical Engineering</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Ielts/">
+            <span class="level-start">
+                <span class="level-item">Ielts</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Image-Processing/">
+            <span class="level-start">
+                <span class="level-item">Image Processing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Magnetic-field-specialty/">
+            <span class="level-start">
+                <span class="level-item">Magnetic field specialty</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/ROBOCON2020/">
+            <span class="level-start">
+                <span class="level-item">ROBOCON2020</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/ZYC/">
+            <span class="level-start">
+                <span class="level-item">ZYC</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/hexo/">
+            <span class="level-start">
+                <span class="level-item">hexo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/fMRI/" style="font-size: 10px;">fMRI</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-23T04:01:49.000Z">2020-06-23</time></div>
+                    <a href="/2020/06/23/fMRI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fMRI学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Biomedical-Engineering/">Biomedical Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time></div>
+                    <a href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录 2nd</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T12:52:29.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于matlab的蓝牙串口通信</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/ielts-5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-5</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T01:08:55.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CNN/">
+                        <span class="tag">CNN</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DT35/">
+                        <span class="tag">DT35</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NNS/">
+                        <span class="tag">NNS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PIL/">
+                        <span class="tag">PIL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ROBOCON2020/">
+                        <span class="tag">ROBOCON2020</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/adams/">
+                        <span class="tag">adams</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bluetooth/">
+                        <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fMRI/">
+                        <span class="tag">fMRI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ielts/">
+                        <span class="tag">ielts</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jupyter/">
+                        <span class="tag">jupyter</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matlab/">
+                        <span class="tag">matlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maxwell/">
+                        <span class="tag">maxwell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pytorch/">
+                        <span class="tag">pytorch</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/record/">
+                        <span class="tag">record</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zyc/">
+                        <span class="tag">zyc</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%B2%E5%8F%A3/">
+                        <span class="tag">串口</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/">
+                        <span class="tag">定位算法</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-23T04:01:49.000Z">2020-06-23</time></div>
+                    <a href="/2020/06/23/fMRI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fMRI学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Biomedical-Engineering/">Biomedical Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time></div>
+                    <a href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录 2nd</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-14T12:52:29.000Z">2020-04-14</time></div>
+                    <a href="/2020/04/14/%E5%9F%BA%E4%BA%8Ematlab%E7%9A%84%E8%93%9D%E7%89%99%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">基于matlab的蓝牙串口通信</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T04:05:00.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/ielts-5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Ielts小班课学习-5</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ielts/">Ielts</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T01:08:55.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ROBOCON2020/">ROBOCON2020</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CNN/">
+                        <span class="tag">CNN</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DT35/">
+                        <span class="tag">DT35</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NNS/">
+                        <span class="tag">NNS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PIL/">
+                        <span class="tag">PIL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ROBOCON2020/">
+                        <span class="tag">ROBOCON2020</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/adams/">
+                        <span class="tag">adams</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bluetooth/">
+                        <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fMRI/">
+                        <span class="tag">fMRI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ielts/">
+                        <span class="tag">ielts</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jupyter/">
+                        <span class="tag">jupyter</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/matlab/">
+                        <span class="tag">matlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maxwell/">
+                        <span class="tag">maxwell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pytorch/">
+                        <span class="tag">pytorch</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/record/">
+                        <span class="tag">record</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zyc/">
+                        <span class="tag">zyc</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%B8%B2%E5%8F%A3/">
+                        <span class="tag">串口</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/">
+                        <span class="tag">定位算法</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/delayz.png" alt="Wdnmd" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 张砚驰&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                Visited by <span id="busuanzi_value_site_uv">0</span> users
+                </span>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://hit-zyc.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

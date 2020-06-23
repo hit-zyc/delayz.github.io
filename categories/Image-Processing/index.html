@@ -514,917 +514,29 @@
 
 
 
+
     
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-03T06:19:15.000Z">2020-04-03</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    15 minutes read (About 2279 words)
-                </span>
-                
-                
-            </div>
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/categories/Image-Processing/page/0/">Previous</a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/03/pytorch%E5%88%9D%E8%AF%86/">pytorch、jupyter初识</a>
-            
-        </h1>
-        <div class="content">
-            <font face='Times New Roman'>
-
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&emsp;&emsp;如何逐渐掌握深度学习呢，是一个难题，网上参差不齐没有一个非常好非常全面的教程，只能一点一点自己累计，寻找例程来模仿主要理解他是怎么一步步完成任务的、思考一个普遍性的解决问题的过程，如何搭建深度学习的神经网络框架，现在暂时选择<code>pytorch</code>。<br>&emsp;&emsp;然后，目前推荐搭建框架过程使用<code>jupyter notebook</code>，所以也要学习如何使用它，那么我想在每一阶段都解决和思考一些问题记录下来，来一步步稳扎稳打的学习深度学习</p>
-<h3 id="个人思路"><a href="#个人思路" class="headerlink" title="个人思路"></a>个人思路</h3><p>&emsp;&emsp;其实，深度学习说难不难，说简单肯定不简单，你真的可以甚至1天快速入门、上手，只要你懂一些python语法，稍微看看比较通俗的神经网络的介绍文章，学一种搭建框架的方式就能让你用上你设计的网络结构，大批量的规则化的图像信息甚至也可以从网上获取，然后非常方便的使用、训练、测试。<br>&emsp;&emsp;但是你想真正用神经网络来解决问题你自己的实际问题，那么这些将远远不够，至少我是这样认为的，所以我寻找了很多比较有顺序的深度学习教程（pytorch的），都需要一篇篇的仔细阅读，深化概念，让之后的进阶操作能更快理解。</p>
-<hr>
-<h1 id="学习阶段————初次接触"><a href="#学习阶段————初次接触" class="headerlink" title="学习阶段————初次接触"></a>学习阶段————初次接触</h1><p>思考：</p>
-<ul>
-<li>如何将一大批尺寸不一、随机的图像统一标准化的作为深度学习的输入、以及同时集合这些输入的label–对应的解，即真实值（来和输出层的计算值比较损失）？</li>
-</ul>
-<blockquote>
-</blockquote>
-<ul>
-<li>神经网络的框架如何根据自己的要求、向适合解决问题的网络结构改进？</li>
-</ul>
-<blockquote>
-</blockquote>
-<ul>
-<li>学习如何使用GPU来训练模型？</li>
-</ul>
-<blockquote>
-</blockquote>
-<ul>
-<li>jupyter notebook 中如何正常运行pytorch网络？</li>
-</ul>
-<blockquote>
-</blockquote>
-<hr>
-<h2 id="一、在Morvan莫烦的pytorch教程中，再次理解神经网络"><a href="#一、在Morvan莫烦的pytorch教程中，再次理解神经网络" class="headerlink" title="一、在Morvan莫烦的pytorch教程中，再次理解神经网络"></a>一、在Morvan莫烦的pytorch教程中，再次理解神经网络</h2><h3 id="1-1-神经网络是什么"><a href="#1-1-神经网络是什么" class="headerlink" title="1.1 神经网络是什么"></a>1.1 神经网络是什么</h3><ul>
-<li>之前虽然理解了一种说法，好像没提出来，这里讲一讲，但不讲太多，没啥意义</li>
-<li>首先，人们希望模仿人类的大脑，即生物神经网络，人类如何形成条件反射？如何学习？如何记忆？大脑内神经元如何工作？神经元之间有什么样的联系？</li>
-<li>人工神经网络相比，相似，又不相似，所有神经元的连接在同一时间都是固定的，不会凭空产生新联结，它是一种逐次接近正确答案的训练手段，其中“误差反向传递”起到关键作用</li>
-</ul>
-<h3 id="1-2-神经网络的简单结构概念"><a href="#1-2-神经网络的简单结构概念" class="headerlink" title="1.2 神经网络的简单结构概念"></a>1.2 神经网络的简单结构概念</h3><ul>
-<li><code>Gradient Descent</code>：梯度下降&emsp;&emsp;&emsp;&emsp;<code>Cost Function</code>：损失函数</li>
-<li><strong>输入层、隐含层（第1层。。。第n层）、输出层</strong>就对应着<strong>特征–&gt;代表特征1–&gt;…–&gt;代表特征n–&gt;输出</strong>，这些代表特征是越来越抽象的，人越来越无法理解，但计算机就对他比较敏感了</li>
-<li><strong>迁移学习</strong>：即在当你现有的一般神经网络足够处理比如图片内容种类识别、字符识别的任务后。如果我们在输出层前再加入几层神经网络来训练，就能来完成进阶的任务，比如不仅识别数字，还能知道数字的书写字体。。等等</li>
-</ul>
-<h3 id="2-1-选择Pytorch"><a href="#2-1-选择Pytorch" class="headerlink" title="2.1 选择Pytorch"></a>2.1 选择<code>Pytorch</code></h3><ul>
-<li>好用、使用广泛、新颖、直观、动态建立框架</li>
-<li><strong><code>torchvision</code></strong>里已经有一些它搭建好的网络，比如resnet（可以可以，我知道例程是这样用的了），然后你用这个已有的网络来训练自己的任务</li>
-</ul>
-<blockquote>
-<p>将<code>jupyter notebook</code>工作目录更改为自定义，即在属性栏启动目录将<code>userprofile/</code>..双引号内的内容改为自己希望前往的目录地址，重启即可</p>
-</blockquote>
-<ul>
-<li><a href="http://pytorch.org/docs/torch.html#math-operations">pytorch常用函数的详解</a>&emsp;&emsp;&emsp;&emsp;<a href="https://www.bilibili.com/video/BV1Vx411j7kT?p=7">numpy矩阵类型与pytorch中tensor（张量）矩阵转换</a></li>
-</ul>
-<h3 id="2-2-什么是Variable"><a href="#2-2-什么是Variable" class="headerlink" title="2.2 什么是Variable"></a>2.2 什么是<code>Variable</code></h3><ul>
-<li><p>&emsp;&emsp;它在神经网络的训练中是一个关键，为什么这么说？思考一下，神经网络的反向传播算法常用梯度下降法，那其中如何求梯度呢？<br>&emsp;&emsp;大家都知道就是求偏导数，导数就是梯度，torch里求导数的小帮手就是<code>variable</code>，将tensor张量放进variable中，开启自动求梯度的配置</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable = Variable(tensor,requires_grad=<span class="literal">True</span>) <span class="comment">#requires_grad = True</span></span><br></pre></td></tr></table></figure>
-<p>那么，你以后含variable的运算就都和variable本身建立了某种联系，可以快速得到以后的结果相对variable的梯度</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v_out = torch.mean(variable*variable)  <span class="comment">#例如求个平均数的运算</span></span><br><span class="line">v_out.backward()  <span class="comment">#求梯度</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>variable</code>变量不同于<code>tensor</code>，但是<code>variable.data</code>可以得到tensor，如果想进行tensor和numpy_array的转换，那么就要<code>xx.data</code>先得到tensor</p>
-</li>
-<li><p><code>variable</code>的运算和<code>tensor</code>相似，但不完全相同</p>
-</li>
-</ul>
-<h3 id="2-3-激励函数-AF–activation-function-？"><a href="#2-3-激励函数-AF–activation-function-？" class="headerlink" title="2.3 激励函数(AF–activation function)？"></a>2.3 激励函数(AF–activation function)？</h3><ul>
-<li>&emsp;&emsp;激励函数广泛应用在各种层，各种用，可是为什么要激励函数呢？因为复杂问题中，输入输出往往都<strong>不是线性关系</strong>，不是线性，你就不能简单在他们中间乘个系数。<br>&emsp;&emsp;进阶的操作就是，在输入做完简单线性处理（乘k）的结果代入一个非线性函数</li>
-</ul>
-<ul>
-<li>&emsp;&emsp;常用的非线性激活函数由<code>relu</code>、<code>sigmoid</code>、<code>tanh</code>方程，甚至可以自己创造激励函数来求解，不过要注意，这些激励函数必须都是<strong>可以微分的</strong>，因为需要求梯度求导</li>
-</ul>
-<ul>
-<li>&emsp;&emsp;当隐藏层不多时，可以尝试任意一个激励函数；不过当隐藏层中含有非常多个<code>layer</code>，就有慎重选择，可能出现<em>梯度爆炸</em>、<em>梯度消失</em>（我也不太懂，再学学）。其次，具体案例中，少量隐藏层可以有多种选择，<strong>卷积神经网络</strong>首选<code>relu</code>，<strong>循环神经网络</strong>首选<code>relu</code>、<code>tanh</code></li>
-</ul>
-<h4 id="如何应用activation-function"><a href="#如何应用activation-function" class="headerlink" title="如何应用activation function"></a><strong>如何应用activation function</strong></h4><ul>
-<li>理解代码然后实验即可<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># fake data</span></span><br><span class="line"></span><br><span class="line">x = torch.linspace(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">200</span>)  <span class="comment"># x data (tensor), shape=(100, 1)</span></span><br><span class="line">x = Variable(x)</span><br><span class="line">x_np = x.data.numpy()   <span class="comment"># numpy array for plotting</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># following are popular activation functions</span></span><br><span class="line"></span><br><span class="line">y_relu = torch.relu(x).data.numpy()</span><br><span class="line">y_sigmoid = torch.sigmoid(x).data.numpy()</span><br><span class="line">y_tanh = torch.tanh(x).data.numpy()</span><br><span class="line">y_softplus = F.softplus(x).data.numpy() <span class="comment"># there's no softplus in torch</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="3-1-构建网络：回归"><a href="#3-1-构建网络：回归" class="headerlink" title="3.1 构建网络：回归"></a>3.1 构建网络：回归</h3><ul>
-<li><p>利用<code>Pytorch</code>建立一个简单的神经网络</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, xxx, xxx, xxx, ...)</span>:</span></span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        <span class="comment"># xxxxxxxx</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="comment"># xxxxxxxx</span></span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure></li>
-<li><p>定义一个实际的神经网络</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net = Net(xxx=<span class="number">1</span>, xxx=<span class="number">10</span>, xxx=<span class="number">1</span>, ...)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>定义优化器<code>optimizer</code>和损失函数<code>loss function</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">optimizer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.2</span>)  <span class="comment">#net.parameters()：包含了神经网络的所有参数  lr：学习率（步长）</span></span><br><span class="line">loss_func = torch.nn.MSELoss()  <span class="comment"># this is for regression mean squared loss</span></span><br></pre></td></tr></table></figure></li>
-<li><p>那么在训练的时候</p>
-<ul>
-<li>首先定义网络的输出位置<code>prediction</code>，真正计算损失<code>loss</code></li>
-<li>每次利用优化器清除掉网络中之前计算的梯度</li>
-<li>然后开始运行反向传播算法</li>
-<li>最后向正确方向迈出一步，用计算出的梯度再计算出新一轮的网络参数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prediction = net(x)     <span class="comment"># input x and predict based on x</span></span><br><span class="line">loss = loss_func(prediction, y)     <span class="comment"># must be (1. nn output, 2. target)</span></span><br><span class="line">optimizer.zero_grad()   <span class="comment"># clear gradients for next train</span></span><br><span class="line">loss.backward()         <span class="comment"># backpropagation, compute gradients</span></span><br><span class="line">optimizer.step()        <span class="comment"># apply gradients</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>当然本节是对于简单的回归问题，所以定义输出量的变量简单，损失计算也是简单的均方差算法</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="3-2-构建网络：分类"><a href="#3-2-构建网络：分类" class="headerlink" title="3.2 构建网络：分类"></a>3.2 构建网络：分类</h3><ul>
-<li>与简单的回归神经网络不同的是，分类神经网络的输入量和输出量都不只有一个</li>
-<li>输入量可以是一组坐标，甚至可以是一张图片的一个三维张量，而输出则可以是一个输入张量对所有类别的概率判断</li>
-<li>分类的损失函数选择和回归是不一样的，教程中选择了<code>loss_func = torch.nn.CrossEntropyLoss()</code></li>
-<li>当然，对于我要解决的字符识别问题而言，输入就要复杂得多，远不是一对坐标那么简单，输出的类别也会有很多，所以更透彻的学习将在第二阶段进行</li>
-</ul>
-</font>
+        <div class="pagination-next">
+            <a class="is-flex-grow has-text-black-ter" href="/categories/Image-Processing/page/2/">Next</a>
         </div>
-        
-        
-        
-    </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link is-current" href="/categories/Image-Processing/">1</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/Image-Processing/page/2/">2</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/Image-Processing/page/3/">3</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/Image-Processing/page/4/">4</a></li>
+            
+        </ul>
+    </nav>
 </div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-03T05:06:41.000Z">2020-04-03</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    17 minutes read (About 2488 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/03/opencv-4/">python 之 opencv 阶段总结篇</a>
-            
-        </h1>
-        <div class="content">
-            <font face='Times New Roman'>
-
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
-<li>没想到吧，这就总结了。没错我学习的三分钟热度真的太强了，这几天作业都没好好做，全在看这一套opencv的教程。那么就在大概第四天的时候把这一套教程给全部实验了一遍。</li>
-<li>不管怎么说，这一套教程呢，我作为小白学者觉得非常不错，讲的不深也有一些小挑战（略微简单，不过需要细品）。其实可以通过这些知识和技巧来做自己的延申，我还没有多尝试，唯一一次尝试使用对比字母轮廓形状的方法找到正确的字母，用他给的‘A’成功了，自己在网上找了个‘C’，预处理还做了闭运算轮廓只有一条，结果算法结果是像A我真的吐了。</li>
-<li>那么鉴于我一下子就学完了，而且每一章都像之前那样复制性的总结其实没多大意义，教程我电脑里也有，想复习了再去看看就可，所以这次来一个总结，目的就是略微的提到写我觉得的重点。</li>
-</ul>
-<h1 id="知识点回忆"><a href="#知识点回忆" class="headerlink" title="知识点回忆"></a>知识点回忆</h1><hr>
-<p><a href="#1">1. 摄像头 or 视频</a><br><a href="#2">2. matplotlib的使用</a><br><a href="#3">3. 图像基本操作</a><br><a href="#4">4. 颜色空间转换</a><br><a href="#5">5. 阈值分割</a><br><a href="#6">6. 图形几何变换</a><br><a href="#7">7. 绘图功能</a><br><a href="#8">8. 图像混合</a></p>
-<hr>
-<h3 id="1">1. 摄像头 or 视频</h3>
-
-
-<ul>
-<li>我看了下，之前讲完了前三个部分，调用电脑摄像头，可以用来截取一帧图像、可以将摄像头的连续若干帧图像保存成视频的形式</li>
-</ul>
-<ul>
-<li>可以打开一个视频，如果你利用cv2来<strong>创建一个滑动条</strong><code>cv2.createTrackbar()</code>（滑动就会对应有回调函数）还能<strong>实现拖动视频播放进度</strong>，借助<code>cv2.setTrackbarPos()</code>、<code>cv2.getTrackbarPos()</code>其实看函数名也知道是干什么的，这里不多讲了  </li>
-</ul>
-<ul>
-<li><code>cv2.VideoCapture()</code>可以<strong>打开摄像头或者视频文件</strong>，<code>cap.get(propId)</code>、<code>cap.set(propId,value)</code>来<strong>得到和修改摄像头的很多属性</strong></li>
-</ul>
-<ul>
-<li><p><code>cv2.imwrite()</code>来<strong>保存图片或者视频</strong>，保存视频的时候要注意提前设置好视频编码方式，我看有挺多的可能根据需要到时候就会了解吧、当然<strong>读取图片</strong>还是得<code>cv2.imread()</code></p>
-</li>
-<li><p>捕获视频中的一帧<code>ret, frame = capture.read()</code></p>
-</li>
-</ul>
-<hr>
-<h3 id="2">2. matplotlib的使用</h3>  
-
-
-<ul>
-<li>其实这整套教程也没咋用到，他和matlab里的plot用法有点像，都是subplot。不过要注意，他来显示图像时，<code>plt.imshow()</code>中后一个参数cmap的参数选择，灰度图就是<code>cmap = &#39;gray&#39;</code>，而且imshow之后必须要加<code>plt.show()</code>，要不然图片就不显示，可以看一下老师怎么写的</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">titles &#x3D; [&#39;Original&#39;, &#39;BINARY&#39;, &#39;BINARY_INV&#39;, &#39;TRUNC&#39;, &#39;TOZERO&#39;, &#39;TOZERO_INV&#39;]</span><br><span class="line">images &#x3D; [img, th1, th2, th3, th4, th5]</span><br><span class="line"></span><br><span class="line"># 使用Matplotlib显示</span><br><span class="line">for i in range(6):</span><br><span class="line">    plt.subplot(2, 3, i + 1)</span><br><span class="line">    plt.imshow(images[i], &#39;gray&#39;)</span><br><span class="line">    plt.title(titles[i], fontsize&#x3D;8)</span><br><span class="line">    plt.xticks([]), plt.yticks([])  # 隐藏坐标轴</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>matplotlib中图像显示RGB顺序，opencv是BGR，显示时需要通道<strong>倒置</strong>一下</li>
-</ul>
-<hr>
-<h3 id="3">3. 图像基本操作</h3>
-
-<ul>
-<li>读取像素点的值直接<code>img[100, 90]</code>，修改也是这样。</li>
-</ul>
-<ul>
-<li><code>img.shape</code>形状中包括行数、列数和通道数</li>
-</ul>
-<ul>
-<li><strong>截取ROI</strong>，非常简单一看就懂，<code>face = img[100:200, 115:188]</code>，这也只能是个矩形，不过得到轮廓或者利用掩码方式得到一块想要的区域也行</li>
-</ul>
-<ul>
-<li>彩色图的BGR三个通道是可以<strong>分开</strong>单独访问的，<code>b, g, r = cv2.split(img)</code>；也可以<strong>合并</strong>组成图像<code>img = cv2.merge((b, g, r))</code></li>
-</ul>
-<hr>
-<h3 id="4">4. 颜色空间转换</h3>
-
-<ul>
-<li><code>img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</code>图像形式转换，教程中用他来转换成HSV颜色模型，改成<code>cv2.COLOR_BGR2HSV</code>就行了</li>
-</ul>
-<ul>
-<li><code>mask = cv2.inRange(hsv, lower_blue, upper_blue)</code>，其实inRange这个函数我感觉不太重要，因为后面有阈值分割，但可能这个是<strong>针对真彩图像</strong>，与阈值分割多是用于灰度图</li>
-</ul>
-<ul>
-<li>然后很重要的一个<code>res = cv2.bitwise_and(frame, frame, mask=mask)</code>，这个位操作是图像只存在0和255也就是二值图像的关键操作，可以在以后的二值图像处理里起到作用，特别是<strong>应用在掩码图的得到</strong></li>
-</ul>
-<hr>
-<h3 id="5">5. 阈值分割</h3>
-
-<ul>
-<li>这一段是之后的基础，全都讲起来有点麻烦了，我就不多说。额，先说一句，这个应该是用在<strong>处理灰度图上的</strong></li>
-</ul>
-<ul>
-<li><strong>固定阈值</strong>：<code>ret, th = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)</code>，第二个参数是设定的阈值，第三个是最大值，最后一个阈值的方式，<a href="https://docs.opencv.org/4.0.0/d7/d1b/group__imgproc__misc.html#gaa9e58d2860d4afa658ef70a9b1115576">种类主要5种</a></li>
-</ul>
-<ul>
-<li><strong>自适应阈值</strong>：<code>th2 = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 4)</code>，不同之处就在第三个参数，小区域阈值的计算方式；最后一个参数：最终阈值等于小区域计算出的阈值再减去此值（光看看不懂，想试试就自己试试）</li>
-</ul>
-<ul>
-<li><p><strong>Otsu阈值</strong>：看代码就知道怎么用了，原理自便</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 固定阈值法</span><br><span class="line">ret1, th1 &#x3D; cv2.threshold(img, 100, 255, cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line"># Otsu阈值法</span><br><span class="line">ret2, th2 &#x3D; cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)</span><br><span class="line"></span><br><span class="line"># 先进行高斯滤波，再使用Otsu阈值法</span><br><span class="line">blur &#x3D; cv2.GaussianBlur(img, (5, 5), 0)</span><br><span class="line">ret3, th3 &#x3D; cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>光线不均匀的图片就用自适应阈值就完事了</p>
-</li>
-</ul>
-<hr>
-<h3 id="6">6. 图形几何变换</h3>
-
-<ul>
-<li>其实我觉得这一章是很重要的，因为图像处理应该会有很多时候待处理的目标是需要几何变换特别是立体上的仿射变换</li>
-</ul>
-<ul>
-<li><code>cv2.resize()</code><strong>可以自己定义大小，也可以按比例缩放</strong>，用处会很多，我不知道和下面这个有什么关系，用处大不大，或者说在哪里使用</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lower &#x3D; cv2.pyrDown(img)  # 向下采样一级</span><br><span class="line">higher &#x3D; cv2.pyrUp(img)  # 向上采样一级</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li><code>cv2.flip(img, 1)</code>第二个参数决定是<strong>镜像、垂直、镜像垂直翻转</strong></li>
-</ul>
-<ul>
-<li><strong>平移图片</strong>，需要用到矩阵，用<strong>仿射变换函数</strong><code>cv2.warpAffine()</code>实现；<strong>旋转</strong>也是，而且用这个函数前，还要加个得到旋转对应的矩阵的函数<code>cv2.getRotationMatrix2D()</code>，你看这还只是2D的</li>
-</ul>
-<p>$$<br>M = \left[<br> \begin{matrix}<br>   1 &amp; 0 &amp; t_x \newline<br>   0 &amp; 1 &amp; t_y<br>  \end{matrix}<br>  \right]<br>$$</p>
-<h4 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a><strong>仿射变换</strong></h4><ul>
-<li><strong>二维的</strong>，懂了吗，基本的图像变换就是二维坐标的变换：从一种二维坐标(x,y)到另一种二维坐标(u,v)的线性变换，你得先得到一个矩阵，那么就可以转换了，矩阵<strong>T(2×3)</strong>就称为仿射变换的变换矩阵</li>
-</ul>
-<p>$$<br>\begin{matrix}<br>   u=a_1x+b_1y+c_1 \newline<br>   v=a_2x+b_2y+c_2<br>  \end{matrix}<br>$$</p>
-<hr>
-<p>$$<br>\left[<br> \begin{matrix}<br>   u \newline<br>   v<br>  \end{matrix}<br>  \right]  = \left[<br> \begin{matrix}<br>   a_1 &amp; b_1  \newline<br>   a_2 &amp; b_2<br>  \end{matrix}<br>  \right] \left[<br> \begin{matrix}<br>   x \newline<br>   y<br>  \end{matrix}<br>  \right]+\left[<br> \begin{matrix}<br>   c_1 \newline<br>   c_2<br>  \end{matrix}<br>  \right]<br>$$</p>
-<hr>
-<p>$$<br>R=\left[<br> \begin{matrix}<br>   a_1 &amp; b_1  \newline<br>   a_2 &amp; b_2<br>  \end{matrix}<br>  \right], t=\left[<br> \begin{matrix}<br>   c_1 \newline<br>   c_2<br>  \end{matrix}<br>  \right],T=\left[<br> \begin{matrix}<br>   R &amp; t<br>  \end{matrix}<br>  \right]<br>$$</p>
-<hr>
-<ul>
-<li>然后几行代码看懂，现根据三个点和对应的三个点得到变换矩阵，然后直接转整个图像</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 变换前的三个点</span><br><span class="line">pts1 &#x3D; np.float32([[50, 65], [150, 65], [210, 210]])</span><br><span class="line"># 变换后的三个点</span><br><span class="line">pts2 &#x3D; np.float32([[50, 100], [150, 65], [100, 250]])</span><br><span class="line"></span><br><span class="line"># 生成变换矩阵</span><br><span class="line">M &#x3D; cv2.getAffineTransform(pts1, pts2)</span><br><span class="line">dst &#x3D; cv2.warpAffine(img, M, (cols, rows))</span><br></pre></td></tr></table></figure>
-
-<h4 id="透视变换"><a href="#透视变换" class="headerlink" title="透视变换"></a><strong>透视变换</strong></h4><ul>
-<li><strong>三维的</strong>，就是<strong>立体上</strong>如何把一个目标看得顺眼一点，一个身份证你斜着拍的，那我想让他能像平着拍的一样舒服，那就用这个方法</li>
-</ul>
-<p>$$<br>\begin{matrix}<br>   X=a_1 x + b_1 y + c_1 \newline<br>   Y=a_2 x + b_2 y + c_2  \newline<br>   Z=a_3 x + b_3 y + c_3<br>  \end{matrix}<br>$$</p>
-<hr>
-<p>$$<br>\left[<br> \begin{matrix}<br>   X \newline<br>   Y \newline<br>   Z<br>  \end{matrix}<br>  \right]  = \left[<br> \begin{matrix}<br>   a_1 &amp; b_1 &amp; c_1  \newline<br>   a_2 &amp; b_2 &amp; c_2  \newline<br>   a_3 &amp; b_3 &amp; c_3<br>  \end{matrix}<br>  \right] \left[<br> \begin{matrix}<br>   x \newline<br>   y \newline<br>   1<br>  \end{matrix}<br>  \right]<br>$$</p>
-<ul>
-<li>OpenCV中首先根据变换前后的四个点用<code>cv2.getPerspectiveTransform()</code>生成3×3的变换矩阵，然后再用<code>cv2.warpPerspective()</code>进行透视变换</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 原图中卡片的四个角点</span><br><span class="line">pts1 &#x3D; np.float32([[148, 80], [437, 114], [94, 247], [423, 288]])</span><br><span class="line"># 变换后分别在左上、右上、左下、右下四个点</span><br><span class="line">pts2 &#x3D; np.float32([[0, 0], [320, 0], [0, 178], [320, 178]])</span><br><span class="line"></span><br><span class="line"># 生成透视变换矩阵</span><br><span class="line">M &#x3D; cv2.getPerspectiveTransform(pts1, pts2)</span><br><span class="line"># 进行透视变换，参数3是目标图像大小</span><br><span class="line">dst &#x3D; cv2.warpPerspective(img, M, (320, 178))</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="center">变换</th>
-<th align="center">矩阵</th>
-<th align="center">自由度</th>
-<th align="center">保持性质</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">平移</td>
-<td align="center">[I, t]（2×3）</td>
-<td align="center">2</td>
-<td align="center">方向/长度/夹角/平行性/直线性</td>
-</tr>
-<tr>
-<td align="center">刚体</td>
-<td align="center">[R, t]（2×3）</td>
-<td align="center">3</td>
-<td align="center">长度/夹角/平行性/直线性</td>
-</tr>
-<tr>
-<td align="center">相似</td>
-<td align="center">[sR, t]（2×3）</td>
-<td align="center">4</td>
-<td align="center">夹角/平行性/直线性</td>
-</tr>
-<tr>
-<td align="center">仿射</td>
-<td align="center">[T]（2×3）</td>
-<td align="center">6</td>
-<td align="center">平行性/直线性</td>
-</tr>
-<tr>
-<td align="center">透视</td>
-<td align="center">[T]（3×3）</td>
-<td align="center">8</td>
-<td align="center">直线性</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="7">7. 绘图功能</h3>
-
-<ul>
-<li><p>感觉画图功能不太用得到，不过也是用起来很方便，绘制形状的函数有一些共同的参数</p>
-<ul>
-<li>color：绘制的颜色,是彩色图就估计是BGR，就输一个三维元组ok；灰度图就一个255以内的数</li>
-<li>thickness：线宽，默认为1；<strong>对于矩形/圆之类的封闭形状而言，传入-1表示填充形状</strong></li>
-<li>建议画什么线型都加一个<code>lineType=cv2.LINE_AA</code>比较好看</li>
-</ul>
-</li>
-<li><p><code>img = np.zeros((512, 512, 3), np.uint8)</code>可以直接用这样一句话来<strong>创建一个纯色图</strong></p>
-</li>
-</ul>
-<ul>
-<li><code>cv2.line(img, (0, 0), (512, 512), (255, 0, 0), 5)</code>，<strong>起点</strong>、<strong>终点</strong></li>
-</ul>
-<ul>
-<li><code>cv2.rectangle(img, (384, 0), (510, 128), (0, 255, 0), 3)</code>，<strong>左上</strong>、<strong>右下</strong></li>
-</ul>
-<ul>
-<li><code>cv2.circle(img, (447, 63), 63, (0, 0, 255), -1)</code>，<strong>圆心</strong>、<strong>半径</strong></li>
-</ul>
-<ul>
-<li><code>cv2.ellipse(img, (256, 256), (100, 50), 0, 0, 180, (255, 0, 0), -1)</code>，<strong>椭圆中心</strong>、<strong>x/y轴长度</strong>、<strong>旋转角度</strong>、<strong>起始角度</strong>、<strong>结束角度</strong>，具体自己试试</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 使用cv2.polylines()画多条直线</span><br><span class="line">line1 &#x3D; np.array([[100, 20],  [300, 20]], np.int32).reshape((-1, 1, 2))</span><br><span class="line">line2 &#x3D; np.array([[100, 60],  [300, 60]], np.int32).reshape((-1, 1, 2))</span><br><span class="line">line3 &#x3D; np.array([[100, 100],  [300, 100]], np.int32).reshape((-1, 1, 2))</span><br><span class="line">cv2.polylines(img, [line1, line2, line3], True, (0, 255, 255))</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>添加文字</strong>：<code>cv2.putText(img, &#39;ex2tron&#39;, (10, 500), font,4, (255, 255, 255), 2, lineType=cv2.LINE_AA)</code></li>
-</ul>
-<hr>
-<h3 id="8">8. 图像混合</h3>
-
-
-
-<p>👴乏了，找时间再写吧</p>
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-29T18:45:22.000Z">2020-03-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 minutes read (About 824 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/30/opencv3/">python 之 opencv-摄像头采集和视频播放</a>
-            
-        </h1>
-        <div class="content">
-            <font face='Times New Roman'>
-
-<h2 id="打开摄像头"><a href="#打开摄像头" class="headerlink" title="打开摄像头"></a>打开摄像头</h2><hr>
-<p>要使用摄像头，需要使用<code>cv2.VideoCapture(0)</code>创建VideoCapture对象，参数0指的是摄像头的编号，如果你电脑上有两个摄像头的话，访问第2个摄像头就可以传入1，依此类推。</p>
-<h4 id="capture-read"><a href="#capture-read" class="headerlink" title="capture.read"></a><strong>capture.read</strong></h4><p>函数返回的第1个参数ret(return value缩写)是一个布尔值，表示当前这一帧是否获取正确</p>
-<h4 id="cv2-cvtColor"><a href="#cv2-cvtColor" class="headerlink" title="cv2.cvtColor"></a><strong>cv2.cvtColor</strong></h4><p>用来转换颜色，这里将彩色图转成灰度图</p>
-<h4 id="cap-get-propId-、cap-set-propId-value"><a href="#cap-get-propId-、cap-set-propId-value" class="headerlink" title="cap.get(propId)、cap.set(propId,value)"></a><strong>cap.get(propId)</strong>、<strong>cap.set(propId,value)</strong></h4><p>通过<code>cap.get(propId)</code>可以获取摄像头的一些属性，比如捕获的分辨率，亮度和对比度等。propId是从0~18的数字，代表不同的属性，完整的属性列表可以参考：<a href="https://docs.opencv.org/4.0.0/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d">VideoCaptureProperties</a>。也可以使用<code>cap.set(propId,value)</code>来修改属性值</p>
-<blockquote>
-<p>经验之谈：某些摄像头设定分辨率等参数时会无效，因为它有固定的分辨率大小支持，一般可在摄像头的资料页中找到。</p>
-</blockquote>
-<h2 id="播放本地视频"><a href="#播放本地视频" class="headerlink" title="播放本地视频"></a>播放本地视频</h2><hr>
-<p>跟打开摄像头一样，如果把摄像头的编号换成视频的路径就可以播放本地视频了。回想一下<code>cv2.waitKey()</code>，它的参数表示暂停时间，所以这个值越大，视频播放速度越慢，反之，播放速度越快，通常设置为25或30。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 播放本地视频</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="string">'demo_video.mp4'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line">    cv2.imshow(<span class="string">'frame'</span>, gray)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">30</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="录制视频"><a href="#录制视频" class="headerlink" title="录制视频"></a>录制视频</h2><hr>
-<p>之前我们保存图片用的是<code>cv2.imwrite()</code>，要保存视频，我们需要创建一个<code>VideoWriter</code>的对象，需要给它传入四个参数：</p>
-<ul>
-<li>输出的文件名，如’output.avi’</li>
-<li>编码方式<a href="https://baike.baidu.com/item/fourcc/6168470?fr=aladdin">FourCC</a>码</li>
-<li>帧率<a href="https://baike.baidu.com/item/FPS/3227416">FPS</a></li>
-<li>要保存的分辨率大小</li>
-</ul>
-<p>FourCC是用来指定视频编码方式的四字节码，所有的编码可参考<a href="http://www.fourcc.org/codecs.php">Video Codecs</a>。如MJPG编码可以这样写： <code>cv2.VideoWriter_fourcc(*&#39;MJPG&#39;)</code>或<code>cv2.VideoWriter_fourcc(&#39;M&#39;,&#39;J&#39;,&#39;P&#39;,&#39;G&#39;)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义编码方式并创建VideoWriter对象</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'MJPG'</span>)</span><br><span class="line">outfile = cv2.VideoWriter(<span class="string">'output.avi'</span>, fourcc, <span class="number">25.</span>, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        outfile.write(frame)  <span class="comment"># 写入文件</span></span><br><span class="line">        cv2.imshow(<span class="string">'frame'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://blog.csdn.net/u011436429/article/details/80604590">OpenCV VideoCapture.get()参数中文详解，不太准确供参考</a></p>
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><hr>
-<ul>
-<li>实现一个可以拖动滑块播放视频的功能。（提示：需要用到 <code>cv2.CAP_PROP_FRAME_COUNT</code>和<code>cv2.CAP_PROP_POS_FRAMES</code>两个属性）</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changetime</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> capture.set(cv2.CAP_PROP_POS_FRAMES, x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 播放本地视频</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="string">'demo_video.mp4'</span>)</span><br><span class="line"><span class="comment">#获取视频帧长度</span></span><br><span class="line">frame_count = capture.get(cv2.CAP_PROP_FRAME_COUNT)</span><br><span class="line"><span class="comment">#创建一个窗口</span></span><br><span class="line">cv2.namedWindow(<span class="string">'video'</span>)</span><br><span class="line"><span class="comment"># 创建视频滑动条</span></span><br><span class="line">cv2.createTrackbar(<span class="string">'video'</span>, <span class="string">'video'</span>, <span class="number">0</span>, int(frame_count), changetime)</span><br><span class="line"></span><br><span class="line">height = capture.get(cv2.CAP_PROP_FRAME_HEIGHT)</span><br><span class="line">width = capture.get(cv2.CAP_PROP_FRAME_WIDTH)</span><br><span class="line">print(capture.set(cv2.CAP_PROP_FRAME_HEIGHT, height * <span class="number">2</span>))</span><br><span class="line">print(capture.set(cv2.CAP_PROP_FRAME_WIDTH, width * <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(capture.isOpened()):</span><br><span class="line">    ret, frame = capture.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        cv2.setTrackbarPos(<span class="string">'video'</span>,<span class="string">'video'</span>,int(capture.get(cv2.CAP_PROP_POS_FRAMES)))</span><br><span class="line">        cv2.imshow(<span class="string">'video'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">30</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-29T18:27:34.000Z">2020-03-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 452 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/30/opencv2/">python 之 opencv-matplotlib显示图片</a>
-            
-        </h1>
-        <div class="content">
-            <font face='Times New Roman'>
-
-<h2 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h2><hr>
-<p>Matplotlib是Python的一个很常用的绘图库，有兴趣的可以去<a href="www.matplotlib.org/">官网</a>学习更多内容。</p>
-<h3 id="显示灰度图"><a href="#显示灰度图" class="headerlink" title="显示灰度图"></a>显示灰度图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度图显示，cmap(color map)设置为gray</span></span><br><span class="line">plt.imshow(img, cmap=<span class="string">'gray'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p>结果如下：</p>
-<p><img src="http://blog.codec.wang/cv2_matplotlib_show_gray_image.jpg" alt=""></p>
-<p><a href="https://blog.csdn.net/ab_1_2_3_4_5_6_7_8_9/article/details/89306797">plt.show()和plt.imshow()的区别</a></p>
-<p><a href="https://blog.csdn.net/qq_30934313/article/details/85249831"><code>plt.imshow</code> 的<code>cmap</code>颜色参数选择</a></p>
-<hr>
-<h3 id="显示彩色图"><a href="#显示彩色图" class="headerlink" title="显示彩色图"></a>显示彩色图</h3><p><strong>OpenCV中的图像是以BGR的通道顺序存储的</strong>，但Matplotlib是以RGB模式显示的，所以直接在Matplotlib中显示OpenCV图像会出现问题，因此需要转换一下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">img2 = img[:, :, ::<span class="number">-1</span>]</span><br><span class="line"><span class="comment"># 或使用</span></span><br><span class="line"><span class="comment"># img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示不正确的图</span></span><br><span class="line">plt.subplot(<span class="number">121</span>),plt.imshow(img) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示正确的图</span></span><br><span class="line">plt.subplot(<span class="number">122</span>)</span><br><span class="line">plt.xticks([]), plt.yticks([]) <span class="comment"># 隐藏x和y轴</span></span><br><span class="line">plt.imshow(img2)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>img[:,:,0]</code>表示图片的蓝色通道，<code>img[:,:,::-1]</code>就表示BGR翻转，变成RGB，说明一下：</p>
-</blockquote>
-<p>熟悉Python的童鞋应该知道，对一个字符串s翻转可以这样写：<code>s[::-1]</code>，’abc’变成’cba’，-1表示逆序。图片是二维的，所以完整地复制一副图像就是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img2 = img[:,:] <span class="comment"># 写全就是：img2 = img[0:height,0:width]</span></span><br></pre></td></tr></table></figure>
-
-<p>而图片是有三个通道，相当于一个长度为3的字符串，所以通道翻转与图片复制组合起来便是<code>img[:,:,::-1]</code>。</p>
-<p>结果如下：</p>
-<p><img src="http://blog.codec.wang/cv2_matplotlib_show_color_image.jpg" alt=""></p>
-<h3 id="加载和保存图片"><a href="#加载和保存图片" class="headerlink" title="加载和保存图片"></a>加载和保存图片</h3><p>不使用OpenCV，Matplotlib也可以加载和保存图片：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = plt.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">plt.imshow(img)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存图片，需放在show()函数之前</span></span><br><span class="line">plt.savefig(<span class="string">'lena2.jpg'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-29T10:08:03.000Z">2020-03-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 minutes read (About 877 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/29/opencv1/">python 之 opencv-简单读取操作</a>
-            
-        </h1>
-        <div class="content">
-            <font face='Times New Roman'>
-
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这几天看了很多关于图像处理的知识，知道神经网络是怎么回事，深度学习是什么东西，机器学习和他们有什么联系，又看了python语言下如何进行图像处理。我认为在接受更高层次的处理手段和算法设计前，应该打好基础，python的图像处理，学好PIL库和opencv库，我在github上找了个opencv的教程，接下来就是对opencv重点的一些备注</p>
-<hr>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr>
-<blockquote>
-<p><code>pip install opencv-python</code></p>
-</blockquote>
-<ul>
-<li>安装测试</li>
-</ul>
-<blockquote>
-<p><code>python --version</code><br><code>import cv2</code>&emsp; or&emsp; <code>print(cv2.__version__)  # &#39;3.4.1&#39;</code></p>
-</blockquote>
-<hr>
-<h3 id="使用清华镜像在python中pip安装"><a href="#使用清华镜像在python中pip安装" class="headerlink" title="使用清华镜像在python中pip安装"></a><a href="https://blog.csdn.net/weixin_34130389/article/details/94510529">使用清华镜像在python中pip安装</a></h3><hr>
-<ul>
-<li>临时使用：</li>
-</ul>
-<p>可以在使用pip的时候加参数-i <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a></p>
-<p>例如：pip install -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a> gevent，这样就会从清华这边的镜像去安装gevent库。</p>
-<hr>
-<h3 id="opencv入门"><a href="#opencv入门" class="headerlink" title="opencv入门"></a>opencv入门</h3><hr>
-<ul>
-<li>OpenCV中彩色图是以<strong>B-G-R</strong>通道顺序存储的，灰度图只有一个通道</li>
-<li>图像坐标的起始点是在<strong>左上角</strong>，所以行对应的是y，列对应的是x</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始计时</span></span><br><span class="line">start = cv2.getTickCount()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读入一张图片</span></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止计时</span></span><br><span class="line">end = cv2.getTickCount()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 单位：s</span></span><br><span class="line">print((end - start) / cv2.getTickFrequency())</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="cv2-imread"><a href="#cv2-imread" class="headerlink" title="cv2.imread"></a><strong>cv2.imread</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载灰度图</span></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>参数1：图片的文件名</p>
-<ul>
-<li>如果图片放在当前文件夹下，直接写文件名就行了，如’lena.jpg’</li>
-<li>否则需要给出绝对路径，如’D:\OpenCVSamples\lena.jpg’</li>
-</ul>
-</li>
-<li><p>参数2：读入方式，省略即采用默认值</p>
-<ul>
-<li><code>cv2.IMREAD_COLOR</code>：彩色图，默认值(1)</li>
-<li><code>cv2.IMREAD_GRAYSCALE</code>：灰度图(0)</li>
-<li><code>cv2.IMREAD_UNCHANGED</code>：包含透明通道的彩色图(-1)</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>经验之谈：路径中不能有中文噢，并且没有加载成功的话是不会报错的，<code>print(img)</code>的结果为None，后面处理才会报错，算是个小坑。</p>
-</blockquote>
-<hr>
-<h4 id="cv2-imshow、cv2-waitKey"><a href="#cv2-imshow、cv2-waitKey" class="headerlink" title="cv2.imshow、cv2.waitKey"></a><strong>cv2.imshow</strong>、<strong>cv2.waitKey</strong></h4><hr>
-<p>使用<code>cv2.imshow()</code>显示图片，窗口会自适应图片的大小：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">'lena'</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>参数1是窗口的名字，参数2是要显示的图片。不同窗口之间用窗口名区分，所以窗口名相同就表示是同一个窗口</p>
-<hr>
-<p><code>cv2.waitKey()</code>是让程序暂停的意思，参数是等待时间（毫秒ms）。时间一到，会继续执行接下来的程序，传入0的话表示一直等待。等待期间也可以获取用户的按键输入：<code>k = cv2.waitKey(0)</code></p>
-<hr>
-<h4 id="cv2-namedWindow"><a href="#cv2-namedWindow" class="headerlink" title="cv2.namedWindow"></a><strong>cv2.namedWindow</strong></h4><hr>
-<p>我们也可以先用<code>cv2.namedWindow()</code>创建一个窗口，之后再显示图片：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先定义窗口，后显示图片</span></span><br><span class="line">cv2.namedWindow(<span class="string">'lena2'</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.imshow(<span class="string">'lena2'</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>参数1依旧是窗口的名字，参数2默认是<code>cv2.WINDOW_AUTOSIZE</code>，表示窗口大小自适应图片，也可以设置为<code>cv2.WINDOW_NORMAL</code>，表示窗口大小可调整。图片比较大的时候，可以考虑用后者。</p>
-<hr>
-<h4 id="cv2-imwrite"><a href="#cv2-imwrite" class="headerlink" title="cv2.imwrite"></a><strong>cv2.imwrite</strong></h4><hr>
-<p>使用<code>cv2.imwrite()</code>保存图片，参数1是包含后缀名的文件名：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.imwrite(<span class="string">'lena_gray.jpg'</span>, img)</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ul>
-<li>打开lena.jpg并显示，s如果按下’s’，就保存图片为’lena_save.bmp’，否则就结束程序</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">cv2.imshow(<span class="string">'lena'</span>, img)</span><br><span class="line"></span><br><span class="line">k = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"><span class="comment"># ord()用来获取某个字符的编码</span></span><br><span class="line"><span class="keyword">if</span> k == ord(<span class="string">'s'</span>):</span><br><span class="line">    cv2.imwrite(<span class="string">'lena_save.bmp'</span>, img)</span><br></pre></td></tr></table></figure>
-
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-27T14:03:57.000Z">2020-03-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 245 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/27/PYTHON-%E4%B9%8B-%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">pillow初识、format格式化、绝对相对路径说明</a>
-            
-        </h1>
-        <div class="content">
-            <font face="Times New Roman">
-
-<blockquote>
-<p>python -m -pip install –upgrade pip   #升级python的pip</p>
-</blockquote>
-<blockquote>
-<p>pip install pillow   #安装pillow库</p>
-</blockquote>
-<blockquote>
-<p>pip install django-simple-captcha    #安装captcha库</p>
-</blockquote>
-<blockquote>
-<p>pip install opencv-python   #安装opencv库</p>
-</blockquote>
-<blockquote>
-<p>pip install matplotlib    #安装matplotlib库</p>
-</blockquote>
-<hr>
-<p><a href="https://www.php.cn/python-tutorials-372980.html">pillow的小程度基本入门</a></p>
-<ul>
-<li>可以对图像进行简单的读取、生成、裁剪、缩放、复制、翻转、旋转、粘贴、拉伸</li>
-<li>图像的模糊、边缘增强、锐利、平滑等常见操作</li>
-<li>在图像中加入文本，将图片变色</li>
-</ul>
-<hr>
-<h3 id="文件绝对路径和相对路径的表示形式不同"><a href="#文件绝对路径和相对路径的表示形式不同" class="headerlink" title="文件绝对路径和相对路径的表示形式不同"></a>文件绝对路径和相对路径的表示形式不同</h3><ol>
-<li>windows系统中绝对路径用<code>\</code>展开，而在其他系统中会出现用<code>/</code>的展开</li>
-<li>相对路径中则使用<code>/</code>，比如返回上一级文件夹<code>../</code>，当前文件夹前不需要加斜杠，前往下一级文件夹的某文件则类似于<code>/xx/xx.c</code></li>
-</ol>
-<h3 id="python语法：格式化输出之format用法"><a href="#python语法：格式化输出之format用法" class="headerlink" title="python语法：格式化输出之format用法"></a><a href="https://www.cnblogs.com/lovejh/p/9201219.html">python语法：格式化输出之format用法</a></h3></font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-25T15:58:18.000Z">2020-03-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    18 minutes read (About 2713 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/25/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E4%B8%8E%E5%A4%84%E7%90%86/">图像识别与处理</a>
-            
-        </h1>
-        <div class="content">
-            <font face="Times New Roman">
-前言：图像识别与处理的大实验，需要完成的任务是基于嵌入式的字符识别
-
-<p>我目前想到的方案：</p>
-<ul>
-<li>硬件方面：利用手里有的stm32f4开发板，再买一个ov2460的摄像头采集图像，最后借助手上的蓝牙模块传输信息到电脑上。</li>
-<li>算法部分：做基于python的程序编写，那么准备利用好github上的各种方法，将这一块的图像处理学透,比如得到一个原始图像的初步处理，后面的支持向量机（SVM）、深度学习等</li>
-</ul>
-<h1 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a><strong>CNN</strong></h1><p><a href="https://www.jianshu.com/p/c0215d26d20a">一个通俗易懂的卷积神经网络的内容介绍</a></p>
-<ul>
-<li>这是一个非常容易理解的CNN卷积神经网络的入门介绍，一个图像的信息以RGB的形式输入，那么就是一个3维的且“厚度”为3阶（一个RGB像素点含三个数）的矩阵，经过</li>
-</ul>
-<blockquote>
-<p><strong>卷积层</strong>（矩阵样式的过滤器，很好理解）</p>
-</blockquote>
-<blockquote>
-<p><strong>激活函数</strong>（比如relu，对每一层后得到的矩阵处理）</p>
-</blockquote>
-<blockquote>
-<p><strong>池化层</strong>（分成中块对每个中块进行处理，来简化阶数）</p>
-</blockquote>
-<blockquote>
-<p><strong>全连接层</strong>（涉及传统的神经网络，这一层是每一个单元都和前一层的每一个单元相连接，所以称之为“全连接”）</p>
-</blockquote>
-<ul>
-<li>到了全连接层之后的操作，就跟普通的神经网络无异了,卷积神经网络比较于传统神经网络的优势在于：</li>
-</ul>
-<blockquote>
-<p>1.<strong>参数共享机制</strong>：对于不同的区域，我们都共享同一个filter，因此就共享这同一组参数；有效地避免过拟合；由于filter的参数共享，即使图片进行了一定的平移操作，我们照样可以识别出特征，这叫做 “平移不变性”。因此，模型就更加稳健了</p>
-</blockquote>
-<blockquote>
-<p>2.<strong>连接的稀疏性</strong>：传统神经网络中，由于都是全连接，所以输出的任何一个单元，都要受输入的所有的单元的影响。这样无形中会对图像的识别效果大打折扣。比较，每一个区域都有自己的专属特征，我们不希望它受到其他区域的影响</p>
-</blockquote>
-<hr>
-<hr>
-<h1 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a><strong>Logistic Regression</strong></h1><p><a href="https://www.jianshu.com/p/4cf34bf158a1">逻辑分析的理解</a></p>
-<ul>
-<li>逻辑分析的含义：</li>
-</ul>
-<ol>
-<li>有一个列向量，其中包含着一张照片的所有有效信息，他可能有10个数据，也可能有10000个数据，通常是像素值；每一个数据都对应着一个权重，那么自然这些权重也会组成一个列向量。所有数据加权求和之后加上一个系数b就会有一个输出，可以理解成一张照片就会有一个总输出</li>
-</ol>
-<blockquote>
-<p>x<sub>0</sub>w<sub>0</sub>+x<sub>1</sub>w<sub>1</sub>+…+x<sub>12287</sub>w<sub>12287</sub>+b=W<sup>T</sup>x+b</p>
-</blockquote>
-<ol start="2">
-<li>对于总输出的处理，他会作为一个<strong>激活函数</strong>（对于神经元的）（对于逻辑分析就指的是<strong>sigmoid函数</strong>）的变量输入，函数的输出就是这张照片的一个预测结果y’，sigmoid函数**输出在0-1范围内，对于图像处理最终结果的判断就在0-1中且分为了几个区间，y’在这个区间说明图片是“xx”，在那个区间又说明什么。。。</li>
-</ol>
-<blockquote>
-<p>y’ = σ(W<sup>T</sup>x+b)</p>
-</blockquote>
-<ol start="3">
-<li>而其实这都是根据一个前置处理（加权求和、带入激活函数）得出的预测值，他就不会一定准，所以有一个<strong>损失函数</strong>来衡量y’与真实值y（比如sigmoid函数输出对应的0或1）的差距</li>
-</ol>
-<blockquote>
-<p>L(y’,y) = -[y·log(y’)+(1-y)·log(1-y’)]</p>
-</blockquote>
-<ol start="4">
-<li>那么对于一个我们用来训练的图片集来说，每一张照片都有一个预测值y’。这些y’的损失函数的输出值的平均值尽量小，那就是综合了所有图片数据得到的模型。寻找W和b的较好的值，就靠这个平均值，也叫<strong>平均损失</strong>（其函数名称叫<strong>代价函数</strong>）求得，这个函数的导数为零的那一点应该是极小值，那损失就是极小值。</li>
-</ol>
-<blockquote>
-<p>J(W,b) = 1/m·Σ<sup>m</sup><sub>i=1</sub>L(y’<sup>(i)</sup>,y<sup>(i)</sup>)</p>
-</blockquote>
-<ol start="5">
-<li>通常用梯度下降法，那么操作起来就是，求得函数在目前的W、b处对W的导数，如果梯度（导数）为正，说明曲线之后向上走，所以W的值应该减小才能往低处走，梯度为负那就往前走正好是往低了走，重复一次成为一个<strong>迭代</strong>，当然还有对b的偏导，一次次迭代，一次次更新W和b的参数。梯度下降法中<strong>学习率</strong>（α）相当于每次迭代步长</li>
-</ol>
-<blockquote>
-<p>w := w - α(dJ/dw)</p>
-</blockquote>
-<ol start="6">
-<li>最后那这对（W、b）就可以用来检验对于图像识别的准确率了</li>
-</ol>
-<hr>
-<p><a href="https://zhuanlan.zhihu.com/p/28415991">一个对逻辑回归分析更清晰的介绍</a></p>
-<ol>
-<li>简单来说， 逻辑回归（Logistic Regression）是一种用于解决二分类（0 or 1）问题的机器学习方法，用于估计某种事物的可能性。</li>
-<li>上文所提到的代价函数称之为<strong>交叉熵</strong>，是对「出乎意料」（译者注：原文使用suprise）的度量。那么，交叉熵衡量的是我们在知道y的真实值时的平均「出乎意料」程度。当输出是我们期望的值，我们的「出乎意料」程度比较低；当输出不是我们期望的，我们的「出乎意料」程度就比较高。</li>
-<li>sigmoid函数为决策边境，他是线性的。</li>
-</ol>
-<hr>
-<hr>
-<h1 id="NNS"><a href="#NNS" class="headerlink" title="NNS"></a><strong>NNS</strong></h1><p><a href="https://blog.csdn.net/illikang/article/details/82019945">传统神经网络的基础入门</a></p>
-<ol>
-<li><p>作为对前面碎片化学习的延申。我认为只能说一次逻辑回归可能只能应用于线性问题，而有多个计算层的神经网络是可以解决非线性问题的。这是由于每一个计算层，或者说每一个单元的处理都是线性的，但是前一个计算层将<strong>数据空间扭曲</strong>了（两层间的权重矩阵是转换的关键），使得下一个计算层就算是线性的，也可以很好的划分出决策边境。因此，多层的神经网络的本质就是<strong>复杂函数拟合</strong></p>
-</li>
-<li><p>神经网络通常有</p>
-</li>
-</ol>
-<blockquote>
-<p><strong>输入层</strong>（包含已知的若干特征）</p>
-</blockquote>
-<blockquote>
-<p><strong>隐藏层</strong>（对输入特征一层层的抽象，获得更深一层的含义）</p>
-</blockquote>
-<blockquote>
-<p><strong>输出层</strong>（希望获得的目标，可以是单一值，也可以是向量）</p>
-</blockquote>
-<blockquote>
-<p><strong>偏置单元</strong>：它本质上是一个只含有存储功能，且存储值永远为1的单元。在神经网络的每个层次中，除了输出层以外，都会含有这样一个偏置单元。正如线性回归模型与逻辑回归模型中的一样。</p>
-</blockquote>
-<ol start="3">
-<li><p>对于只有输入层和输出层的神经网络称为<strong>感知器</strong>，它只能做线性的分类任务；而<strong>多层神经网络</strong>（深度学习）就能更深入的表示特征，以及拥有更强的函数模拟能力</p>
-</li>
-<li><p>传统神经网络中一个单元（节点 or 神经元）的处理基本上可以陈述为：上一层所有节点的输出向量矩阵乘上两层之间的权重矩阵，得到的结果矩阵，再作为<strong>激活函数</strong>（<strong>转移函数</strong>）的变量输入。函数输出值作为这个节点的输出向下一层传递、或者作为目标直接输出</p>
-</li>
-<li><p>在单层神经网络时，我们使用的激活函数是sgn函数。到了两层神经网络时，我们使用的最多的是sigmoid函数。而到了多层神经网络时，通过一系列的研究发现，ReLU函数在训练多层神经网络时，更容易收敛，并且预测性能更好。因此，目前在深度学习中，最流行的非线性函数是ReLU函数。</p>
-</li>
-</ol>
-<blockquote>
-<p>ReLU函数：不是传统的非线性函数，而是分段线性函数。其表达式非常简单，就是y=max(x,0)。简而言之，在x大于0，输出就是输入，而在x小于0时，输出就保持为0。这种函数的设计启发来自于生物神经元对于激励的线性响应，以及当低于某个阈值后就不再响应的模拟。</p>
-</blockquote>
-<ol start="6">
-<li><strong>训练</strong>：训练的主题仍然是<font color=red>优化</font>和<font color=green>泛化</font>。</li>
-</ol>
-<blockquote>
-<p><font color=red>优化</font>：<strong>梯度下降算法</strong>以及<strong>反向传播算法</strong>（BP）在多层神经网络中的训练中仍然工作的很好。目前学术界主要的研究既在于开发新的算法，也在于对这两个算法进行不断的优化。</p>
-<blockquote>
-<p><strong>反向传播算法</strong>:即由后层向前层一层层的递推，递推什么呢，就是<strong>代价函数</strong>对于这些个<strong>权重的偏导数</strong>，由于高等数学中的偏导数中的<strong>链式法则</strong></p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p><font color=green>泛化</font>：在深度学习中，泛化技术变的比以往更加的重要。这主要是因为神经网络的层数增加了，参数也增加了，表示能力大幅度增强，很容易出现<strong>过拟合现象</strong>。因此<strong>正则化技术</strong>就显得十分重要。目前，Dropout技术，以及数据扩容（Data-Augmentation）技术是目前使用的最多的正则化技术。</p>
-</blockquote>
-<p><img src="/../images/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9B%BE%E8%A7%A3.jpg" alt="神经网络的类别" title="神经网络的类别"></p>
-<p>深度学习就是多层神经网络，而机器学习则不同，他大概是人工智能算法的一个总称，他的算法包含了回归算法、神经网络、SVM等等，是一个宽泛的课题</p>
-<p><a href="https://baijiahao.baidu.com/s?id=1636567480736287260&wfr=spider&for=pc">深度学习之卷积神经网络经典模型</a></p>
-</font>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 </div>
                 
 
@@ -1470,7 +582,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            28
+                            29
                         </p>
                     </a>
                 </div>
@@ -1482,7 +594,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            7
+                            8
                         </p>
                     </a>
                 </div>
@@ -1494,7 +606,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            20
+                            21
                         </p>
                     </a>
                 </div>
@@ -1572,17 +684,6 @@
                 </a>
             </li>
         
-            <li>
-                <a class="level is-mobile" href="https://www.ieltscat.com/ " target="_blank" rel="noopener">
-                    <span class="level-left">
-                        <span class="level-item">Ieltscat</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">www.ieltscat.com</span>
-                    </span>
-                </a>
-            </li>
-        
         </ul>
         </div>
     </div>
@@ -1598,6 +699,14 @@
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/Biomedical-Engineering/">
+            <span class="level-start">
+                <span class="level-item">Biomedical Engineering</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Ielts/">
             <span class="level-start">
                 <span class="level-item">Ielts</span>
@@ -1664,7 +773,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/fMRI/" style="font-size: 10px;">fMRI</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
     </div>
 </div>
     
@@ -1676,6 +785,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-23T04:01:49.000Z">2020-06-23</time></div>
+                    <a href="/2020/06/23/fMRI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fMRI学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Biomedical-Engineering/">Biomedical Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1729,19 +851,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time></div>
-                    <a href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入探索续篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1752,6 +861,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1833,6 +953,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/bluetooth/">
                         <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fMRI/">
+                        <span class="tag">fMRI</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1954,6 +1081,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-23T04:01:49.000Z">2020-06-23</time></div>
+                    <a href="/2020/06/23/fMRI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fMRI学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Biomedical-Engineering/">Biomedical Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time></div>
                     <a href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录 2nd</a>
                     <p class="is-size-7 is-uppercase">
@@ -2002,19 +1142,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time></div>
-                    <a href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入探索续篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -2025,6 +1152,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -2106,6 +1244,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/bluetooth/">
                         <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fMRI/">
+                        <span class="tag">fMRI</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

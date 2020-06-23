@@ -540,125 +540,25 @@
 
 
 
+
     
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-29T10:08:03.000Z">2020-03-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 minutes read (About 877 words)
-                </span>
-                
-                
-            </div>
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/tags/opencv/page/0/">Previous</a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/29/opencv1/">python 之 opencv-简单读取操作</a>
-            
-        </h1>
-        <div class="content">
-            <font face='Times New Roman'>
-
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这几天看了很多关于图像处理的知识，知道神经网络是怎么回事，深度学习是什么东西，机器学习和他们有什么联系，又看了python语言下如何进行图像处理。我认为在接受更高层次的处理手段和算法设计前，应该打好基础，python的图像处理，学好PIL库和opencv库，我在github上找了个opencv的教程，接下来就是对opencv重点的一些备注</p>
-<hr>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><hr>
-<blockquote>
-<p><code>pip install opencv-python</code></p>
-</blockquote>
-<ul>
-<li>安装测试</li>
-</ul>
-<blockquote>
-<p><code>python --version</code><br><code>import cv2</code>&emsp; or&emsp; <code>print(cv2.__version__)  # &#39;3.4.1&#39;</code></p>
-</blockquote>
-<hr>
-<h3 id="使用清华镜像在python中pip安装"><a href="#使用清华镜像在python中pip安装" class="headerlink" title="使用清华镜像在python中pip安装"></a><a href="https://blog.csdn.net/weixin_34130389/article/details/94510529">使用清华镜像在python中pip安装</a></h3><hr>
-<ul>
-<li>临时使用：</li>
-</ul>
-<p>可以在使用pip的时候加参数-i <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a></p>
-<p>例如：pip install -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a> gevent，这样就会从清华这边的镜像去安装gevent库。</p>
-<hr>
-<h3 id="opencv入门"><a href="#opencv入门" class="headerlink" title="opencv入门"></a>opencv入门</h3><hr>
-<ul>
-<li>OpenCV中彩色图是以<strong>B-G-R</strong>通道顺序存储的，灰度图只有一个通道</li>
-<li>图像坐标的起始点是在<strong>左上角</strong>，所以行对应的是y，列对应的是x</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始计时</span></span><br><span class="line">start = cv2.getTickCount()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读入一张图片</span></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止计时</span></span><br><span class="line">end = cv2.getTickCount()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 单位：s</span></span><br><span class="line">print((end - start) / cv2.getTickFrequency())</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="cv2-imread"><a href="#cv2-imread" class="headerlink" title="cv2.imread"></a><strong>cv2.imread</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载灰度图</span></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>参数1：图片的文件名</p>
-<ul>
-<li>如果图片放在当前文件夹下，直接写文件名就行了，如’lena.jpg’</li>
-<li>否则需要给出绝对路径，如’D:\OpenCVSamples\lena.jpg’</li>
-</ul>
-</li>
-<li><p>参数2：读入方式，省略即采用默认值</p>
-<ul>
-<li><code>cv2.IMREAD_COLOR</code>：彩色图，默认值(1)</li>
-<li><code>cv2.IMREAD_GRAYSCALE</code>：灰度图(0)</li>
-<li><code>cv2.IMREAD_UNCHANGED</code>：包含透明通道的彩色图(-1)</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>经验之谈：路径中不能有中文噢，并且没有加载成功的话是不会报错的，<code>print(img)</code>的结果为None，后面处理才会报错，算是个小坑。</p>
-</blockquote>
-<hr>
-<h4 id="cv2-imshow、cv2-waitKey"><a href="#cv2-imshow、cv2-waitKey" class="headerlink" title="cv2.imshow、cv2.waitKey"></a><strong>cv2.imshow</strong>、<strong>cv2.waitKey</strong></h4><hr>
-<p>使用<code>cv2.imshow()</code>显示图片，窗口会自适应图片的大小：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">'lena'</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>参数1是窗口的名字，参数2是要显示的图片。不同窗口之间用窗口名区分，所以窗口名相同就表示是同一个窗口</p>
-<hr>
-<p><code>cv2.waitKey()</code>是让程序暂停的意思，参数是等待时间（毫秒ms）。时间一到，会继续执行接下来的程序，传入0的话表示一直等待。等待期间也可以获取用户的按键输入：<code>k = cv2.waitKey(0)</code></p>
-<hr>
-<h4 id="cv2-namedWindow"><a href="#cv2-namedWindow" class="headerlink" title="cv2.namedWindow"></a><strong>cv2.namedWindow</strong></h4><hr>
-<p>我们也可以先用<code>cv2.namedWindow()</code>创建一个窗口，之后再显示图片：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先定义窗口，后显示图片</span></span><br><span class="line">cv2.namedWindow(<span class="string">'lena2'</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.imshow(<span class="string">'lena2'</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>参数1依旧是窗口的名字，参数2默认是<code>cv2.WINDOW_AUTOSIZE</code>，表示窗口大小自适应图片，也可以设置为<code>cv2.WINDOW_NORMAL</code>，表示窗口大小可调整。图片比较大的时候，可以考虑用后者。</p>
-<hr>
-<h4 id="cv2-imwrite"><a href="#cv2-imwrite" class="headerlink" title="cv2.imwrite"></a><strong>cv2.imwrite</strong></h4><hr>
-<p>使用<code>cv2.imwrite()</code>保存图片，参数1是包含后缀名的文件名：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.imwrite(<span class="string">'lena_gray.jpg'</span>, img)</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ul>
-<li>打开lena.jpg并显示，s如果按下’s’，就保存图片为’lena_save.bmp’，否则就结束程序</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>)</span><br><span class="line">cv2.imshow(<span class="string">'lena'</span>, img)</span><br><span class="line"></span><br><span class="line">k = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"><span class="comment"># ord()用来获取某个字符的编码</span></span><br><span class="line"><span class="keyword">if</span> k == ord(<span class="string">'s'</span>):</span><br><span class="line">    cv2.imwrite(<span class="string">'lena_save.bmp'</span>, img)</span><br></pre></td></tr></table></figure>
-
-</font>
+        <div class="pagination-next">
+            <a class="is-flex-grow has-text-black-ter" href="/tags/opencv/page/2/">Next</a>
         </div>
-        
-        
-        
-    </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link is-current" href="/tags/opencv/">1</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/tags/opencv/page/2/">2</a></li>
+            
+        </ul>
+    </nav>
 </div>
-
-
-
-
-
-
-
-
 </div>
                 
 
@@ -704,7 +604,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            28
+                            29
                         </p>
                     </a>
                 </div>
@@ -716,7 +616,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            7
+                            8
                         </p>
                     </a>
                 </div>
@@ -728,7 +628,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            20
+                            21
                         </p>
                     </a>
                 </div>
@@ -806,17 +706,6 @@
                 </a>
             </li>
         
-            <li>
-                <a class="level is-mobile" href="https://www.ieltscat.com/ " target="_blank" rel="noopener">
-                    <span class="level-left">
-                        <span class="level-item">Ieltscat</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">www.ieltscat.com</span>
-                    </span>
-                </a>
-            </li>
-        
         </ul>
         </div>
     </div>
@@ -832,6 +721,14 @@
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/Biomedical-Engineering/">
+            <span class="level-start">
+                <span class="level-item">Biomedical Engineering</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Ielts/">
             <span class="level-start">
                 <span class="level-item">Ielts</span>
@@ -898,7 +795,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
+        <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/DT35/" style="font-size: 10px;">DT35</a> <a href="/tags/NNS/" style="font-size: 12.5px;">NNS</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/ROBOCON2020/" style="font-size: 17.5px;">ROBOCON2020</a> <a href="/tags/adams/" style="font-size: 10px;">adams</a> <a href="/tags/bluetooth/" style="font-size: 10px;">bluetooth</a> <a href="/tags/fMRI/" style="font-size: 10px;">fMRI</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/ielts/" style="font-size: 17.5px;">ielts</a> <a href="/tags/jupyter/" style="font-size: 10px;">jupyter</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/matlab/" style="font-size: 10px;">matlab</a> <a href="/tags/maxwell/" style="font-size: 10px;">maxwell</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytorch/" style="font-size: 15px;">pytorch</a> <a href="/tags/record/" style="font-size: 20px;">record</a> <a href="/tags/zyc/" style="font-size: 10px;">zyc</a> <a href="/tags/%E4%B8%B2%E5%8F%A3/" style="font-size: 10px;">串口</a> <a href="/tags/%E5%AE%9A%E4%BD%8D%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">定位算法</a>
     </div>
 </div>
     
@@ -910,6 +807,19 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-23T04:01:49.000Z">2020-06-23</time></div>
+                    <a href="/2020/06/23/fMRI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fMRI学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Biomedical-Engineering/">Biomedical Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -963,19 +873,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time></div>
-                    <a href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入探索续篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -986,6 +883,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1067,6 +975,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/bluetooth/">
                         <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fMRI/">
+                        <span class="tag">fMRI</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1188,6 +1103,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-23T04:01:49.000Z">2020-06-23</time></div>
+                    <a href="/2020/06/23/fMRI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fMRI学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Biomedical-Engineering/">Biomedical Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-27T00:24:59.000Z">2020-04-27</time></div>
                     <a href="/2020/04/27/%E6%A0%87%E5%AE%9A%E8%AE%B0%E5%BD%95-2nd/" class="title has-link-black-ter is-size-6 has-text-weight-normal">标定记录 2nd</a>
                     <p class="is-size-7 is-uppercase">
@@ -1236,19 +1164,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-09T15:29:59.000Z">2020-04-09</time></div>
-                    <a href="/2020/04/09/pytorch%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2%E7%BB%AD%E7%AF%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch深入探索续篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Image-Processing/">Image Processing</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1259,6 +1174,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1340,6 +1266,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/bluetooth/">
                         <span class="tag">bluetooth</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fMRI/">
+                        <span class="tag">fMRI</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
