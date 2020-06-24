@@ -19,7 +19,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hit-zyc.github.io/images/og_image.png">
 <meta property="article:published_time" content="2020-06-23T04:01:49.000Z">
-<meta property="article:modified_time" content="2020-06-23T07:33:38.710Z">
+<meta property="article:modified_time" content="2020-06-24T01:50:38.878Z">
 <meta property="article:author" content="张砚驰">
 <meta property="article:tag" content="fMRI">
 <meta name="twitter:card" content="summary">
@@ -147,7 +147,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 minutes read (About 493 words)
+                    6 minutes read (About 956 words)
                 </span>
                 
                 
@@ -174,18 +174,45 @@
 <ul>
 <li><strong>T1时间常数</strong>为纵向弛豫中，原子核纵向磁化强度增长到原来（无脉冲时）63%所需的时间</li>
 <li><strong>T2时间常数</strong>指横向弛豫中，原子核横向磁化强度从100%衰减到37%所需的时间</li>
+<li>但<strong>T2*</strong>衰减的比T2快，所以如果不加其他处理，我们得到的数据是<strong>T2*</strong>时间</li>
 </ul>
 <hr>
-<h4 id="二维傅里叶原理"><a href="#二维傅里叶原理" class="headerlink" title="二维傅里叶原理"></a><a href="https://zhuanlan.zhihu.com/p/110026009">二维傅里叶原理</a></h4><hr>
+<h3 id="SNR、CNR"><a href="#SNR、CNR" class="headerlink" title="SNR、CNR"></a>SNR、CNR</h3><blockquote>
+<p><strong>SNR</strong>：信号的平均值与噪音方差的比值</p>
+</blockquote>
+<blockquote>
+<p><strong>CNR</strong>：两个信号差的平均值与噪音方差的比值</p>
+</blockquote>
+<ul>
+<li><strong>空间上看</strong>：SNR应该是信噪比的结果；CNR是分辨两个不同区域是否是相似组织的依据</li>
+</ul>
+<ul>
+<li><strong>时间上看</strong>：目标都是一块体素，SNR还是信噪比；CNR代表的是体素对相应的实验操作或者心理状态的响应程度</li>
+</ul>
+<hr>
+<h3 id="血液动力响应函数-HRF-Hemodynamic-Response-Function"><a href="#血液动力响应函数-HRF-Hemodynamic-Response-Function" class="headerlink" title="血液动力响应函数(HRF,Hemodynamic Response Function)"></a>血液动力响应函数(HRF,Hemodynamic Response Function)</h3><ul>
+<li><p><strong>启动下降</strong>：神经元兴奋消耗氧气，脱氧血红蛋白短时间内增加，磁场趋于不均匀，信号减弱</p>
+</li>
+<li><p><strong>顶峰</strong>：人体负反馈机制输送来大量富氧血红蛋白，信号增强，甚至调节过度持续走高，在神经元兴奋后大约4到6秒达到顶峰。</p>
+</li>
+<li><p><strong>最后下降</strong>：在到达顶峰后，BOLD信号会大幅度的下降，甚至下降到基线以下（Baseline）。过度下降的原因是血流流出量逐渐减少，血流含量升高（这里不太明白）</p>
+</li>
+</ul>
+<div align=center><img src="/../images/HRF.png"  alt="HRF曲线" style="zoom:60%;"  /></div>
+
+<hr>
+<h4 id="MRI信号如何得到"><a href="#MRI信号如何得到" class="headerlink" title="MRI信号如何得到"></a><a href="https://zhuanlan.zhihu.com/p/137255997">MRI信号如何得到</a></h4><h4 id="二维傅里叶原理"><a href="#二维傅里叶原理" class="headerlink" title="二维傅里叶原理"></a><a href="https://zhuanlan.zhihu.com/p/110026009">二维傅里叶原理</a></h4><hr>
 <h3 id="疑惑"><a href="#疑惑" class="headerlink" title="疑惑"></a>疑惑</h3><ul>
-<li><p>MR扫描仪器测量的信号是氢原子的含量，和血红蛋白是什么样的联系？</p>
-</li>
-<li><p>如果就说MR扫描仪器测量的信号是血红蛋白的含量，会由于脱氧、富氧血红蛋白的顺磁性和反磁性使得T2信号有差别而两种血红蛋白的相对含量能分别测出么？</p>
-</li>
-<li><p>如果不是，那BOLD相对比值是如何求得的？</p>
-</li>
-<li><p>如果MRI的待处理信号表示为一个图像离散数据的二维傅里叶，那么其中的kx、ky的值具体是如何得到的？作为分析数据，我们需要从哪一步开始？直接可以得到T1、T2*之类的图像么？</p>
-</li>
+<li>MR扫描仪器测量的信号是氢原子的含量，和血红蛋白是什么样的联系？</li>
+</ul>
+<p>依据：MR测量信号即BOLD信号，对应HRF函数</p>
+<ul>
+<li>如果就说MR扫描仪器测量的信号是血红蛋白的含量，会由于脱氧、富氧血红蛋白的顺磁性和反磁性使得T2信号有差别而两种血红蛋白的相对含量能分别测出么？</li>
+<li>如果不是，那BOLD相对比值是如何求得的？</li>
+</ul>
+<p>依据：MR测量一中间步骤即，不断采集获取K-space图，再作IFT得到大脑亮度图像，那么可思考K-space中的每一个点的信号是怎样采集的，是什么形式的（其实是二维傅里叶公式的表示形式）。现知利用磁矩变化推导而来，没时间仔细研究推导过程。</p>
+<ul>
+<li>如果MRI的待处理信号表示为一个图像离散数据的二维傅里叶，那么其中的kx、ky的值具体是如何得到的？作为分析数据，我们需要从哪一步开始？直接可以得到T1、T2*之类的图像么？</li>
 </ul>
 </font>
         </div>
